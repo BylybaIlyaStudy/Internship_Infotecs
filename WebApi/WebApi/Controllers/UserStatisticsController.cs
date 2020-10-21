@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Models;
+using WebApi;
 
 namespace WebApi.Controllers
 {
@@ -13,57 +14,55 @@ namespace WebApi.Controllers
     [ApiController]
     public class UserStatisticsController : ControllerBase
     {
-        private List<UserStatistics> userStatistics = new List<UserStatistics>();
+        //private List<UserStatistics> userStatistics = new List<UserStatistics>();
 
         public UserStatisticsController()
         {
-            userStatistics.Add(new UserStatistics("ivan", DateTime.Now, "1.0.0", "android"));
-            userStatistics.Add(new UserStatistics("pavel", DateTime.Now, "1.0.0", "android"));
         }
 
         [HttpGet]
         public string Get()
         {
-            return JsonSerializer.Serialize<List<UserStatistics>>(userStatistics);
+            return JsonSerializer.Serialize<List<UserStatistics>>(Program.DB.GetUsersList());
         }
 
         [HttpPost]
-        public ActionResult<UserStatistics> Post(UserStatistics user)
+        public void Post([FromBody]UserStatistics user)
         {
-            if (user == null)
-            {
-                return BadRequest();
-            }
+            //if (user == null)
+            //{
+            //    return BadRequest();
+            //}
 
-            Console.WriteLine(">> " + user.NameOfNode);
-            Console.WriteLine(">> " + user.DateTimeOfLastStatistics);
-            Console.WriteLine(">> " + user.VersionOfClient);
-            Console.WriteLine(">> " + user.TypeOfDevice);
+            //Console.WriteLine(">> " + user.NameOfNode);
+            //Console.WriteLine(">> " + user.DateTimeOfLastStatistics);
+            //Console.WriteLine(">> " + user.VersionOfClient);
+            //Console.WriteLine(">> " + user.TypeOfDevice);
 
-            userStatistics.Add(user);
+            Program.DB.Create(user);
             //userStatistics.Add(JsonSerializer.Deserialize<UserStatistics>(user));
 
-            return Ok(user);
+            //return Ok(user);
         }
 
         [HttpPut]
-        public ActionResult<string> Put(string user)
+        public void Put([FromBody]UserStatistics user)
         {
-            if (user == null)
-            {
-                return BadRequest();
-            }
+            //if (user == null)
+            //{
+            //    return BadRequest();
+            //}
 
-            UserStatistics newUser = JsonSerializer.Deserialize<UserStatistics>(user);
+            //UserStatistics newUser = JsonSerializer.Deserialize<UserStatistics>(user);
 
-            if (!userStatistics.Exists(x => x.NameOfNode == newUser.NameOfNode))
-            {
-                return NotFound();
-            }
+            //if (!Program.DB.Users.Exists(x => x.NameOfNode == newUser.NameOfNode))
+            //{
+            //    return NotFound();
+            //}
 
-            userStatistics[userStatistics.FindIndex(x => x.NameOfNode == newUser.NameOfNode)] = newUser;
+            Program.DB.Update(user);
 
-            return Ok(user);
+            //return Ok(user);
         }
     }
 }
