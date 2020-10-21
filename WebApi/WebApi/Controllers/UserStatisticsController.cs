@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,9 +22,9 @@ namespace WebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<UserStatistics> Get()
+        public string Get()
         {
-            return userStatistics;
+            return JsonSerializer.Serialize<List<UserStatistics>>(userStatistics);
         }
 
         [HttpPost]
@@ -34,7 +35,34 @@ namespace WebApi.Controllers
                 return BadRequest();
             }
 
+            Console.WriteLine(">> " + user.NameOfNode);
+            Console.WriteLine(">> " + user.DateTimeOfLastStatistics);
+            Console.WriteLine(">> " + user.VersionOfClient);
+            Console.WriteLine(">> " + user.TypeOfDevice);
+
             userStatistics.Add(user);
+            //userStatistics.Add(JsonSerializer.Deserialize<UserStatistics>(user));
+
+            return Ok(user);
+        }
+
+        [HttpPut]
+        public ActionResult<string> Put(string user)
+        {
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            UserStatistics newUser = JsonSerializer.Deserialize<UserStatistics>(user);
+
+            if (!userStatistics.Exists(x => x.NameOfNode == newUser.NameOfNode))
+            {
+                return NotFound();
+            }
+
+            userStatistics[userStatistics.FindIndex(x => x.NameOfNode == newUser.NameOfNode)] = newUser;
+
             return Ok(user);
         }
     }
