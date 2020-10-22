@@ -10,20 +10,24 @@ namespace WebApi
     {
         private List<UserStatistics> users = new List<UserStatistics>();
 
-        public void Create(UserStatistics user)
+        public bool Create(UserStatistics user)
         {
-            if (!users.Exists(x => x == user))
+            if (!users.Exists(x => x.NameOfNode == user.NameOfNode))
             {
                 users.Add(user);
+                return true;
             }
+            return false;
         }
 
-        public void Delete(string name)
+        public bool Delete(string name)
         {
             if (users.Exists(x => x.NameOfNode == name))
             {
                 users.Remove(users.Find(x => x.NameOfNode == name));
+                return true;
             }
+            return false;
         }
 
         public virtual void Dispose()
@@ -53,12 +57,14 @@ namespace WebApi
             return users;
         }
 
-        public void Update(UserStatistics user)
+        public bool Update(UserStatistics user)
         {
             if (users.Exists(x => x.NameOfNode == user.NameOfNode))
             {
                 users[users.FindIndex(x => x.NameOfNode == user.NameOfNode)] = user;
+                return true;
             }
+            return false;
         }
     }
 }

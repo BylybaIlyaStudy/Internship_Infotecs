@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 using Serilog.Events;
@@ -18,9 +19,10 @@ namespace WebApi
 
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            //.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
             .AddEnvironmentVariables()
+            .AddJsonFile("appsettings.json")
             .Build();
 
         public static int Main(string[] args)
@@ -29,9 +31,10 @@ namespace WebApi
             DB.Create(new UserStatistics("pavel", DateTime.Now, "1.0.0", "android"));
 
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.Console()
-                .MinimumLevel.Debug()
-                .WriteTo.RollingFile(Path.Combine(Directory.GetCurrentDirectory(), "log-{Date}.txt"))
+                .ReadFrom.Configuration(Configuration)
+                //.WriteTo.Console()
+                //.MinimumLevel.Debug()
+                //.WriteTo.RollingFile(Path.Combine(Directory.GetCurrentDirectory(), "log-{Date}.txt"))
                 .CreateLogger();
 
             try

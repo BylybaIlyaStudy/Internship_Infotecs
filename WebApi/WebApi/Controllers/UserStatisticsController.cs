@@ -55,17 +55,17 @@ namespace WebApi.Controllers
             //Console.WriteLine(">> " + user.VersionOfClient);
             //Console.WriteLine(">> " + user.TypeOfDevice);
             
-            //_logger.Debug($"Запрос на добавление пользователя {user.NameOfNode}");
+            _logger.Debug("Запрос на добавление пользователя {@user}", user);
             UserStatistics newUsser = new UserStatistics(user.NameOfNode, Convert.ToDateTime(user.DateTimeOfLastStatistics), user.VersionOfClient, user.TypeOfDevice);
             //bool status = Program.DB.Create(newUsser);
             bool status = Repository.Create(newUsser);
             if (status)
             {
-                //_logger.Debug(($"Запрос на добавление пользователя {user.NameOfNode} подтверждён."));
+                _logger.Debug("Запрос на добавление пользователя {@user} подтверждён.", user);
             }
             else
             {
-                //_logger.Error(($"Запрос на добавление пользователя {user.NameOfNode} отклонён. Пользователь с таким именем уже существует."));
+                _logger.Error("Запрос на добавление пользователя {@user} отклонён. Пользователь с таким именем уже существует.", user);
             }
             //userStatistics.Add(JsonSerializer.Deserialize<UserStatistics>(user));
 
@@ -86,17 +86,17 @@ namespace WebApi.Controllers
             //{
             //    return NotFound();
             //}
-            //_logger.Debug($"Запрос на обновление данных о пользователе {user.NameOfNode}");
+            _logger.Debug("Запрос на обновление данных о пользователе {@user}", user);
             UserStatistics newUsser = new UserStatistics(user.NameOfNode, Convert.ToDateTime(user.DateTimeOfLastStatistics), user.VersionOfClient, user.TypeOfDevice);
             //bool status = Program.DB.Update(newUsser);
             bool status = Repository.Update(newUsser);
             if (status)
             {
-                //_logger.Debug(($"Запрос на обновление данных о пользователе {user.NameOfNode} подтверждён."));
+                _logger.Debug("Запрос на обновление данных о пользователе {@user} подтверждён.", user);
             }
             else
             {
-                //_logger.Error(($"Запрос на обновление данных о пользователе {user.NameOfNode} отклонён. Пользователя с таким именем не существует."));
+                _logger.Error("Запрос на обновление данных о пользователе {@user} отклонён. Пользователя с таким именем не существует.", user);
             }
             //return Ok(user);
         }
@@ -115,17 +115,17 @@ namespace WebApi.Controllers
             //{
             //    return NotFound();
             //}
-            //_logger.Debug($"Запрос на удаление пользователя {user.NameOfNode}");
+            _logger.Debug("Запрос на удаление пользователя {@user}", user);
 
             //bool status = Program.DB.Delete(user.NameOfNode);
             bool status = Repository.Delete(user.NameOfNode);
             if (status)
             {
-                //_logger.Debug(($"Запрос на удаление пользователя {user.NameOfNode} подтверждён."));
+                _logger.Debug("Запрос на удаление пользователя {@user} подтверждён.", user);
             }
             else
             {
-                //_logger.Error(($"Запрос на удаление пользователя {user.NameOfNode} отклонён. Пользователя с таким именем не существует."));
+                _logger.Error("Запрос на удаление пользователя {@user} отклонён. Пользователя с таким именем не существует.", user);
             }
             //return Ok(user);
         }

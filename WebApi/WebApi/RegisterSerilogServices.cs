@@ -22,7 +22,7 @@ namespace Serilog.Injection
         {
             return services.AddSerilogServices(
                 new LoggerConfiguration()
-                    .MinimumLevel.Verbose()
+                    //.MinimumLevel.Verbose()
                     .WriteTo.Console());
         }
     }
