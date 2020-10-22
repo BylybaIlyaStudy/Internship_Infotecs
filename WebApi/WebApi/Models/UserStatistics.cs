@@ -7,10 +7,10 @@ namespace WebApi.Models
 {
     public class UserStatistics
     {
-        public string NameOfNode { get; set; }
-        public string DateTimeOfLastStatistics { get; set; }
-        public string VersionOfClient { get; set; }
-        public string TypeOfDevice { get; set; }
+        public string NameOfNode { get; private set; }
+        public string DateTimeOfLastStatistics { get; private set; }
+        public string VersionOfClient { get; private set; }
+        public string TypeOfDevice { get; private set; }
 
         public UserStatistics(string nameOfNode, DateTime dateTime, string versionOfClient, string typeOfDevice)
         {
