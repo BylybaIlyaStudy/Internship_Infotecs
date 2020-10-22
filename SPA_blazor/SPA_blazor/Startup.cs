@@ -29,7 +29,6 @@ namespace Infotecs.SPA_blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<UserStatisticsService>();
-            services.AddSingleton<BlazorTimer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
