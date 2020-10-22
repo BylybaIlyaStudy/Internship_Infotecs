@@ -6,12 +6,12 @@ using WebApi.Models;
 
 namespace WebApi
 {
-    interface IRepository : IDisposable
+    public interface IRepository : IDisposable
     {
         List<UserStatistics> GetUsersList();
         UserStatistics GetUser(string name);
-        void Create(UserStatistics user);
-        void Update(UserStatistics user);
-        void Delete(string name);
+        bool Create(UserStatistics user);
+        bool Update(UserStatistics user);
+        bool Delete(string name);
     }
 }
