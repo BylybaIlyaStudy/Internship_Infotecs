@@ -1,0 +1,835 @@
+2020-10-26 19:11:18.824 +07:00 [Debug] Hosting starting
+2020-10-26 19:11:19.193 +07:00 [Debug] Failed to locate the development https certificate at 'null'.
+2020-10-26 19:11:19.283 +07:00 [Debug] Using development certificate: "CN=localhost" (Thumbprint: "9AD2255271162ABFAE3A2FA177EF88703AB40EC4")
+2020-10-26 19:11:19.311 +07:00 [Warning] Unable to bind to "https://localhost:5001" on the "IPv4 loopback" interface: '"Сделана попытка доступа к сокету методом, запрещенным правами доступа."'.
+2020-10-26 19:11:19.323 +07:00 [Warning] Unable to bind to "http://localhost:5000" on the "IPv4 loopback" interface: '"Сделана попытка доступа к сокету методом, запрещенным правами доступа."'.
+2020-10-26 19:11:19.325 +07:00 [Information] Now listening on: "https://localhost:5001"
+2020-10-26 19:11:19.326 +07:00 [Information] Now listening on: "http://localhost:5000"
+2020-10-26 19:11:19.327 +07:00 [Debug] Loaded hosting startup assembly "WebApi"
+2020-10-26 19:11:19.328 +07:00 [Information] Application started. Press Ctrl+C to shut down.
+2020-10-26 19:11:19.329 +07:00 [Information] Hosting environment: "Development"
+2020-10-26 19:11:19.330 +07:00 [Information] Content root path: "C:\Users\bylyba.ilia\source\repos\WebApi\WebApi"
+2020-10-26 19:11:19.330 +07:00 [Debug] Hosting started
+2020-10-26 19:11:19.592 +07:00 [Debug] Connection id ""0HM3PL0VKA6KS"" accepted.
+2020-10-26 19:11:19.595 +07:00 [Debug] Connection id ""0HM3PL0VKA6KS"" started.
+2020-10-26 19:11:19.758 +07:00 [Information] Request starting HTTP/2 GET https://localhost:5001/  
+2020-10-26 19:11:19.764 +07:00 [Debug] Wildcard detected, all requests with hosts will be allowed.
+2020-10-26 19:11:19.790 +07:00 [Debug] No candidates found for the request path '"/"'
+2020-10-26 19:11:19.792 +07:00 [Debug] Request did not match any endpoints
+2020-10-26 19:11:19.798 +07:00 [Information] Request finished in 41.7014ms 404 
+2020-10-26 19:11:33.739 +07:00 [Debug] Connection id ""0HM3PL0VKA6KT"" accepted.
+2020-10-26 19:11:33.741 +07:00 [Debug] Connection id ""0HM3PL0VKA6KT"" started.
+2020-10-26 19:11:34.291 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:34.296 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:34.301 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:34.303 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:34.305 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:34.313 +07:00 [Debug] Registered model binder providers, in the following order: ["Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BinderTypeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ServicesModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.BodyModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.HeaderModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FloatingPointTypeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.EnumTypeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.SimpleTypeModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CancellationTokenModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ByteArrayModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormFileModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.FormCollectionModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.KeyValuePairModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.DictionaryModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ArrayModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.CollectionModelBinderProvider", "Microsoft.AspNetCore.Mvc.ModelBinding.Binders.ComplexTypeModelBinderProvider"]
+2020-10-26 19:11:34.386 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:34.389 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:34.391 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:34.393 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:34.404 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:34.405 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:34.408 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:34.411 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:34.414 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:34.424 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:34.433 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:34.435 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:34.437 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:34.438 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:34.440 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:34.455 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 44.8217ms
+2020-10-26 19:11:34.457 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:34.482 +07:00 [Debug] Connection id ""0HM3PL0VKA6KT"" completed keep alive response.
+2020-10-26 19:11:34.484 +07:00 [Debug] Connection id ""0HM3PL0VKA6KT"" received FIN.
+2020-10-26 19:11:34.484 +07:00 [Information] Request finished in 193.9842ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:34.487 +07:00 [Debug] Connection id ""0HM3PL0VKA6KT"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:34.497 +07:00 [Debug] Connection id ""0HM3PL0VKA6KT"" disconnecting.
+2020-10-26 19:11:34.502 +07:00 [Debug] Connection id ""0HM3PL0VKA6KT"" stopped.
+2020-10-26 19:11:34.741 +07:00 [Debug] Connection id ""0HM3PL0VKA6KU"" accepted.
+2020-10-26 19:11:34.743 +07:00 [Debug] Connection id ""0HM3PL0VKA6KU"" started.
+2020-10-26 19:11:34.747 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:34.748 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:34.750 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:34.754 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:34.755 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:34.757 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:34.762 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:34.778 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:34.790 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:34.804 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:34.806 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:34.808 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:34.811 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:34.813 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:34.815 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:34.817 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:34.821 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:34.824 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:34.831 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:34.857 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:34.859 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 51.5671ms
+2020-10-26 19:11:34.861 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:34.862 +07:00 [Debug] Connection id ""0HM3PL0VKA6KU"" completed keep alive response.
+2020-10-26 19:11:34.863 +07:00 [Debug] Connection id ""0HM3PL0VKA6KU"" received FIN.
+2020-10-26 19:11:34.864 +07:00 [Information] Request finished in 116.4544ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:34.867 +07:00 [Debug] Connection id ""0HM3PL0VKA6KU"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:34.870 +07:00 [Debug] Connection id ""0HM3PL0VKA6KU"" disconnecting.
+2020-10-26 19:11:34.872 +07:00 [Debug] Connection id ""0HM3PL0VKA6KU"" stopped.
+2020-10-26 19:11:39.505 +07:00 [Debug] Connection id ""0HM3PL0VKA6KV"" accepted.
+2020-10-26 19:11:39.506 +07:00 [Debug] Connection id ""0HM3PL0VKA6KV"" started.
+2020-10-26 19:11:39.510 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:39.512 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:39.513 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:39.517 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:39.518 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:39.520 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:39.522 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:39.525 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:39.528 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:39.531 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:39.533 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:39.537 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:39.539 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:39.540 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:39.541 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:39.545 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:39.548 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:39.549 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:39.550 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:39.552 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:39.553 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 16.417ms
+2020-10-26 19:11:39.556 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:39.558 +07:00 [Debug] Connection id ""0HM3PL0VKA6KV"" completed keep alive response.
+2020-10-26 19:11:39.559 +07:00 [Debug] Connection id ""0HM3PL0VKA6KV"" received FIN.
+2020-10-26 19:11:39.560 +07:00 [Information] Request finished in 49.5374ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:39.561 +07:00 [Debug] Connection id ""0HM3PL0VKA6KV"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:39.562 +07:00 [Debug] Connection id ""0HM3PL0VKA6L0"" accepted.
+2020-10-26 19:11:39.565 +07:00 [Debug] Connection id ""0HM3PL0VKA6KV"" disconnecting.
+2020-10-26 19:11:39.568 +07:00 [Debug] Connection id ""0HM3PL0VKA6L0"" started.
+2020-10-26 19:11:39.569 +07:00 [Debug] Connection id ""0HM3PL0VKA6KV"" stopped.
+2020-10-26 19:11:39.572 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:39.573 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:39.575 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:39.578 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:39.579 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:39.581 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:39.582 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:39.585 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:39.588 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:39.590 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:39.592 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:39.597 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:39.599 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:39.600 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:39.601 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:39.607 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:39.608 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:39.610 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:39.611 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:39.618 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:39.621 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 24.5429ms
+2020-10-26 19:11:39.623 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:39.625 +07:00 [Debug] Connection id ""0HM3PL0VKA6L0"" completed keep alive response.
+2020-10-26 19:11:39.625 +07:00 [Debug] Connection id ""0HM3PL0VKA6L0"" received FIN.
+2020-10-26 19:11:39.626 +07:00 [Information] Request finished in 54.1869ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:39.629 +07:00 [Debug] Connection id ""0HM3PL0VKA6L0"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:39.633 +07:00 [Debug] Connection id ""0HM3PL0VKA6L0"" disconnecting.
+2020-10-26 19:11:39.634 +07:00 [Debug] Connection id ""0HM3PL0VKA6L0"" stopped.
+2020-10-26 19:11:44.499 +07:00 [Debug] Connection id ""0HM3PL0VKA6L1"" accepted.
+2020-10-26 19:11:44.500 +07:00 [Debug] Connection id ""0HM3PL0VKA6L1"" started.
+2020-10-26 19:11:44.505 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:44.506 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:44.507 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:44.513 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:44.514 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:44.515 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:44.517 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:44.520 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:44.523 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:44.526 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:44.528 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:44.537 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:44.540 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:44.543 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:44.544 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:44.546 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:44.548 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:44.551 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:44.553 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:44.556 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:44.559 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 22.9363ms
+2020-10-26 19:11:44.562 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:44.563 +07:00 [Debug] Connection id ""0HM3PL0VKA6L1"" completed keep alive response.
+2020-10-26 19:11:44.564 +07:00 [Debug] Connection id ""0HM3PL0VKA6L1"" received FIN.
+2020-10-26 19:11:44.565 +07:00 [Information] Request finished in 59.8677ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:44.566 +07:00 [Debug] Connection id ""0HM3PL0VKA6L1"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:44.568 +07:00 [Debug] Connection id ""0HM3PL0VKA6L2"" accepted.
+2020-10-26 19:11:44.573 +07:00 [Debug] Connection id ""0HM3PL0VKA6L1"" disconnecting.
+2020-10-26 19:11:44.575 +07:00 [Debug] Connection id ""0HM3PL0VKA6L2"" started.
+2020-10-26 19:11:44.577 +07:00 [Debug] Connection id ""0HM3PL0VKA6L1"" stopped.
+2020-10-26 19:11:44.582 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:44.583 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:44.584 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:44.588 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:44.591 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:44.592 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:44.604 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:44.605 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:44.607 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:44.613 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:44.614 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:44.618 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:44.620 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:44.631 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:44.633 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:44.637 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:44.637 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:44.642 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:44.661 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:44.667 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:44.670 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 51.5933ms
+2020-10-26 19:11:44.673 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:44.675 +07:00 [Debug] Connection id ""0HM3PL0VKA6L2"" completed keep alive response.
+2020-10-26 19:11:44.676 +07:00 [Debug] Connection id ""0HM3PL0VKA6L2"" received FIN.
+2020-10-26 19:11:44.677 +07:00 [Information] Request finished in 95.1143ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:44.681 +07:00 [Debug] Connection id ""0HM3PL0VKA6L2"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:44.686 +07:00 [Debug] Connection id ""0HM3PL0VKA6L2"" disconnecting.
+2020-10-26 19:11:44.688 +07:00 [Debug] Connection id ""0HM3PL0VKA6L2"" stopped.
+2020-10-26 19:11:49.496 +07:00 [Debug] Connection id ""0HM3PL0VKA6L3"" accepted.
+2020-10-26 19:11:49.498 +07:00 [Debug] Connection id ""0HM3PL0VKA6L3"" started.
+2020-10-26 19:11:49.503 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:49.504 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:49.507 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:49.511 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:49.513 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:49.514 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:49.526 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:49.527 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:49.530 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:49.534 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:49.536 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:49.539 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:49.542 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:49.544 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:49.553 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:49.559 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:49.561 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:49.564 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:49.566 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:49.568 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:49.570 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 31.133ms
+2020-10-26 19:11:49.573 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:49.574 +07:00 [Debug] Connection id ""0HM3PL0VKA6L3"" completed keep alive response.
+2020-10-26 19:11:49.574 +07:00 [Debug] Connection id ""0HM3PL0VKA6L3"" received FIN.
+2020-10-26 19:11:49.576 +07:00 [Information] Request finished in 72.5407ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:49.579 +07:00 [Debug] Connection id ""0HM3PL0VKA6L4"" accepted.
+2020-10-26 19:11:49.583 +07:00 [Debug] Connection id ""0HM3PL0VKA6L3"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:49.586 +07:00 [Debug] Connection id ""0HM3PL0VKA6L4"" started.
+2020-10-26 19:11:49.589 +07:00 [Debug] Connection id ""0HM3PL0VKA6L3"" disconnecting.
+2020-10-26 19:11:49.592 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:49.594 +07:00 [Debug] Connection id ""0HM3PL0VKA6L3"" stopped.
+2020-10-26 19:11:49.595 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:49.597 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:49.599 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:49.603 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:49.607 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:49.622 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:49.626 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:49.627 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:49.634 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:49.635 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:49.638 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:49.646 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:49.648 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:49.649 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:49.653 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:49.655 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:49.659 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:49.660 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:49.662 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:49.663 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 25.7916ms
+2020-10-26 19:11:49.667 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:49.670 +07:00 [Debug] Connection id ""0HM3PL0VKA6L4"" completed keep alive response.
+2020-10-26 19:11:49.670 +07:00 [Debug] Connection id ""0HM3PL0VKA6L4"" received FIN.
+2020-10-26 19:11:49.676 +07:00 [Information] Request finished in 83.6136ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:49.678 +07:00 [Debug] Connection id ""0HM3PL0VKA6L4"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:49.681 +07:00 [Debug] Connection id ""0HM3PL0VKA6L4"" disconnecting.
+2020-10-26 19:11:49.682 +07:00 [Debug] Connection id ""0HM3PL0VKA6L4"" stopped.
+2020-10-26 19:11:54.502 +07:00 [Debug] Connection id ""0HM3PL0VKA6L5"" accepted.
+2020-10-26 19:11:54.503 +07:00 [Debug] Connection id ""0HM3PL0VKA6L5"" started.
+2020-10-26 19:11:54.508 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:54.509 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:54.510 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:54.515 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:54.516 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:54.518 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:54.519 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:54.523 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:54.525 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:54.529 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:54.532 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:54.536 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:54.537 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:54.538 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:54.539 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:54.545 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:54.546 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:54.547 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:54.548 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:54.550 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:54.552 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 16.908ms
+2020-10-26 19:11:54.556 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:54.558 +07:00 [Debug] Connection id ""0HM3PL0VKA6L5"" completed keep alive response.
+2020-10-26 19:11:54.558 +07:00 [Debug] Connection id ""0HM3PL0VKA6L5"" received FIN.
+2020-10-26 19:11:54.560 +07:00 [Information] Request finished in 52.5439ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:54.562 +07:00 [Debug] Connection id ""0HM3PL0VKA6L6"" accepted.
+2020-10-26 19:11:54.565 +07:00 [Debug] Connection id ""0HM3PL0VKA6L5"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:54.568 +07:00 [Debug] Connection id ""0HM3PL0VKA6L6"" started.
+2020-10-26 19:11:54.569 +07:00 [Debug] Connection id ""0HM3PL0VKA6L5"" disconnecting.
+2020-10-26 19:11:54.576 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:54.576 +07:00 [Debug] Connection id ""0HM3PL0VKA6L5"" stopped.
+2020-10-26 19:11:54.582 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:54.587 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:54.591 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:54.593 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:54.595 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:54.596 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:54.598 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:54.601 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:54.606 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:54.608 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:54.611 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:54.614 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:54.616 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:54.619 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:54.625 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:54.625 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:54.627 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:54.627 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:54.629 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:54.632 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 21.0995ms
+2020-10-26 19:11:54.634 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:54.635 +07:00 [Debug] Connection id ""0HM3PL0VKA6L6"" completed keep alive response.
+2020-10-26 19:11:54.635 +07:00 [Debug] Connection id ""0HM3PL0VKA6L6"" received FIN.
+2020-10-26 19:11:54.636 +07:00 [Information] Request finished in 60.8931ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:54.638 +07:00 [Debug] Connection id ""0HM3PL0VKA6L6"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:54.641 +07:00 [Debug] Connection id ""0HM3PL0VKA6L6"" disconnecting.
+2020-10-26 19:11:54.644 +07:00 [Debug] Connection id ""0HM3PL0VKA6L6"" stopped.
+2020-10-26 19:11:59.495 +07:00 [Debug] Connection id ""0HM3PL0VKA6L7"" accepted.
+2020-10-26 19:11:59.496 +07:00 [Debug] Connection id ""0HM3PL0VKA6L7"" started.
+2020-10-26 19:11:59.500 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:59.501 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:59.502 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:59.507 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:59.509 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:59.510 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:59.514 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:59.518 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:59.520 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:59.523 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:59.527 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:59.530 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:59.531 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:59.533 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:59.534 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:59.540 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:59.541 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:59.543 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:59.544 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:59.548 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:59.549 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 19.4887ms
+2020-10-26 19:11:59.550 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:59.552 +07:00 [Debug] Connection id ""0HM3PL0VKA6L7"" completed keep alive response.
+2020-10-26 19:11:59.552 +07:00 [Debug] Connection id ""0HM3PL0VKA6L7"" received FIN.
+2020-10-26 19:11:59.553 +07:00 [Information] Request finished in 52.7337ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:59.556 +07:00 [Debug] Connection id ""0HM3PL0VKA6L8"" accepted.
+2020-10-26 19:11:59.558 +07:00 [Debug] Connection id ""0HM3PL0VKA6L7"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:59.561 +07:00 [Debug] Connection id ""0HM3PL0VKA6L8"" started.
+2020-10-26 19:11:59.562 +07:00 [Debug] Connection id ""0HM3PL0VKA6L7"" disconnecting.
+2020-10-26 19:11:59.565 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:11:59.565 +07:00 [Debug] Connection id ""0HM3PL0VKA6L7"" stopped.
+2020-10-26 19:11:59.568 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:11:59.571 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:11:59.573 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:59.574 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:59.577 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:11:59.581 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:11:59.582 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:11:59.584 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:11:59.591 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:11:59.592 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:11:59.594 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:59.595 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:11:59.596 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:11:59.599 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:11:59.603 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:11:59.604 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:11:59.606 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:11:59.607 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:11:59.611 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:11:59.612 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 17.9052ms
+2020-10-26 19:11:59.613 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:11:59.614 +07:00 [Debug] Connection id ""0HM3PL0VKA6L8"" completed keep alive response.
+2020-10-26 19:11:59.614 +07:00 [Debug] Connection id ""0HM3PL0VKA6L8"" received FIN.
+2020-10-26 19:11:59.617 +07:00 [Information] Request finished in 51.5717ms 200 text/plain; charset=utf-8
+2020-10-26 19:11:59.620 +07:00 [Debug] Connection id ""0HM3PL0VKA6L8"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:11:59.623 +07:00 [Debug] Connection id ""0HM3PL0VKA6L8"" disconnecting.
+2020-10-26 19:11:59.624 +07:00 [Debug] Connection id ""0HM3PL0VKA6L8"" stopped.
+2020-10-26 19:12:04.504 +07:00 [Debug] Connection id ""0HM3PL0VKA6L9"" accepted.
+2020-10-26 19:12:04.506 +07:00 [Debug] Connection id ""0HM3PL0VKA6L9"" started.
+2020-10-26 19:12:04.510 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:04.512 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:04.514 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:04.519 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:04.520 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:04.521 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:04.525 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:04.528 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:04.530 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:04.534 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:04.538 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:04.541 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:04.544 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:04.548 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:04.549 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:04.552 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:04.556 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:04.559 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:04.560 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:04.563 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:04.567 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 25.5723ms
+2020-10-26 19:12:04.574 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:04.577 +07:00 [Debug] Connection id ""0HM3PL0VKA6L9"" completed keep alive response.
+2020-10-26 19:12:04.577 +07:00 [Debug] Connection id ""0HM3PL0VKA6L9"" received FIN.
+2020-10-26 19:12:04.579 +07:00 [Information] Request finished in 69.0045ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:04.581 +07:00 [Debug] Connection id ""0HM3PL0VKA6LA"" accepted.
+2020-10-26 19:12:04.581 +07:00 [Debug] Connection id ""0HM3PL0VKA6L9"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:04.586 +07:00 [Debug] Connection id ""0HM3PL0VKA6LA"" started.
+2020-10-26 19:12:04.590 +07:00 [Debug] Connection id ""0HM3PL0VKA6L9"" disconnecting.
+2020-10-26 19:12:04.593 +07:00 [Debug] Connection id ""0HM3PL0VKA6L9"" stopped.
+2020-10-26 19:12:04.594 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:04.604 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:04.610 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:04.615 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:04.617 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:04.626 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:04.630 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:04.632 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:04.635 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:04.640 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:04.642 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:04.647 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:04.649 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:04.651 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:04.652 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:04.658 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:04.659 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:04.660 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:04.661 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:04.665 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:04.668 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 20.7049ms
+2020-10-26 19:12:04.669 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:04.670 +07:00 [Debug] Connection id ""0HM3PL0VKA6LA"" completed keep alive response.
+2020-10-26 19:12:04.670 +07:00 [Debug] Connection id ""0HM3PL0VKA6LA"" received FIN.
+2020-10-26 19:12:04.671 +07:00 [Information] Request finished in 77.1799ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:04.673 +07:00 [Debug] Connection id ""0HM3PL0VKA6LA"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:04.678 +07:00 [Debug] Connection id ""0HM3PL0VKA6LA"" disconnecting.
+2020-10-26 19:12:04.679 +07:00 [Debug] Connection id ""0HM3PL0VKA6LA"" stopped.
+2020-10-26 19:12:09.492 +07:00 [Debug] Connection id ""0HM3PL0VKA6LB"" accepted.
+2020-10-26 19:12:09.493 +07:00 [Debug] Connection id ""0HM3PL0VKA6LB"" started.
+2020-10-26 19:12:09.497 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:09.498 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:09.499 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:09.505 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:09.506 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:09.508 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:09.510 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:09.513 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:09.516 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:09.519 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:09.520 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:09.525 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:09.527 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:09.528 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:09.529 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:09.535 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:09.536 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:09.538 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:09.539 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:09.545 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:09.547 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 22.0575ms
+2020-10-26 19:12:09.549 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:09.551 +07:00 [Debug] Connection id ""0HM3PL0VKA6LB"" completed keep alive response.
+2020-10-26 19:12:09.551 +07:00 [Debug] Connection id ""0HM3PL0VKA6LB"" received FIN.
+2020-10-26 19:12:09.556 +07:00 [Debug] Connection id ""0HM3PL0VKA6LC"" accepted.
+2020-10-26 19:12:09.557 +07:00 [Information] Request finished in 60.0621ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:09.560 +07:00 [Debug] Connection id ""0HM3PL0VKA6LC"" started.
+2020-10-26 19:12:09.559 +07:00 [Debug] Connection id ""0HM3PL0VKA6LB"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:09.567 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:09.567 +07:00 [Debug] Connection id ""0HM3PL0VKA6LB"" disconnecting.
+2020-10-26 19:12:09.568 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:09.569 +07:00 [Debug] Connection id ""0HM3PL0VKA6LB"" stopped.
+2020-10-26 19:12:09.571 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:09.578 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:09.579 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:09.581 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:09.587 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:09.588 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:09.590 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:09.594 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:09.598 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:09.600 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:09.601 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:09.602 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:09.605 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:09.609 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:09.610 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:09.611 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:09.612 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:09.617 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:09.620 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 20.2719ms
+2020-10-26 19:12:09.621 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:09.622 +07:00 [Debug] Connection id ""0HM3PL0VKA6LC"" completed keep alive response.
+2020-10-26 19:12:09.623 +07:00 [Debug] Connection id ""0HM3PL0VKA6LC"" received FIN.
+2020-10-26 19:12:09.624 +07:00 [Information] Request finished in 56.8237ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:09.625 +07:00 [Debug] Connection id ""0HM3PL0VKA6LC"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:09.631 +07:00 [Debug] Connection id ""0HM3PL0VKA6LC"" disconnecting.
+2020-10-26 19:12:09.632 +07:00 [Debug] Connection id ""0HM3PL0VKA6LC"" stopped.
+2020-10-26 19:12:14.501 +07:00 [Debug] Connection id ""0HM3PL0VKA6LD"" accepted.
+2020-10-26 19:12:14.502 +07:00 [Debug] Connection id ""0HM3PL0VKA6LD"" started.
+2020-10-26 19:12:14.506 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:14.508 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:14.513 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:14.526 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:14.529 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:14.530 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:14.535 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:14.537 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:14.539 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:14.558 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:14.560 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:14.562 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:14.564 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:14.567 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:14.568 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:14.585 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:14.587 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:14.589 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:14.590 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:14.594 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:14.596 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 33.6814ms
+2020-10-26 19:12:14.597 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:14.598 +07:00 [Debug] Connection id ""0HM3PL0VKA6LD"" completed keep alive response.
+2020-10-26 19:12:14.599 +07:00 [Debug] Connection id ""0HM3PL0VKA6LD"" received FIN.
+2020-10-26 19:12:14.600 +07:00 [Information] Request finished in 93.7329ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:14.602 +07:00 [Debug] Connection id ""0HM3PL0VKA6LE"" accepted.
+2020-10-26 19:12:14.608 +07:00 [Debug] Connection id ""0HM3PL0VKA6LD"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:14.617 +07:00 [Debug] Connection id ""0HM3PL0VKA6LE"" started.
+2020-10-26 19:12:14.621 +07:00 [Debug] Connection id ""0HM3PL0VKA6LD"" disconnecting.
+2020-10-26 19:12:14.624 +07:00 [Debug] Connection id ""0HM3PL0VKA6LD"" stopped.
+2020-10-26 19:12:14.625 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:14.629 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:14.630 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:14.640 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:14.641 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:14.643 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:14.645 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:14.648 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:14.650 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:14.652 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:14.654 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:14.657 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:14.660 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:14.662 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:14.669 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:14.674 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:14.676 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:14.680 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:14.681 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:14.682 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:14.684 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 26.8438ms
+2020-10-26 19:12:14.690 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:14.692 +07:00 [Debug] Connection id ""0HM3PL0VKA6LE"" completed keep alive response.
+2020-10-26 19:12:14.692 +07:00 [Debug] Connection id ""0HM3PL0VKA6LE"" received FIN.
+2020-10-26 19:12:14.700 +07:00 [Information] Request finished in 74.9716ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:14.702 +07:00 [Debug] Connection id ""0HM3PL0VKA6LE"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:14.705 +07:00 [Debug] Connection id ""0HM3PL0VKA6LE"" disconnecting.
+2020-10-26 19:12:14.706 +07:00 [Debug] Connection id ""0HM3PL0VKA6LE"" stopped.
+2020-10-26 19:12:19.018 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"" accepted.
+2020-10-26 19:12:19.019 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"" started.
+2020-10-26 19:12:19.491 +07:00 [Debug] Connection id ""0HM3PL0VKA6LG"" accepted.
+2020-10-26 19:12:19.493 +07:00 [Debug] Connection id ""0HM3PL0VKA6LG"" started.
+2020-10-26 19:12:19.498 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:19.499 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:19.502 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:19.505 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:19.507 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:19.508 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:19.514 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:19.516 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:19.518 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:19.535 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:19.537 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:19.542 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:19.545 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:19.547 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:19.556 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:19.561 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:19.562 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:19.564 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:19.567 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:19.570 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:19.572 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 29.7834ms
+2020-10-26 19:12:19.576 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:19.584 +07:00 [Information] Request starting HTTP/1.1 POST https://localhost:5001/api/userstatistics application/json 121
+2020-10-26 19:12:19.588 +07:00 [Debug] Connection id ""0HM3PL0VKA6LG"" completed keep alive response.
+2020-10-26 19:12:19.589 +07:00 [Debug] Connection id ""0HM3PL0VKA6LG"" received FIN.
+2020-10-26 19:12:19.590 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:19.593 +07:00 [Information] Request finished in 94.203ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:19.593 +07:00 [Debug] Connection id ""0HM3PL0VKA6LH"" accepted.
+2020-10-26 19:12:19.595 +07:00 [Debug] Connection id ""0HM3PL0VKA6LG"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:19.602 +07:00 [Debug] Connection id ""0HM3PL0VKA6LH"" started.
+2020-10-26 19:12:19.597 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Post (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:19.604 +07:00 [Debug] Connection id ""0HM3PL0VKA6LG"" disconnecting.
+2020-10-26 19:12:19.608 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:19.621 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Post (WebApi)"'
+2020-10-26 19:12:19.622 +07:00 [Debug] Connection id ""0HM3PL0VKA6LG"" stopped.
+2020-10-26 19:12:19.622 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:19.624 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Post (WebApi)"'
+2020-10-26 19:12:19.627 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:19.633 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:19.634 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:19.635 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:19.637 +07:00 [Information] Route matched with "{action = \"Post\", controller = \"UserStatistics\"}". Executing controller action with signature "Void Post(WebApi.Models.UserStatisticsDTO)" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:19.650 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:19.653 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:19.654 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:19.656 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:19.659 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:19.661 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:19.666 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:19.683 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:19.685 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:19.686 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:19.689 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:19.695 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:19.696 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:19.697 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:19.700 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:19.716 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:19.718 +07:00 [Debug] Attempting to bind parameter '"user"' of type '"WebApi.Models.UserStatisticsDTO"' ...
+2020-10-26 19:12:19.718 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:19.722 +07:00 [Debug] Attempting to bind parameter '"user"' of type '"WebApi.Models.UserStatisticsDTO"' using the name '""' in request data ...
+2020-10-26 19:12:19.722 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:19.726 +07:00 [Debug] Selected input formatter '"Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonInputFormatter"' for content type '"application/json"'.
+2020-10-26 19:12:19.726 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:19.734 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"", Request id ""0HM3PL0VKA6LF:00000001"": started reading request body.
+2020-10-26 19:12:19.749 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:19.752 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"", Request id ""0HM3PL0VKA6LF:00000001"": done reading request body.
+2020-10-26 19:12:19.754 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:19.758 +07:00 [Debug] JSON input formatter succeeded, deserializing to type '"WebApi.Models.UserStatisticsDTO"'
+2020-10-26 19:12:19.758 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 68.3873ms
+2020-10-26 19:12:19.762 +07:00 [Debug] Done attempting to bind parameter '"user"' of type '"WebApi.Models.UserStatisticsDTO"'.
+2020-10-26 19:12:19.763 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:19.765 +07:00 [Debug] Done attempting to bind parameter '"user"' of type '"WebApi.Models.UserStatisticsDTO"'.
+2020-10-26 19:12:19.774 +07:00 [Debug] Connection id ""0HM3PL0VKA6LH"" completed keep alive response.
+2020-10-26 19:12:19.774 +07:00 [Debug] Connection id ""0HM3PL0VKA6LH"" received FIN.
+2020-10-26 19:12:19.780 +07:00 [Debug] Attempting to validate the bound parameter '"user"' of type '"WebApi.Models.UserStatisticsDTO"' ...
+2020-10-26 19:12:19.782 +07:00 [Information] Request finished in 173.6847ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:19.785 +07:00 [Debug] Connection id ""0HM3PL0VKA6LH"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:19.790 +07:00 [Debug] Done attempting to validate the bound parameter '"user"' of type '"WebApi.Models.UserStatisticsDTO"'.
+2020-10-26 19:12:19.794 +07:00 [Debug] Connection id ""0HM3PL0VKA6LH"" disconnecting.
+2020-10-26 19:12:19.809 +07:00 [Debug] Connection id ""0HM3PL0VKA6LH"" stopped.
+2020-10-26 19:12:19.812 +07:00 [Debug] Запрос на добавление пользователя UserStatisticsDTO { NameOfNode: "ilya", DateTimeOfLastStatistics: "26.10.2020 19:12:18", VersionOfClient: "1.0.0", TypeOfDevice: "android" }
+2020-10-26 19:12:19.820 +07:00 [Debug] Запрос на добавление пользователя UserStatisticsDTO { NameOfNode: "ilya", DateTimeOfLastStatistics: "26.10.2020 19:12:18", VersionOfClient: "1.0.0", TypeOfDevice: "android" } подтверждён.
+2020-10-26 19:12:19.839 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Post (WebApi)" in 143.9075ms
+2020-10-26 19:12:19.840 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Post (WebApi)"'
+2020-10-26 19:12:19.841 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"" completed keep alive response.
+2020-10-26 19:12:19.842 +07:00 [Information] Request finished in 258.3536ms 200 
+2020-10-26 19:12:19.849 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"" received FIN.
+2020-10-26 19:12:19.851 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:19.853 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"" disconnecting.
+2020-10-26 19:12:19.857 +07:00 [Debug] Connection id ""0HM3PL0VKA6LF"" stopped.
+2020-10-26 19:12:24.495 +07:00 [Debug] Connection id ""0HM3PL0VKA6LI"" accepted.
+2020-10-26 19:12:24.497 +07:00 [Debug] Connection id ""0HM3PL0VKA6LI"" started.
+2020-10-26 19:12:24.502 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:24.503 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:24.505 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:24.510 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:24.511 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:24.512 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:24.515 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:24.519 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:24.529 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:24.534 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:24.535 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:24.543 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:24.544 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:24.545 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:24.546 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:24.561 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:24.565 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:24.566 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:24.568 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:24.574 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:24.576 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 32.9965ms
+2020-10-26 19:12:24.578 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:24.580 +07:00 [Debug] Connection id ""0HM3PL0VKA6LI"" completed keep alive response.
+2020-10-26 19:12:24.581 +07:00 [Debug] Connection id ""0HM3PL0VKA6LI"" received FIN.
+2020-10-26 19:12:24.584 +07:00 [Debug] Connection id ""0HM3PL0VKA6LJ"" accepted.
+2020-10-26 19:12:24.608 +07:00 [Information] Request finished in 105.6436ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:24.613 +07:00 [Debug] Connection id ""0HM3PL0VKA6LJ"" started.
+2020-10-26 19:12:24.612 +07:00 [Debug] Connection id ""0HM3PL0VKA6LI"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:24.626 +07:00 [Debug] Connection id ""0HM3PL0VKA6LI"" disconnecting.
+2020-10-26 19:12:24.626 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:24.628 +07:00 [Debug] Connection id ""0HM3PL0VKA6LI"" stopped.
+2020-10-26 19:12:24.630 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:24.635 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:24.636 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:24.638 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:24.640 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:24.644 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:24.653 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:24.655 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:24.658 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:24.660 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:24.664 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:24.666 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:24.668 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:24.669 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:24.674 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:24.675 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:24.685 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:24.686 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:24.688 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:24.690 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 26.2234ms
+2020-10-26 19:12:24.692 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:24.695 +07:00 [Debug] Connection id ""0HM3PL0VKA6LJ"" completed keep alive response.
+2020-10-26 19:12:24.695 +07:00 [Debug] Connection id ""0HM3PL0VKA6LJ"" received FIN.
+2020-10-26 19:12:24.696 +07:00 [Information] Request finished in 69.7554ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:24.698 +07:00 [Debug] Connection id ""0HM3PL0VKA6LJ"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:24.700 +07:00 [Debug] Connection id ""0HM3PL0VKA6LJ"" disconnecting.
+2020-10-26 19:12:24.703 +07:00 [Debug] Connection id ""0HM3PL0VKA6LJ"" stopped.
+2020-10-26 19:12:29.503 +07:00 [Debug] Connection id ""0HM3PL0VKA6LK"" accepted.
+2020-10-26 19:12:29.508 +07:00 [Debug] Connection id ""0HM3PL0VKA6LK"" started.
+2020-10-26 19:12:29.511 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:29.512 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:29.514 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:29.517 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:29.518 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:29.520 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:29.540 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:29.547 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:29.549 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:29.574 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:29.577 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:29.579 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:29.581 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:29.591 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:29.603 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:29.607 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:29.608 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:29.609 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:29.610 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:29.620 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:29.623 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 44.1331ms
+2020-10-26 19:12:29.633 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:29.667 +07:00 [Debug] Connection id ""0HM3PL0VKA6LK"" completed keep alive response.
+2020-10-26 19:12:29.667 +07:00 [Debug] Connection id ""0HM3PL0VKA6LK"" received FIN.
+2020-10-26 19:12:29.669 +07:00 [Information] Request finished in 157.8659ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:29.670 +07:00 [Debug] Connection id ""0HM3PL0VKA6LL"" accepted.
+2020-10-26 19:12:29.671 +07:00 [Debug] Connection id ""0HM3PL0VKA6LK"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:29.675 +07:00 [Debug] Connection id ""0HM3PL0VKA6LL"" started.
+2020-10-26 19:12:29.689 +07:00 [Debug] Connection id ""0HM3PL0VKA6LK"" disconnecting.
+2020-10-26 19:12:29.715 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:29.715 +07:00 [Debug] Connection id ""0HM3PL0VKA6LK"" stopped.
+2020-10-26 19:12:29.716 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:29.718 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:29.721 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:29.724 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:29.726 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:29.728 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:29.730 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:29.734 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:29.742 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:29.757 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:29.762 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:29.765 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:29.776 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:29.788 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:29.793 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:29.794 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:29.795 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:29.797 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:29.819 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:29.822 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 60.1457ms
+2020-10-26 19:12:29.823 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:29.824 +07:00 [Debug] Connection id ""0HM3PL0VKA6LL"" completed keep alive response.
+2020-10-26 19:12:29.825 +07:00 [Debug] Connection id ""0HM3PL0VKA6LL"" received FIN.
+2020-10-26 19:12:29.826 +07:00 [Information] Request finished in 110.9901ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:29.827 +07:00 [Debug] Connection id ""0HM3PL0VKA6LL"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:29.844 +07:00 [Debug] Connection id ""0HM3PL0VKA6LL"" disconnecting.
+2020-10-26 19:12:29.864 +07:00 [Debug] Connection id ""0HM3PL0VKA6LL"" stopped.
+2020-10-26 19:12:34.492 +07:00 [Debug] Connection id ""0HM3PL0VKA6LM"" accepted.
+2020-10-26 19:12:34.494 +07:00 [Debug] Connection id ""0HM3PL0VKA6LM"" started.
+2020-10-26 19:12:34.497 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:34.498 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:34.499 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:34.501 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:34.503 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:34.506 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:34.509 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:34.513 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:34.516 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:34.519 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:34.521 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:34.526 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:34.527 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:34.528 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:34.530 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:34.536 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:34.540 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:34.541 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:34.543 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:34.547 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:34.548 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 22.0332ms
+2020-10-26 19:12:34.549 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:34.550 +07:00 [Debug] Connection id ""0HM3PL0VKA6LM"" completed keep alive response.
+2020-10-26 19:12:34.551 +07:00 [Debug] Connection id ""0HM3PL0VKA6LM"" received FIN.
+2020-10-26 19:12:34.553 +07:00 [Debug] Connection id ""0HM3PL0VKA6LN"" accepted.
+2020-10-26 19:12:34.555 +07:00 [Information] Request finished in 57.5166ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:34.567 +07:00 [Debug] Connection id ""0HM3PL0VKA6LN"" started.
+2020-10-26 19:12:34.565 +07:00 [Debug] Connection id ""0HM3PL0VKA6LM"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:34.571 +07:00 [Information] Request starting HTTP/1.1 GET https://localhost:5001/api/userstatistics  
+2020-10-26 19:12:34.573 +07:00 [Debug] Connection id ""0HM3PL0VKA6LM"" disconnecting.
+2020-10-26 19:12:34.574 +07:00 [Debug] 1 candidate(s) found for the request path '"/api/userstatistics"'
+2020-10-26 19:12:34.578 +07:00 [Debug] Connection id ""0HM3PL0VKA6LM"" stopped.
+2020-10-26 19:12:34.579 +07:00 [Debug] Endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"' with route pattern '"api/UserStatistics"' is valid for the request path '"/api/userstatistics"'
+2020-10-26 19:12:34.582 +07:00 [Debug] Request matched endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:34.584 +07:00 [Information] Executing endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:34.587 +07:00 [Information] Route matched with "{action = \"Get\", controller = \"UserStatistics\"}". Executing controller action with signature "System.String Get()" on controller "WebApi.Controllers.UserStatisticsController" ("WebApi").
+2020-10-26 19:12:34.594 +07:00 [Debug] Execution plan of "authorization" filters (in the following order): ["None"]
+2020-10-26 19:12:34.598 +07:00 [Debug] Execution plan of "resource" filters (in the following order): ["None"]
+2020-10-26 19:12:34.599 +07:00 [Debug] Execution plan of "action" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Filters.ControllerActionFilter (Order: -2147483648)", "Microsoft.AspNetCore.Mvc.ModelBinding.UnsupportedContentTypeFilter (Order: -3000)", "Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter (Order: -2000)"]
+2020-10-26 19:12:34.602 +07:00 [Debug] Execution plan of "exception" filters (in the following order): ["None"]
+2020-10-26 19:12:34.605 +07:00 [Debug] Execution plan of "result" filters (in the following order): ["Microsoft.AspNetCore.Mvc.Infrastructure.ClientErrorResultFilter (Order: -2000)"]
+2020-10-26 19:12:34.608 +07:00 [Debug] Executing controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:34.610 +07:00 [Debug] Executed controller factory for controller "WebApi.Controllers.UserStatisticsController" ("WebApi")
+2020-10-26 19:12:34.611 +07:00 [Debug] Запрос списка пользователей
+2020-10-26 19:12:34.612 +07:00 [Debug] List of registered output formatters, in the following order: ["Microsoft.AspNetCore.Mvc.Formatters.HttpNoContentOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.StreamOutputFormatter", "Microsoft.AspNetCore.Mvc.Formatters.SystemTextJsonOutputFormatter"]
+2020-10-26 19:12:34.617 +07:00 [Debug] No information found on request to perform content negotiation.
+2020-10-26 19:12:34.619 +07:00 [Debug] Attempting to select an output formatter without using a content type as no explicit content types were specified for the response.
+2020-10-26 19:12:34.620 +07:00 [Debug] Attempting to select the first formatter in the output formatters list which can write the result.
+2020-10-26 19:12:34.621 +07:00 [Debug] Selected output formatter '"Microsoft.AspNetCore.Mvc.Formatters.StringOutputFormatter"' and content type '"text/plain"' to write the response.
+2020-10-26 19:12:34.624 +07:00 [Information] Executing ObjectResult, writing value of type '"System.String"'.
+2020-10-26 19:12:34.627 +07:00 [Information] Executed action "WebApi.Controllers.UserStatisticsController.Get (WebApi)" in 18.5598ms
+2020-10-26 19:12:34.629 +07:00 [Information] Executed endpoint '"WebApi.Controllers.UserStatisticsController.Get (WebApi)"'
+2020-10-26 19:12:34.630 +07:00 [Debug] Connection id ""0HM3PL0VKA6LN"" completed keep alive response.
+2020-10-26 19:12:34.631 +07:00 [Debug] Connection id ""0HM3PL0VKA6LN"" received FIN.
+2020-10-26 19:12:34.634 +07:00 [Information] Request finished in 62.7765ms 200 text/plain; charset=utf-8
+2020-10-26 19:12:34.637 +07:00 [Debug] Connection id ""0HM3PL0VKA6LN"" sending FIN because: ""The client closed the connection.""
+2020-10-26 19:12:34.639 +07:00 [Debug] Connection id ""0HM3PL0VKA6LN"" disconnecting.
+2020-10-26 19:12:34.640 +07:00 [Debug] Connection id ""0HM3PL0VKA6LN"" stopped.
