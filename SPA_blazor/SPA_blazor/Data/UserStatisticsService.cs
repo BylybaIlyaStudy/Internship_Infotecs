@@ -10,7 +10,7 @@ namespace Infotecs.SPA_blazor.Data
 {
     public class UserStatisticsService
     {
-        public List<UserStatistics> GetUserStatistics()
+        public Task<List<UserStatistics>> GetUserStatisticsAsync()
         {
             //List<UserStatistics> userStatistics = null;
 
@@ -22,7 +22,7 @@ namespace Infotecs.SPA_blazor.Data
 
             List<UserStatistics> users = JsonSerializer.Deserialize<List<UserStatistics>>(json);
 
-            return users;
+            return Task.FromResult(users);
         }
     }
 }

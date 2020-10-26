@@ -1,7 +1,7 @@
 ﻿@page "/"
 
+@using Infotecs.SPA_blazor
 @using Infotecs.SPA_blazor.Data
-@inject WeatherForecastService ForecastService
 @inject UserStatisticsService StatisticsService
 
 <button @onclick="@Update">Update</button>
@@ -36,20 +36,52 @@ else
 }
 
 @code {
-    private WeatherForecast[] forecasts;
+    //private WeatherForecast[] forecasts;
     private List<UserStatistics> userStatistics = null;
+
+    private static BlazorTimer Timer = new BlazorTimer();
 
     protected override async Task OnInitializedAsync()
     {
-        forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        //forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+        userStatistics = await Update();
+        StartTimer();
     }
 
-    protected void Update()
+    protected async Task<List<UserStatistics>> Update()
     {
-        userStatistics = StatisticsService.GetUserStatistics();
-        foreach (var user in userStatistics)
+        List<UserStatistics> users = null;
+        try
         {
-            Console.WriteLine(user.NameOfNode);
+            users = await StatisticsService.GetUserStatisticsAsync();
         }
+        catch (Exception ex)
+        {
+            users = userStatistics;
+            Console.WriteLine(ex.Message);
+        }
+
+        if (users != null)
+        {
+            foreach (var user in users)
+            {
+                Console.WriteLine(user.NameOfNode);
+            }
+        }
+
+        return users;
+    }
+
+    private void StartTimer()
+    {
+        Timer.SetTimer(5000);
+        Timer.OnElapsed += TimerElapsedHandler;
+    }
+
+    public async void TimerElapsedHandler()
+    {
+        userStatistics = await Update();
+        await this.InvokeAsync(new Action(() => this.StateHasChanged()));
+        //JSRuntime.InvokeAsync<string>("window.location.reload", true);
     }
 }

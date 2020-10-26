@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Infotecs.SPA_blazor.Data
 {
+    /// <summary>
+    /// Класс описывает пользователей и необходим для хранения данных.
+    /// </summary>
     public class UserStatistics
     {
         public string NameOfNode { get; set; }
