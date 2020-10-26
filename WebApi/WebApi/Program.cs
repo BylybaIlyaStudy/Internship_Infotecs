@@ -30,12 +30,13 @@ namespace WebApi
             DB.Create(new UserStatistics("ivan", DateTime.Now, "1.0.0", "android"));
             DB.Create(new UserStatistics("pavel", DateTime.Now, "1.0.0", "android"));
 
-            Log.Logger = new LoggerConfiguration()
-                .ReadFrom.Configuration(Configuration)
-                //.WriteTo.Console()
-                //.MinimumLevel.Debug()
-                //.WriteTo.RollingFile(Path.Combine(Directory.GetCurrentDirectory(), "log-{Date}.txt"))
-                .CreateLogger();
+            //Log.Logger = new LoggerConfiguration()
+            //    .ReadFrom.Configuration(Configuration)
+            //    .WriteTo.Console()
+            //    .WriteTo.Seq("http://localhost:5341")
+            //    .MinimumLevel.Debug()
+            //    .WriteTo.RollingFile(Path.Combine(Directory.GetCurrentDirectory(), "log-{Date}.txt"))
+            //    .CreateLogger();
 
             try
             {

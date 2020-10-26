@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.IO;
 
 namespace Serilog.Injection
 {
@@ -23,7 +24,11 @@ namespace Serilog.Injection
             return services.AddSerilogServices(
                 new LoggerConfiguration()
                     //.MinimumLevel.Verbose()
-                    .WriteTo.Console());
+                    //.WriteTo.Console());
+                    .WriteTo.Console()
+                    .WriteTo.Seq("http://localhost:5341")
+                    .MinimumLevel.Debug()
+                    .WriteTo.RollingFile(Path.Combine(Directory.GetCurrentDirectory(), "log-{Date}.txt")));
         }
     }
 }
