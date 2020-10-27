@@ -26,6 +26,7 @@
         "dependencies": {
           "Mapster": "6.5.1",
           "Microsoft.Extensions.DependencyInjection": "3.1.9",
+          "Microsoft.VisualStudio.Threading.Analyzers": "16.8.51",
           "Serilog": "2.10.0",
           "Serilog.AspNetCore": "3.4.0",
           "Serilog.Extensions.Autofac.DependencyInjection": "3.0.0",
@@ -36,6 +37,8 @@
           "Serilog.Sinks.File": "4.1.0",
           "Serilog.Sinks.RollingFile": "3.3.0",
           "Serilog.Sinks.Seq": "4.0.0",
+          "SerilogAnalyzer": "0.15.0",
+          "StyleCop.Analyzers": "1.1.118",
           "Swashbuckle.AspNetCore": "5.6.3",
           "Swashbuckle.AspNetCore.SwaggerGen": "5.6.3",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
@@ -562,6 +565,7 @@
           "lib/netstandard2.0/Microsoft.OpenApi.dll": {}
         }
       },
+      "Microsoft.VisualStudio.Threading.Analyzers/16.8.51": {},
       "Microsoft.Win32.Primitives/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -932,6 +936,8 @@
           "lib/netstandard1.3/Serilog.Sinks.Seq.dll": {}
         }
       },
+      "SerilogAnalyzer/0.15.0": {},
+      "StyleCop.Analyzers/1.1.118": {},
       "Swashbuckle.AspNetCore/5.6.3": {
         "dependencies": {
           "Microsoft.Extensions.ApiDescription.Server": "3.0.0",
@@ -3383,6 +3389,13 @@
       "path": "microsoft.openapi/1.2.3",
       "hashPath": "microsoft.openapi.1.2.3.nupkg.sha512"
     },
+    "Microsoft.VisualStudio.Threading.Analyzers/16.8.51": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0KAyGt2oEIH9a1qicA90sjSIIcb7TxNdQdxqrsPtstfdYXkr0IMouMVPikH5WnoJp0uxUmapBzHuNGXObyxg+Q==",
+      "path": "microsoft.visualstudio.threading.analyzers/16.8.51",
+      "hashPath": "microsoft.visualstudio.threading.analyzers.16.8.51.nupkg.sha512"
+    },
     "Microsoft.Win32.Primitives/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -3613,6 +3626,20 @@
       "sha512": "sha512-02HTAboPlG6+/u63+o4bffS5f9VOLMn0/76OsK+Ii90IufoTO6YWIEzZ84KUYjmQnjToe0lrVbLa7qOJdUCYbg==",
       "path": "serilog.sinks.seq/4.0.0",
       "hashPath": "serilog.sinks.seq.4.0.0.nupkg.sha512"
+    },
+    "SerilogAnalyzer/0.15.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sVpwfls4MfNnwIXLSGCgaUnV+c9kgJ8ia6GsyRcpd4Vs3gLogSDtSYBYrre2K2u/PNMo8GgG09RehwVnze70Tw==",
+      "path": "seriloganalyzer/0.15.0",
+      "hashPath": "seriloganalyzer.0.15.0.nupkg.sha512"
+    },
+    "StyleCop.Analyzers/1.1.118": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Onx6ovGSqXSK07n/0eM3ZusiNdB6cIlJdabQhWGgJp3Vooy9AaLS/tigeybOJAobqbtggTamoWndz72JscZBvw==",
+      "path": "stylecop.analyzers/1.1.118",
+      "hashPath": "stylecop.analyzers.1.1.118.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/5.6.3": {
       "type": "package",

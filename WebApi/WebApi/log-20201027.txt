@@ -1,0 +1,28 @@
+2020-10-27 17:53:41.969 +07:00 [Debug] Hosting starting
+2020-10-27 17:53:42.301 +07:00 [Debug] Failed to locate the development https certificate at 'null'.
+2020-10-27 17:53:42.382 +07:00 [Debug] Using development certificate: "CN=localhost" (Thumbprint: "9AD2255271162ABFAE3A2FA177EF88703AB40EC4")
+2020-10-27 17:53:42.390 +07:00 [Warning] Unable to bind to "https://localhost:5001" on the "IPv4 loopback" interface: '"Сделана попытка доступа к сокету методом, запрещенным правами доступа."'.
+2020-10-27 17:53:42.392 +07:00 [Warning] Unable to bind to "http://localhost:5000" on the "IPv4 loopback" interface: '"Сделана попытка доступа к сокету методом, запрещенным правами доступа."'.
+2020-10-27 17:53:42.392 +07:00 [Information] Now listening on: "https://localhost:5001"
+2020-10-27 17:53:42.392 +07:00 [Information] Now listening on: "http://localhost:5000"
+2020-10-27 17:53:42.392 +07:00 [Debug] Loaded hosting startup assembly "WebApi"
+2020-10-27 17:53:42.393 +07:00 [Information] Application started. Press Ctrl+C to shut down.
+2020-10-27 17:53:42.393 +07:00 [Information] Hosting environment: "Development"
+2020-10-27 17:53:42.393 +07:00 [Information] Content root path: "C:\Users\bylyba.ilia\source\repos\WebApi\WebApi"
+2020-10-27 17:53:42.393 +07:00 [Debug] Hosting started
+2020-10-27 17:53:42.669 +07:00 [Debug] Connection id ""0HM3QCQ8V1280"" accepted.
+2020-10-27 17:53:42.670 +07:00 [Debug] Connection id ""0HM3QCQ8V1280"" started.
+2020-10-27 17:53:42.805 +07:00 [Information] Request starting HTTP/2 GET https://localhost:5001/  
+2020-10-27 17:53:42.809 +07:00 [Debug] Wildcard detected, all requests with hosts will be allowed.
+2020-10-27 17:53:42.833 +07:00 [Debug] No candidates found for the request path '"/"'
+2020-10-27 17:53:42.833 +07:00 [Debug] Request did not match any endpoints
+2020-10-27 17:53:42.845 +07:00 [Debug] The request path "" does not match the path filter
+2020-10-27 17:53:42.850 +07:00 [Information] Request finished in 47.8445ms 404 
+2020-10-27 17:53:49.238 +07:00 [Information] Request starting HTTP/2 GET https://localhost:5001/swagger/index.html  
+2020-10-27 17:53:49.239 +07:00 [Debug] No candidates found for the request path '"/swagger/index.html"'
+2020-10-27 17:53:49.239 +07:00 [Debug] Request did not match any endpoints
+2020-10-27 17:53:49.261 +07:00 [Information] Request finished in 22.4412ms 200 text/html;charset=utf-8
+2020-10-27 17:53:49.348 +07:00 [Information] Request starting HTTP/2 GET https://localhost:5001/swagger/v1/swagger.json  
+2020-10-27 17:53:49.348 +07:00 [Debug] No candidates found for the request path '"/swagger/v1/swagger.json"'
+2020-10-27 17:53:49.348 +07:00 [Debug] Request did not match any endpoints
+2020-10-27 17:53:49.411 +07:00 [Information] Request finished in 62.7653ms 200 application/json;charset=utf-8

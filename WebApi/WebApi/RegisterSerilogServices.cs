@@ -1,9 +1,13 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.IO;
+﻿// <copyright file="RegisterSerilogServices.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace Serilog.Injection
 {
+    using System;
+    using System.IO;
+    using Microsoft.Extensions.DependencyInjection;
+
     public static class RegisterSerilogServices
     {
         /// <summary>
@@ -19,12 +23,14 @@ namespace Serilog.Injection
         /// <summary>
         /// Register the Serilog service for console logging only.
         /// </summary>
+        /// <returns></returns>
         public static IServiceCollection AddSerilogServices(this IServiceCollection services)
         {
             return services.AddSerilogServices(
                 new LoggerConfiguration()
-                    //.MinimumLevel.Verbose()
-                    //.WriteTo.Console()
+
+                    // .MinimumLevel.Verbose()
+                    // .WriteTo.Console()
                     .WriteTo.Seq("http://localhost:5341")
                     .MinimumLevel.Debug()
                     .WriteTo.RollingFile(Path.Combine(Directory.GetCurrentDirectory(), "log-{Date}.txt")));
