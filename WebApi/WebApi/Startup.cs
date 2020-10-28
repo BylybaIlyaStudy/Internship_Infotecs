@@ -9,16 +9,14 @@ namespace WebApi
     using Serilog.Injection;
 
     /// <summary>
-    /// 
+    /// Входная точка приложения ASP.NET Core.
     /// </summary>
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         /// <summary>
-        /// 
+        /// Регистрирация сервисов, которые используются приложением.
         /// </summary>
-        /// <param name="services"></param>
+        /// <param name="services">Коллекция сервисов приложения.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IRepository, UsersDB>();
@@ -27,11 +25,10 @@ namespace WebApi
             services.AddSwaggerGen();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         /// <summary>
-        /// 
+        /// Установка способа обработки запроса.
         /// </summary>
-        /// <param name="app"></param>
+        /// <param name="app">Компоненты обработки запроса.</param>
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();

@@ -8,11 +8,17 @@ namespace Serilog.Injection
     using System.IO;
     using Microsoft.Extensions.DependencyInjection;
 
+    /// <summary>
+    /// Класс подключения serilog.
+    /// </summary>
     public static class RegisterSerilogServices
     {
         /// <summary>
         /// Register the Serilog service with a custom configuration.
         /// </summary>
+        /// <param name="services">Коллекция сервисов приложения.</param>
+        /// <param name="configuration">Конфигурация логгера.</param>
+        /// <returns>Коллекция сервисов приложения с добавленным serilog.</returns>
         public static IServiceCollection AddSerilogServices(this IServiceCollection services, LoggerConfiguration configuration)
         {
             Log.Logger = configuration.CreateLogger();
@@ -23,7 +29,8 @@ namespace Serilog.Injection
         /// <summary>
         /// Register the Serilog service for console logging only.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="services">Коллекция сервисов приложения.</param>
+        /// <returns>Коллекция сервисов приложения.</returns>
         public static IServiceCollection AddSerilogServices(this IServiceCollection services)
         {
             return services.AddSerilogServices(

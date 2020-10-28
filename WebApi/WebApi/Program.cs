@@ -12,10 +12,13 @@ namespace WebApi
     using Serilog;
 
     /// <summary>
-    /// 
+    /// Стандартный класс с точкой входа.
     /// </summary>
     public class Program
     {
+        /// <summary>
+        /// Строитель параметров конфигурации.
+        /// </summary>
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
@@ -24,10 +27,14 @@ namespace WebApi
             .Build();
 
         /// <summary>
-        /// 
+        /// Точка входа приложения.
         /// </summary>
-        /// <param name="args"></param>
-        /// <returns></returns>
+        /// <param name="args">Аргументы командной строки.</param>
+        /// <returns>
+        /// Статус завершения работы программы:
+        /// 0 - нормальное завершение работы;
+        /// 1 - ошибка при создании узла.
+        /// </returns>
         public static int Main(string[] args)
         {
             try
@@ -48,10 +55,10 @@ namespace WebApi
         }
 
         /// <summary>
-        /// /
+        /// Запуск строителя узла.
         /// </summary>
-        /// <param name="args"></param>
-        /// <returns></returns>
+        /// <param name="args">Аргументы командной строки.</param>
+        /// <returns>Универсальный узел.</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

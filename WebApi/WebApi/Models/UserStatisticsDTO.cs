@@ -10,26 +10,6 @@ namespace WebApi.Models
     public class UserStatisticsDTO
     {
         /// <summary>
-        /// Имя узла.
-        /// </summary>
-        public string NameOfNode { get; set; }
-
-        /// <summary>
-        /// Дата последней статистики.
-        /// </summary>
-        public string DateTimeOfLastStatistics { get; set; }
-
-        /// <summary>
-        /// Версия клиентского приложения.
-        /// </summary>
-        public string VersionOfClient { get; set; }
-
-        /// <summary>
-        /// Тип клиентского устройства.
-        /// </summary>
-        public string TypeOfDevice { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UserStatisticsDTO"/> class.
         /// </summary>
         public UserStatisticsDTO() { }
@@ -48,5 +28,25 @@ namespace WebApi.Models
             this.VersionOfClient = version;
             this.TypeOfDevice = type;
         }
+
+        /// <summary>
+        /// Имя узла.
+        /// </summary>
+        public string NameOfNode { get; set; }
+
+        /// <summary>
+        /// Дата последней статистики.
+        /// </summary>
+        public string DateTimeOfLastStatistics { get; set; }
+
+        /// <summary>
+        /// Версия клиентского приложения.
+        /// </summary>
+        public string VersionOfClient { get; set; }
+
+        /// <summary>
+        /// Тип клиентского устройства.
+        /// </summary>
+        public string TypeOfDevice { get; set; }
     }
 }

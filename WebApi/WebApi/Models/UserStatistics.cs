@@ -12,26 +12,6 @@ namespace WebApi.Models
     public class UserStatistics
     {
         /// <summary>
-        /// Имя узла. Используется как уникальный идентификатор.
-        /// </summary>
-        public string NameOfNode { get; set; }
-
-        /// <summary>
-        /// Дата последней статистики.
-        /// </summary>
-        public string DateTimeOfLastStatistics { get; set; }
-
-        /// <summary>
-        /// Версия клиентского приложения.
-        /// </summary>
-        public string VersionOfClient { get; set; }
-
-        /// <summary>
-        /// Тип клиентского устройства.
-        /// </summary>
-        public string TypeOfDevice { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="UserStatistics"/> class.
         /// </summary>
         /// <param name="nameOfNode">Имя узла.</param>
@@ -57,12 +37,31 @@ namespace WebApi.Models
         /// <param name="versionOfClient">Версия приложения клиента.</param>
         /// <param name="typeOfDevice">Тип устройства клиента.</param>
         public UserStatistics(string nameOfNode, string versionOfClient, string typeOfDevice)
-            : this(nameOfNode, DateTime.Now, versionOfClient, typeOfDevice) {}
+            : this(nameOfNode, DateTime.Now, versionOfClient, typeOfDevice) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStatistics"/> class.
         /// </summary>
         public UserStatistics()
-            : this(string.Empty, DateTime.MinValue, string.Empty, string.Empty) {}
+            : this(string.Empty, DateTime.MinValue, string.Empty, string.Empty) { }
+        /// <summary>
+        /// Имя узла. Используется как уникальный идентификатор.
+        /// </summary>
+        public string NameOfNode { get; set; }
+
+        /// <summary>
+        /// Дата последней статистики.
+        /// </summary>
+        public string DateTimeOfLastStatistics { get; set; }
+
+        /// <summary>
+        /// Версия клиентского приложения.
+        /// </summary>
+        public string VersionOfClient { get; set; }
+
+        /// <summary>
+        /// Тип клиентского устройства.
+        /// </summary>
+        public string TypeOfDevice { get; set; }
     }
 }
