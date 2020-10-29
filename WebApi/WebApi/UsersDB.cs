@@ -7,6 +7,7 @@ using Infotecs.WebApi.Models;
 using Dapper;
 using System.Linq;
 using Npgsql;
+using Microsoft.Extensions.Configuration;
 
 namespace Infotecs.WebApi
 {
@@ -15,10 +16,11 @@ namespace Infotecs.WebApi
     /// </summary>
     public class UsersDB : IRepository
     {
+        
         /// <summary>
         /// Подключение к базе данных.
         /// </summary>
-        private readonly NpgsqlConnection connection = new NpgsqlConnection("User ID=postgres;Password=528491;Host=localhost;Port=5432;Database=webapidb;");
+        private readonly NpgsqlConnection connection = new NpgsqlConnection(Program.Configuration.GetConnectionString("DefaultConnection"));
 
         /// <summary>
         /// Метод создаёт в базе данных новую запись о пользовательской статистике.
