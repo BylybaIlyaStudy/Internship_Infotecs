@@ -1,5 +1,5 @@
-﻿// <copyright file="UsersDB.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="UsersDB.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Подключение к базе данных.
         /// </summary>
-        private readonly NpgsqlConnection connection = new NpgsqlConnection("User ID=postgres;Password=528491;Host=localhost;Port=5432;Database=Infotecs.WebApidb;");
+        private readonly NpgsqlConnection connection = new NpgsqlConnection("User ID=postgres;Password=528491;Host=localhost;Port=5432;Database=webapidb;");
 
         /// <summary>
         /// Метод создаёт в базе данных новую запись о пользовательской статистике.
@@ -77,7 +77,7 @@ namespace Infotecs.WebApi
         /// </summary>
         public virtual void Dispose()
         {
-
+            connection.Close();
         }
 
         /// <summary>
