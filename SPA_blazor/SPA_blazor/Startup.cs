@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,17 +7,29 @@ using Infotecs.SPA_blazor.Data;
 
 namespace Infotecs.SPA_blazor
 {
+    /// <summary>
+    /// Входная точка приложения ASP.NET Core.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Задание параметров конфигурации.
+        /// </summary>
+        /// <param name="configuration">Параметры конфигурации.</param>
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        /// <summary>
+        /// Строитель параметров конфигурации.
+        /// </summary>
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        /// <summary>
+        /// Регистрирация сервисов, которые используются приложением.
+        /// </summary>
+        /// <param name="services">Коллекция сервисов приложения.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
@@ -31,7 +37,11 @@ namespace Infotecs.SPA_blazor
             services.AddSingleton<UserStatisticsService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Установка способа обработки запроса.
+        /// </summary>
+        /// <param name="app">Компоненты обработки запроса.</param>
+        /// <param name="env">Информация о среде запуска приложения.</param>
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -41,7 +51,6 @@ namespace Infotecs.SPA_blazor
             else
             {
                 app.UseExceptionHandler("/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

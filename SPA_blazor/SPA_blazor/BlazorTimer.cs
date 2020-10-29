@@ -1,26 +1,43 @@
-﻿using System;
-using System.Timers;
+﻿// <copyright file="BlazorTimer.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
+// </copyright>
 
 namespace Infotecs.SPA_blazor
 {
+    using System;
+    using System.Timers;
+
+    /// <summary>
+    /// Класс для работы с таймером.
+    /// </summary>
     public class BlazorTimer
     {
-        public Timer _timer;
+        /// <summary>
+        /// Таймер.
+        /// </summary>
+        public Timer Timer;
 
-        public void SetTimer(double interval)
-        {
-            _timer = new Timer(interval);
-            _timer.Elapsed += NotifyTimerElapsed;
-            _timer.Enabled = true;
-        }
-
+        /// <summary>
+        /// Событие срабатывания таймера.
+        /// </summary>
         public event Action OnElapsed;
 
-        private void NotifyTimerElapsed(Object source, ElapsedEventArgs e)
+        /// <summary>
+        /// Установка таймера.
+        /// </summary>
+        /// <param name="interval">Время задержки.</param>
+        public void SetTimer(double interval)
+        {
+            Timer = new Timer(interval);
+            Timer.Elapsed += NotifyTimerElapsed;
+            Timer.Enabled = true;
+        }
+
+        private void NotifyTimerElapsed(object source, ElapsedEventArgs e)
         {
             OnElapsed?.Invoke();
-            _timer.Enabled = false;
-            _timer.Dispose();
+            Timer.Enabled = false;
+            Timer.Dispose();
         }
     }
 }

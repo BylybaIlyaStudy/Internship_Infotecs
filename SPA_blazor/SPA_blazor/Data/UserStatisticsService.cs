@@ -8,12 +8,17 @@ using System.Threading.Tasks;
 
 namespace Infotecs.SPA_blazor.Data
 {
+    /// <summary>
+    /// Класс для работы с пользовательской статистикой.
+    /// </summary>
     public class UserStatisticsService
     {
+        /// <summary>
+        /// Асинхронно запрашивает пользовательскую статистику у сервера.
+        /// </summary>
+        /// <returns>Список пользоавтельских статистик.</returns>
         public Task<List<UserStatistics>> GetUserStatisticsAsync()
         {
-            //List<UserStatistics> userStatistics = null;
-
             WebRequest request = WebRequest.Create("https://localhost:5001/api/userstatistics");
             WebResponse response = request.GetResponse();
 

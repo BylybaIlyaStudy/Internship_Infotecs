@@ -1,21 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Infotecs.SPA_blazor.Data
+﻿namespace Infotecs.SPA_blazor.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     /// <summary>
-    /// Класс описывает пользователей и необходим для хранения данных.
+    /// Класс хранения пользовательской статистики.
     /// </summary>
     public class UserStatistics
     {
-        public string NameOfNode { get; set; }
-        public string DateTimeOfLastStatistics { get; set; }
-        public string VersionOfClient { get; set; }
-        public string TypeOfDevice { get; set; }
-
-        public UserStatistics(string nameOfNode, DateTime dateTime, string versionOfClient, string typeOfDevice)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserStatistics"/> class.
+        /// </summary>
+        /// <param name="nameOfNode">Имя узла.</param>
+        /// <param name="dateTime">Дата последней статистики.</param>
+        /// <param name="versionOfClient">Версия приложения клиента.</param>
+        /// <param name="typeOfDevice">Тип устройства клиента.</param>
+        public UserStatistics(
+            string nameOfNode,
+            DateTime dateTime,
+            string versionOfClient,
+            string typeOfDevice)
         {
             this.NameOfNode = nameOfNode;
             this.DateTimeOfLastStatistics = dateTime.ToString();
@@ -23,9 +29,38 @@ namespace Infotecs.SPA_blazor.Data
             this.TypeOfDevice = typeOfDevice;
         }
 
-        public UserStatistics(string nameOfNode, string versionOfClient, string typeOfDevice) : 
-            this(nameOfNode, DateTime.Now, versionOfClient, typeOfDevice) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserStatistics"/> class.
+        /// </summary>
+        /// <param name="nameOfNode">Имя узла.</param>
+        /// <param name="versionOfClient">Версия приложения клиента.</param>
+        /// <param name="typeOfDevice">Тип устройства клиента.</param>
+        public UserStatistics(string nameOfNode, string versionOfClient, string typeOfDevice)
+            : this(nameOfNode, DateTime.Now, versionOfClient, typeOfDevice) { }
 
-        public UserStatistics() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UserStatistics"/> class.
+        /// </summary>
+        public UserStatistics()
+            : this(string.Empty, DateTime.MinValue, string.Empty, string.Empty) { }
+        /// <summary>
+        /// Имя узла. Используется как уникальный идентификатор.
+        /// </summary>
+        public string NameOfNode { get; set; }
+
+        /// <summary>
+        /// Дата последней статистики.
+        /// </summary>
+        public string DateTimeOfLastStatistics { get; set; }
+
+        /// <summary>
+        /// Версия клиентского приложения.
+        /// </summary>
+        public string VersionOfClient { get; set; }
+
+        /// <summary>
+        /// Тип клиентского устройства.
+        /// </summary>
+        public string TypeOfDevice { get; set; }
     }
 }

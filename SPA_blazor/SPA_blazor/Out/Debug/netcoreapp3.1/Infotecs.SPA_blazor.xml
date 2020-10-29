@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infotecs.SPA_blazor</name>
+    </assembly>
+    <members>
+        <member name="T:Infotecs.SPA_blazor.BlazorTimer">
+            <summary>
+            Класс для работы с таймером.
+            </summary>
+        </member>
+        <member name="F:Infotecs.SPA_blazor.BlazorTimer.Timer">
+            <summary>
+            Таймер.
+            </summary>
+        </member>
+        <member name="E:Infotecs.SPA_blazor.BlazorTimer.OnElapsed">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.BlazorTimer.SetTimer(System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="interval"></param>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Data.UserStatistics">
+            <summary>
+            Класс хранения пользовательской статистики.
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Data.UserStatistics.#ctor(System.String,System.DateTime,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.SPA_blazor.Data.UserStatistics"/> class.
+            </summary>
+            <param name="nameOfNode">Имя узла.</param>
+            <param name="dateTime">Дата последней статистики.</param>
+            <param name="versionOfClient">Версия приложения клиента.</param>
+            <param name="typeOfDevice">Тип устройства клиента.</param>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Data.UserStatistics.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.SPA_blazor.Data.UserStatistics"/> class.
+            </summary>
+            <param name="nameOfNode">Имя узла.</param>
+            <param name="versionOfClient">Версия приложения клиента.</param>
+            <param name="typeOfDevice">Тип устройства клиента.</param>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Data.UserStatistics.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.SPA_blazor.Data.UserStatistics"/> class.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.NameOfNode">
+            <summary>
+            Имя узла. Используется как уникальный идентификатор.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.DateTimeOfLastStatistics">
+            <summary>
+            Дата последней статистики.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.VersionOfClient">
+            <summary>
+            Версия клиентского приложения.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.TypeOfDevice">
+            <summary>
+            Тип клиентского устройства.
+            </summary>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Data.UserStatisticsService">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Data.UserStatisticsService.GetUserStatisticsAsync">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Program">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Program.Main(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Startup">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Startup.Configuration">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
+        </member>
+    </members>
+</doc>

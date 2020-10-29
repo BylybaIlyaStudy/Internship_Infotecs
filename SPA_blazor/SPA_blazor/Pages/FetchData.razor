@@ -36,7 +36,6 @@ else
 }
 
 @code {
-    //private WeatherForecast[] forecasts;
     private List<UserStatistics> userStatistics = null;
 
     private static BlazorTimer Timer = new BlazorTimer();
@@ -82,6 +81,5 @@ else
     {
         userStatistics = await Update();
         await this.InvokeAsync(new Action(() => this.StateHasChanged()));
-        //JSRuntime.InvokeAsync<string>("window.location.reload", true);
     }
 }
