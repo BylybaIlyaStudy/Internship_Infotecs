@@ -36,6 +36,8 @@ else
 }
 
 @code {
+    const int time = 10000; //период обновления данных
+
     private List<UserStatistics> userStatistics = null;
 
     private static BlazorTimer Timer = new BlazorTimer();
@@ -73,7 +75,7 @@ else
 
     private void StartTimer()
     {
-        Timer.SetTimer(5000);
+        Timer.SetTimer(time);
         Timer.OnElapsed += TimerElapsedHandler;
     }
 
