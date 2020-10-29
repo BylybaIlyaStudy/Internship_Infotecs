@@ -41,8 +41,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStatistics"/> class.
         /// </summary>
-        public UserStatistics()
-            : this(string.Empty, DateTime.MinValue, string.Empty, string.Empty) { }
+        public UserStatistics() { }
         /// <summary>
         /// Имя узла. Используется как уникальный идентификатор.
         /// </summary>
