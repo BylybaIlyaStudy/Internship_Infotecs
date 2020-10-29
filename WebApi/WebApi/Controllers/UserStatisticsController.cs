@@ -1,15 +1,15 @@
-﻿// <copyright file="UserStatisticsController.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="UserStatisticsController.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
-namespace WebApi.Controllers
+namespace Infotecs.WebApi.Controllers
 {
     using System.Collections.Generic;
     using System.Text.Json;
     using Mapster;
     using Microsoft.AspNetCore.Mvc;
     using Serilog;
-    using WebApi.Models;
+    using Infotecs.WebApi.Models;
 
     /// <summary>
     /// Класс контроллера для обработки REST запросов и 
@@ -40,14 +40,14 @@ namespace WebApi.Controllers
         /// </summary>
         /// <returns>JSON строка со списком DTO всех пользователей.</returns>
         [HttpGet]
-        public string Get()
+        public List<UserStatisticsDTO> Get()
         {
             this.logger.Debug("Запрос списка пользователей");
 
             List<UserStatistics> users3 = this.repository.GetUsersList();
             List<UserStatisticsDTO> users4 = users3.Adapt<List<UserStatisticsDTO>>();
 
-            return JsonSerializer.Serialize<List<UserStatisticsDTO>>(users4);
+            return users4;
         }
 
         /// <summary>
@@ -55,8 +55,9 @@ namespace WebApi.Controllers
         /// Метод принимает DTO пользователя, конвертирует его в модель и добавляет в базу данных.
         /// </summary>
         /// <param name="user">DTO пользовательской статистики.</param>
+        /// <returns>Результат выполнения запроса.</returns>
         [HttpPost]
-        public void Post([FromBody]UserStatisticsDTO user)
+        public IActionResult Post([FromBody]UserStatisticsDTO user)
         {
             this.logger.Debug("Запрос на добавление пользователя {@User}", user);
 
@@ -66,10 +67,12 @@ namespace WebApi.Controllers
             if (status)
             {
                 this.logger.Debug("Запрос на добавление пользователя {@User} подтверждён.", user);
+                return Ok(user);
             }
             else
             {
                 this.logger.Error("Запрос на добавление пользователя {@User} отклонён. Пользователь с таким именем уже существует.", user);
+                return StatusCode(412, user);
             }
         }
 
@@ -78,8 +81,9 @@ namespace WebApi.Controllers
         /// Метод принимает DTO пользователя, конвертирует его в модель и обновляет запись в базе данных.
         /// </summary>
         /// <param name="user">DTO пользовательской статистики.</param>
+        /// <returns>Результат выполнения запроса.</returns>
         [HttpPut]
-        public void Put([FromBody]UserStatisticsDTO user)
+        public IActionResult Put([FromBody]UserStatisticsDTO user)
         {
             this.logger.Debug("Запрос на обновление данных о пользователе {@User}", user);
 
@@ -89,10 +93,12 @@ namespace WebApi.Controllers
             if (status)
             {
                 this.logger.Debug("Запрос на обновление данных о пользователе {@User} подтверждён.", user);
+                return Ok(user);
             }
             else
             {
                 this.logger.Error("Запрос на обновление данных о пользователе {@User} отклонён. Пользователя с таким именем не существует.", user);
+                return NotFound(user);
             }
         }
 
@@ -102,8 +108,9 @@ namespace WebApi.Controllers
         /// именем этого пользователя в базе данных.
         /// </summary>
         /// <param name="user">DTO пользовательской статистики.</param>
+        /// <returns>Результат выполнения запроса.</returns>
         [HttpDelete]
-        public void Delete([FromBody] UserStatisticsDTO user)
+        public IActionResult Delete([FromBody] UserStatisticsDTO user)
         {
             this.logger.Debug("Запрос на удаление пользователя {@User}", User);
 
@@ -111,10 +118,12 @@ namespace WebApi.Controllers
             if (status)
             {
                 this.logger.Debug("Запрос на удаление пользователя {@User} подтверждён.", User);
+                return Ok(user);
             }
             else
             {
                 this.logger.Error("Запрос на удаление пользователя {@User} отклонён. Пользователя с таким именем не существует.", User);
+                return NotFound(user);
             }
         }
     }
