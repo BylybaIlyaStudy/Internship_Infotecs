@@ -34,7 +34,7 @@ namespace Infotecs.WebApi
         /// </returns>
         public bool Create(UserStatistics user)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
+            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
 
             if (foundUser == null)
             {
@@ -59,11 +59,11 @@ namespace Infotecs.WebApi
         /// </returns>
         public bool Delete(string name)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)", new { nameOfNode = name }).FirstOrDefault();
+            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = name }).FirstOrDefault();
             
             if (foundUser != null)
             {
-                string sqlQuery = "DELETE FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)";
+                string sqlQuery = "DELETE FROM Users WHERE nameOfNode = @nameOfNode";
                 connection.Execute(sqlQuery, new { nameOfNode = name });
                 
                 return true;
@@ -91,7 +91,7 @@ namespace Infotecs.WebApi
         /// </returns>
         public UserStatistics GetUser(string name)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)", new { nameOfNode = name }).FirstOrDefault();
+            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = name }).FirstOrDefault();
 
             return foundUser;
         }
@@ -121,11 +121,11 @@ namespace Infotecs.WebApi
         /// </returns>
         public bool Update(UserStatistics user)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
+            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
 
             if (foundUser != null)
             {
-                string sqlQuery = "UPDATE Users SET nameOfNode = @NameOfNode, DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)";
+                string sqlQuery = "UPDATE Users SET nameOfNode = @NameOfNode, DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE nameOfNode = @nameOfNode";
                 connection.Execute(sqlQuery, user);
 
                 return true;
