@@ -2,7 +2,7 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace WebApi
+namespace Infotecs.WebApi
 {
     using System;
     using System.IO;

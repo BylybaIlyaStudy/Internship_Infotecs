@@ -2,17 +2,23 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace WebApi
-{
-    using System.Collections.Generic;
-    using WebApi.Models;
+using System.Collections.Generic;
+using Infotecs.WebApi.Models;
+using Dapper;
+using System.Linq;
+using Npgsql;
 
+namespace Infotecs.WebApi
+{
     /// <summary>
     /// Класс для работы с базой данных о пользователях.
     /// </summary>
     public class UsersDB : IRepository
     {
-        private List<UserStatistics> users = new List<UserStatistics>();
+        /// <summary>
+        /// Подключение к базе данных.
+        /// </summary>
+        private readonly NpgsqlConnection connection = new NpgsqlConnection("User ID=postgres;Password=528491;Host=localhost;Port=5432;Database=Infotecs.WebApidb;");
 
         /// <summary>
         /// Метод создаёт в базе данных новую запись о пользовательской статистике.
@@ -28,9 +34,12 @@ namespace WebApi
         /// </returns>
         public bool Create(UserStatistics user)
         {
-            if (!this.users.Exists(x => x.NameOfNode == user.NameOfNode))
+            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
+
+            if (foundUser == null)
             {
-                this.users.Add(user);
+                string sqlQuery = "INSERT INTO Users (nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice) VALUES(@nameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice);";
+                connection.Execute(sqlQuery, user);
                 return true;
             }
 
@@ -50,9 +59,13 @@ namespace WebApi
         /// </returns>
         public bool Delete(string name)
         {
-            if (this.users.Exists(x => x.NameOfNode == name))
+            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)", new { nameOfNode = name }).FirstOrDefault();
+            
+            if (foundUser != null)
             {
-                this.users.Remove(this.users.Find(x => x.NameOfNode == name));
+                string sqlQuery = "DELETE FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)";
+                connection.Execute(sqlQuery, new { nameOfNode = name });
+                
                 return true;
             }
 
@@ -64,15 +77,7 @@ namespace WebApi
         /// </summary>
         public virtual void Dispose()
         {
-            if (this.users != null)
-            {
-                if (this.users.Count > 0)
-                {
-                    this.users.Clear();
-                }
 
-                this.users = null;
-            }
         }
 
         /// <summary>
@@ -86,12 +91,9 @@ namespace WebApi
         /// </returns>
         public UserStatistics GetUser(string name)
         {
-            if (this.users.Exists(x => x.NameOfNode == name))
-            {
-                return this.users.Find(x => x.NameOfNode == name);
-            }
+            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)", new { nameOfNode = name }).FirstOrDefault();
 
-            return null;
+            return foundUser;
         }
 
         /// <summary>
@@ -100,7 +102,9 @@ namespace WebApi
         /// <returns>Список всех пользователей.</returns>
         public List<UserStatistics> GetUsersList()
         {
-            return this.users;
+            List<UserStatistics> users = connection.Query<UserStatistics>("SELECT * FROM Users").ToList();
+            
+            return users;
         }
 
         /// <summary>
@@ -117,9 +121,13 @@ namespace WebApi
         /// </returns>
         public bool Update(UserStatistics user)
         {
-            if (this.users.Exists(x => x.NameOfNode == user.NameOfNode))
+            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
+
+            if (foundUser != null)
             {
-                this.users[this.users.FindIndex(x => x.NameOfNode == user.NameOfNode)] = user;
+                string sqlQuery = "UPDATE Users SET nameOfNode = @NameOfNode, DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE to_tsvector(nameOfNode) @@ to_tsquery(@nameOfNode)";
+                connection.Execute(sqlQuery, user);
+
                 return true;
             }
 

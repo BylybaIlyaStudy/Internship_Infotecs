@@ -2,11 +2,11 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace WebApi
+namespace Infotecs.WebApi
 {
     using System;
     using System.Collections.Generic;
-    using WebApi.Models;
+    using Infotecs.WebApi.Models;
 
     /// <summary>
     /// Интерфейс для взаимодействия с базой данных.
