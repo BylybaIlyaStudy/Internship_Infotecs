@@ -37,18 +37,18 @@ namespace Infotecs.WebApi
         /// </returns>
         public int Create(UserStatisticsDTO statistics)
         {
-            Users user = connection.Query<Users>("SELECT * FROM NewUsers WHERE username = @nameOfNode", statistics).FirstOrDefault();
+            Users user = connection.Query<Users>("SELECT * FROM Users WHERE username = @nameOfNode", statistics).FirstOrDefault();
 
             //UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
 
             int status = 0;
             if (user == null)
             {
-                connection.Execute("INSERT INTO NewUsers (UserName) VALUES (@nameOfNode);", statistics);
+                connection.Execute("INSERT INTO Users (UserName) VALUES (@nameOfNode);", statistics);
                 status = 1;
             }
 
-            string sqlQuery = "INSERT INTO Users (nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice) VALUES(@nameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice);";
+            string sqlQuery = "INSERT INTO Statistics (nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice) VALUES(@nameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice);";
             connection.Execute(sqlQuery, statistics);
 
             return status;
@@ -68,13 +68,13 @@ namespace Infotecs.WebApi
         /// </returns>
         public int Update(UserStatisticsDTO statistics)
         {
-            Users user = connection.Query<Users>("SELECT * FROM NewUsers WHERE UserName = @nameOfNode", statistics).FirstOrDefault();
+            Users user = connection.Query<Users>("SELECT * FROM Users WHERE UserName = @nameOfNode", statistics).FirstOrDefault();
 
             //UserStatisticsDTO foundUser = connection.Query<UserStatisticsDTO>("SELECT * FROM NewUsers WHERE UserName = @UserName", new { UserName = user.NameOfNode }).FirstOrDefault();
 
             if (user != null)
             {
-                string sqlQuery = "UPDATE Users SET DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE nameOfNode = @nameOfNode";
+                string sqlQuery = "UPDATE Statistics SET DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE nameOfNode = @nameOfNode";
                 connection.Execute(sqlQuery, statistics);
 
                 return 1;
@@ -97,7 +97,7 @@ namespace Infotecs.WebApi
         {
             //Users foundUser = connection.Query<Users>("SELECT * FROM NewUsers WHERE UserName = @UserName", new { UserName = name }).FirstOrDefault();
 
-            string sqlQuery = "DELETE FROM Users WHERE (nameOfNode = @nameOfNode AND DateTimeOfLastStatistics = @DateTimeOfLastStatistics AND versionOfClient = @versionOfClient AND typeOfDevice = @typeOfDevice)";
+            string sqlQuery = "DELETE FROM Statistics WHERE (nameOfNode = @nameOfNode AND DateTimeOfLastStatistics = @DateTimeOfLastStatistics AND versionOfClient = @versionOfClient AND typeOfDevice = @typeOfDevice)";
             return connection.Execute(sqlQuery, statistics);
         }
 
@@ -129,9 +129,9 @@ namespace Infotecs.WebApi
         /// <returns>Список всех пользователей.</returns>
         public List<UserStatisticsDTO> GetUsersList()
         {
-            List<UserStatisticsDTO> users = connection.Query<UserStatisticsDTO>("SELECT * FROM Users").ToList();
+            List<UserStatisticsDTO> statistics = connection.Query<UserStatisticsDTO>("SELECT * FROM Statistics").ToList();
             
-            return users;
+            return statistics;
         }
     }
 }
