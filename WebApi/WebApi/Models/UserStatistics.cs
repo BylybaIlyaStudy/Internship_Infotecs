@@ -45,7 +45,7 @@ namespace Infotecs.WebApi.Models
         public UserStatistics()
             : this(string.Empty, DateTime.MinValue, string.Empty, string.Empty) { }
         /// <summary>
-        /// Имя узла. Используется как уникальный идентификатор.
+        /// Имя пользователя.
         /// </summary>
         public string NameOfNode { get; set; }
 

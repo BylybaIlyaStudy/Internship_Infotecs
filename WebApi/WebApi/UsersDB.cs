@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 namespace Infotecs.WebApi
 {
     /// <summary>
-    /// Класс для работы с базой данных о пользователях.
+    /// Класс для работы с базой данных.
     /// </summary>
     public class UsersDB : IRepository
     {
@@ -23,7 +23,8 @@ namespace Infotecs.WebApi
         private readonly NpgsqlConnection connection = new NpgsqlConnection(Program.Configuration.GetConnectionString("DefaultConnection"));
 
         /// <summary>
-        /// Метод создаёт в базе данных новую запись о пользовательской статистике.
+        /// Метод создаёт в базе данных наличие пользователя, создаёт его в случае отсутствия и 
+        /// создаёт новую запись о пользовательской статистике.
         /// </summary>
         /// <param name="statistics">
         /// Данные о пользовательской статистике, 
@@ -119,8 +120,6 @@ namespace Infotecs.WebApi
         /// </returns>
         public List<UserStatisticsDTO> GetUser(string name)
         {
-            //List<UserStatisticsDTO> foundUser = connection.Query<UserStatisticsDTO>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = name });
-
             return null;
         }
 
