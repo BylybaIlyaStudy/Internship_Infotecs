@@ -30,7 +30,7 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Метод создаёт в базе данных новую запись о пользовательской статистике.
         /// </summary>
-        /// <param name="user">
+        /// <param name="statistics">
         /// Данные о пользовательской статистике, 
         /// которые нужно внести в базу.
         /// </param>
@@ -39,12 +39,16 @@ namespace Infotecs.WebApi
         /// 1 - запись успешно создана,
         /// 0 - создать запись не удалось.
         /// </returns>
-        int Create(UserStatisticsDTO user);
+        int Create(UserStatisticsDTO statistics);
 
         /// <summary>
         /// Метод обновляет в базе данных запись о пользовательской статистике.
         /// </summary>
-        /// <param name="user">
+        /// <param name="statistics">
+        /// Данные о пользовательской статистике, 
+        /// которые нужно изменить.
+        /// </param>
+        /// <param name="newStatistics">
         /// Данные о пользовательской статистике, 
         /// которые нужно внести в базу.
         /// </param>
@@ -53,12 +57,12 @@ namespace Infotecs.WebApi
         /// 1 - запись успешно обновлена,
         /// 0 - обновить запись не удалось.
         /// </returns>
-        int Update(UserStatisticsDTO user);
+        int Update(UserStatisticsDTO statistics, UserStatisticsDTO newStatistics);
 
         /// <summary>
         /// Метод удаляет из базы данных запись о пользовательской статистике.
         /// </summary>
-        /// <param name="user">
+        /// <param name="statistics">
         /// Имя пользователя, данные о котором необходимо удалить.
         /// </param>
         /// <returns>
@@ -66,6 +70,6 @@ namespace Infotecs.WebApi
         /// 1 - запись успешно удалена,
         /// 0 - удалить запись не удалось.
         /// </returns>
-        int Delete(UserStatisticsDTO user);
+        int Delete(UserStatisticsDTO statistics);
     }
 }

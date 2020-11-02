@@ -61,12 +61,16 @@ namespace Infotecs.WebApi
         /// Данные о пользовательской статистике, 
         /// которые нужно внести в базу.
         /// </param>
+        /// <param name="newStatistics">
+        /// Данные о пользовательской статистике, 
+        /// которые нужно изменить.
+        /// </param>
         /// <returns>
         /// Статус обновления записи:
         /// 1 - запись успешно обновлена,
         /// 0 - обновить запись не удалось.
         /// </returns>
-        public int Update(UserStatisticsDTO statistics)
+        public int Update(UserStatisticsDTO statistics, UserStatisticsDTO newStatistics)
         {
             Users user = connection.Query<Users>("SELECT * FROM Users WHERE UserName = @nameOfNode", statistics).FirstOrDefault();
 
@@ -74,10 +78,26 @@ namespace Infotecs.WebApi
 
             if (user != null)
             {
-                string sqlQuery = "UPDATE Statistics SET DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE nameOfNode = @nameOfNode";
-                connection.Execute(sqlQuery, statistics);
+                if (user.UserName == newStatistics.NameOfNode)
+                {
+                    string sqlQuery = "UPDATE Statistics SET DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE nameOfNode = @nameOfNode";
+                    connection.Execute(sqlQuery, newStatistics);
 
-                return 1;
+                    return 1;
+                }
+                else
+                {
+                    string sqlQuery = "UPDATE Users SET username = @newname WHERE username = @oldname";
+                    connection.Execute(sqlQuery, new { newname = newStatistics.NameOfNode, oldname = statistics.NameOfNode });
+                    
+                    sqlQuery = "UPDATE Statistics SET nameOfNode = @newname WHERE nameOfNode = @oldname";
+                    connection.Execute(sqlQuery, new { newname = newStatistics.NameOfNode, oldname = statistics.NameOfNode });
+
+                    sqlQuery = "UPDATE Statistics SET DateTimeOfLastStatistics = @newstat.DateTimeOfLastStatistics, VersionOfClient = @newstat.VersionOfClient, TypeOfDevice = @newstat.TypeOfDevice WHERE (nameOfNode = @oldstat.nameOfNode AND DateTimeOfLastStatistics = @oldstat.DateTimeOfLastStatistics AND versionOfClient = @oldstat.versionOfClient AND typeOfDevice = @oldstat.typeOfDevice)";
+                    connection.Execute(sqlQuery, new { newstat = newStatistics, oldstat = statistics });
+
+                    return 2;
+                }
             }
 
             return 0;
