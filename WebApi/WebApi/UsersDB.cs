@@ -25,53 +25,79 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Метод создаёт в базе данных новую запись о пользовательской статистике.
         /// </summary>
-        /// <param name="user">
+        /// <param name="statistics">
         /// Данные о пользовательской статистике, 
         /// которые нужно внести в базу.
         /// </param>
         /// <returns>
         /// Статус создания новой записи:
-        /// 1 - запись успешно создана,
-        /// 0 - создать запись не удалось.
+        /// 1 - создана запись о новом пользователе и добавлена статистика о нём;
+        /// 0 - добавлена статистика о существующем пользователе.
         /// </returns>
-        public bool Create(UserStatistics user)
+        public int Create(UserStatisticsDTO statistics)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
+            Users user = connection.Query<Users>("SELECT * FROM NewUsers WHERE username = @nameOfNode", statistics).FirstOrDefault();
 
-            if (foundUser == null)
+            //UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
+
+            int status = 0;
+            if (user == null)
             {
-                string sqlQuery = "INSERT INTO Users (nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice) VALUES(@nameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice);";
-                connection.Execute(sqlQuery, user);
-                return true;
+                connection.Execute("INSERT INTO NewUsers (UserName) VALUES (@nameOfNode);", statistics);
+                status = 1;
             }
 
-            return false;
+            string sqlQuery = "INSERT INTO Users (nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice) VALUES(@nameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice);";
+            connection.Execute(sqlQuery, statistics);
+
+            return status;
+        }
+
+        /// <summary>
+        /// Метод обновляет в базе данных запись о пользовательской статистике.
+        /// </summary>
+        /// <param name="statistics">
+        /// Данные о пользовательской статистике, 
+        /// которые нужно внести в базу.
+        /// </param>
+        /// <returns>
+        /// Статус обновления записи:
+        /// 1 - запись успешно обновлена,
+        /// 0 - обновить запись не удалось.
+        /// </returns>
+        public int Update(UserStatisticsDTO statistics)
+        {
+            Users user = connection.Query<Users>("SELECT * FROM NewUsers WHERE UserName = @nameOfNode", statistics).FirstOrDefault();
+
+            //UserStatisticsDTO foundUser = connection.Query<UserStatisticsDTO>("SELECT * FROM NewUsers WHERE UserName = @UserName", new { UserName = user.NameOfNode }).FirstOrDefault();
+
+            if (user != null)
+            {
+                string sqlQuery = "UPDATE Users SET DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE nameOfNode = @nameOfNode";
+                connection.Execute(sqlQuery, statistics);
+
+                return 1;
+            }
+
+            return 0;
         }
 
         /// <summary>
         /// Метод удаляет из базы данных запись о пользовательской статистике.
         /// </summary>
-        /// <param name="name">
-        /// Имя пользователя, данные о котором необходимо удалить.
+        /// <param name="statistics">
+        /// Данные, которые необходимо удалить.
         /// </param>
         /// <returns>
         /// Статус удаления записи:
-        /// 1 - запись успешно удалена,
-        /// 0 - удалить запись не удалось.
+        /// Кол-во удалённых записей.
         /// </returns>
-        public bool Delete(string name)
+        public int Delete(UserStatisticsDTO statistics)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = name }).FirstOrDefault();
-            
-            if (foundUser != null)
-            {
-                string sqlQuery = "DELETE FROM Users WHERE nameOfNode = @nameOfNode";
-                connection.Execute(sqlQuery, new { nameOfNode = name });
-                
-                return true;
-            }
+            //Users foundUser = connection.Query<Users>("SELECT * FROM NewUsers WHERE UserName = @UserName", new { UserName = name }).FirstOrDefault();
 
-            return false;
+            string sqlQuery = "DELETE FROM Users WHERE (nameOfNode = @nameOfNode AND DateTimeOfLastStatistics = @DateTimeOfLastStatistics AND versionOfClient = @versionOfClient AND typeOfDevice = @typeOfDevice)";
+            return connection.Execute(sqlQuery, statistics);
         }
 
         /// <summary>
@@ -91,49 +117,22 @@ namespace Infotecs.WebApi
         /// Обьект пользовательской статистики для пользователя с именем "name", если такой существует,
         /// Иначе null.
         /// </returns>
-        public UserStatistics GetUser(string name)
+        public List<UserStatisticsDTO> GetUser(string name)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = name }).FirstOrDefault();
+            //List<UserStatisticsDTO> foundUser = connection.Query<UserStatisticsDTO>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = name });
 
-            return foundUser;
+            return null;
         }
 
         /// <summary>
         /// Метод получает из базы данных список всех пользователей.
         /// </summary>
         /// <returns>Список всех пользователей.</returns>
-        public List<UserStatistics> GetUsersList()
+        public List<UserStatisticsDTO> GetUsersList()
         {
-            List<UserStatistics> users = connection.Query<UserStatistics>("SELECT * FROM Users").ToList();
+            List<UserStatisticsDTO> users = connection.Query<UserStatisticsDTO>("SELECT * FROM Users").ToList();
             
             return users;
-        }
-
-        /// <summary>
-        /// Метод обновляет в базе данных запись о пользовательской статистике.
-        /// </summary>
-        /// <param name="user">
-        /// Данные о пользовательской статистике, 
-        /// которые нужно внести в базу.
-        /// </param>
-        /// <returns>
-        /// Статус обновления записи:
-        /// 1 - запись успешно обновлена,
-        /// 0 - обновить запись не удалось.
-        /// </returns>
-        public bool Update(UserStatistics user)
-        {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
-
-            if (foundUser != null)
-            {
-                string sqlQuery = "UPDATE Users SET nameOfNode = @NameOfNode, DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE nameOfNode = @nameOfNode";
-                connection.Execute(sqlQuery, user);
-
-                return true;
-            }
-
-            return false;
         }
     }
 }

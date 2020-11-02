@@ -1,5 +1,5 @@
-﻿// <copyright file="RegisterSerilogServices.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="RegisterSerilogServices.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
 namespace Serilog.Injection

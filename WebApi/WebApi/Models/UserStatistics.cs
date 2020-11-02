@@ -1,8 +1,8 @@
-﻿// <copyright file="UserStatistics.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="UserStatistics.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
-namespace WebApi.Models
+namespace Infotecs.WebApi.Models
 {
     using System;
 

@@ -1,15 +1,15 @@
-﻿// <copyright file="UserStatisticsController.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="UserStatisticsController.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
-namespace WebApi.Controllers
+namespace Infotecs.WebApi.Controllers
 {
     using System.Collections.Generic;
     using System.Text.Json;
     using Mapster;
     using Microsoft.AspNetCore.Mvc;
     using Serilog;
-    using WebApi.Models;
+    using Infotecs.WebApi.Models;
 
     /// <summary>
     /// Класс контроллера для обработки REST запросов и 
@@ -40,14 +40,14 @@ namespace WebApi.Controllers
         /// </summary>
         /// <returns>JSON строка со списком DTO всех пользователей.</returns>
         [HttpGet]
-        public string Get()
+        public List<UserStatisticsDTO> Get()
         {
-            this.logger.Debug("Запрос списка пользователей");
+            this.logger.Debug("Запрос списка статистик");
 
-            List<UserStatistics> users3 = this.repository.GetUsersList();
-            List<UserStatisticsDTO> users4 = users3.Adapt<List<UserStatisticsDTO>>();
+            List<UserStatisticsDTO> users3 = this.repository.GetUsersList();
+            //List<UserStatisticsDTO> users4 = users3.Adapt<List<UserStatisticsDTO>>();
 
-            return JsonSerializer.Serialize<List<UserStatisticsDTO>>(users4);
+            return users3;
         }
 
         /// <summary>
@@ -55,22 +55,26 @@ namespace WebApi.Controllers
         /// Метод принимает DTO пользователя, конвертирует его в модель и добавляет в базу данных.
         /// </summary>
         /// <param name="user">DTO пользовательской статистики.</param>
+        /// <returns>Результат выполнения запроса.</returns>
         [HttpPost]
-        public void Post([FromBody]UserStatisticsDTO user)
+        public IActionResult Post([FromBody]UserStatisticsDTO user)
         {
-            this.logger.Debug("Запрос на добавление пользователя {@User}", user);
+            this.logger.Debug("Запрос на добавление статистики {@User}", user);
 
-            UserStatistics newUser = user.Adapt<UserStatistics>();
+            //UserStatistics newUser = user.Adapt<UserStatistics>();
 
-            bool status = this.repository.Create(newUser);
-            if (status)
+            //System.Console.WriteLine(newUser.DateTimeOfLastStatistics);
+
+            int status = this.repository.Create(user);
+            if (status == 1)
             {
-                this.logger.Debug("Запрос на добавление пользователя {@User} подтверждён.", user);
+                this.logger.Debug("создана запись о новом пользователе {@Name} и добавлена статистика о нём {@User}.", new { Name = user.NameOfNode }, user);
             }
             else
             {
-                this.logger.Error("Запрос на добавление пользователя {@User} отклонён. Пользователь с таким именем уже существует.", user);
+                this.logger.Error("добавлена статистика {@User} о существующем пользователе {@Name}", user, new { Name = user.NameOfNode });
             }
+            return Ok(user);
         }
 
         /// <summary>
@@ -78,21 +82,24 @@ namespace WebApi.Controllers
         /// Метод принимает DTO пользователя, конвертирует его в модель и обновляет запись в базе данных.
         /// </summary>
         /// <param name="user">DTO пользовательской статистики.</param>
+        /// <returns>Результат выполнения запроса.</returns>
         [HttpPut]
-        public void Put([FromBody]UserStatisticsDTO user)
+        public IActionResult Put([FromBody]UserStatisticsDTO user)
         {
-            this.logger.Debug("Запрос на обновление данных о пользователе {@User}", user);
+            this.logger.Debug("Запрос на обновление данных о статистике {@User}", user);
 
-            UserStatistics newUser = user.Adapt<UserStatistics>();
+            //UserStatistics newUser = user.Adapt<UserStatistics>();
 
-            bool status = this.repository.Update(newUser);
-            if (status)
+            int status = this.repository.Update(user);
+            if (status == 1)
             {
-                this.logger.Debug("Запрос на обновление данных о пользователе {@User} подтверждён.", user);
+                this.logger.Debug("Запрос на обновление данных о статистике {@User} подтверждён.", user);
+                return Ok(user);
             }
             else
             {
-                this.logger.Error("Запрос на обновление данных о пользователе {@User} отклонён. Пользователя с таким именем не существует.", user);
+                this.logger.Error("Запрос на обновление данных о статистике {@User} отклонён. Статистики с таким данными не существует.", user);
+                return NotFound(user);
             }
         }
 
@@ -102,19 +109,22 @@ namespace WebApi.Controllers
         /// именем этого пользователя в базе данных.
         /// </summary>
         /// <param name="user">DTO пользовательской статистики.</param>
+        /// <returns>Результат выполнения запроса.</returns>
         [HttpDelete]
-        public void Delete([FromBody] UserStatisticsDTO user)
+        public IActionResult Delete([FromBody] UserStatisticsDTO user)
         {
-            this.logger.Debug("Запрос на удаление пользователя {@User}", User);
+            this.logger.Debug("Запрос на удаление статистики {@User}", User);
 
-            bool status = this.repository.Delete(user.NameOfNode);
-            if (status)
+            int status = this.repository.Delete(user);
+            if (status >= 1)
             {
-                this.logger.Debug("Запрос на удаление пользователя {@User} подтверждён.", User);
+                this.logger.Debug("Запрос на удаление статистики {@User} подтверждён.", User);
+                return Ok(user);
             }
             else
             {
-                this.logger.Error("Запрос на удаление пользователя {@User} отклонён. Пользователя с таким именем не существует.", User);
+                this.logger.Error("Запрос на удаление статистики {@User} отклонён. Статистики с таким данными не существует.", User);
+                return NotFound(user);
             }
         }
     }

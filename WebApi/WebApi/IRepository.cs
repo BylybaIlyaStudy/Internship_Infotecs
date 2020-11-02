@@ -1,5 +1,5 @@
-﻿// <copyright file="IRepository.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="IRepository.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
 namespace Infotecs.WebApi
@@ -17,7 +17,7 @@ namespace Infotecs.WebApi
         /// Метод получает из базы данных список всех пользователей.
         /// </summary>
         /// <returns>Список всех пользователей.</returns>
-        List<UserStatistics> GetUsersList();
+        List<UserStatisticsDTO> GetUsersList();
 
         /// <summary>
         /// Метод получает из базы данных данные по одному пользователю,
@@ -25,7 +25,7 @@ namespace Infotecs.WebApi
         /// </summary>
         /// <param name="name">Имя пользователя, статистику которого нужно получить.</param>
         /// <returns>Обьект пользовательской статистики для пользователя с именем "name".</returns>
-        UserStatistics GetUser(string name);
+        List<UserStatisticsDTO> GetUser(string name);
 
         /// <summary>
         /// Метод создаёт в базе данных новую запись о пользовательской статистике.
@@ -39,7 +39,7 @@ namespace Infotecs.WebApi
         /// 1 - запись успешно создана,
         /// 0 - создать запись не удалось.
         /// </returns>
-        bool Create(UserStatistics user);
+        int Create(UserStatisticsDTO user);
 
         /// <summary>
         /// Метод обновляет в базе данных запись о пользовательской статистике.
@@ -53,12 +53,12 @@ namespace Infotecs.WebApi
         /// 1 - запись успешно обновлена,
         /// 0 - обновить запись не удалось.
         /// </returns>
-        bool Update(UserStatistics user);
+        int Update(UserStatisticsDTO user);
 
         /// <summary>
         /// Метод удаляет из базы данных запись о пользовательской статистике.
         /// </summary>
-        /// <param name="name">
+        /// <param name="user">
         /// Имя пользователя, данные о котором необходимо удалить.
         /// </param>
         /// <returns>
@@ -66,6 +66,6 @@ namespace Infotecs.WebApi
         /// 1 - запись успешно удалена,
         /// 0 - удалить запись не удалось.
         /// </returns>
-        bool Delete(string name);
+        int Delete(UserStatisticsDTO user);
     }
 }

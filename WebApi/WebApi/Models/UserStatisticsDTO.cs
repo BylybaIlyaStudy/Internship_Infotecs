@@ -1,8 +1,8 @@
-﻿// <copyright file="UserStatisticsDTO.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="UserStatisticsDTO.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
-namespace WebApi.Models
+namespace Infotecs.WebApi.Models
 {
     /// <summary>
     /// Класс DTO для передаче данных о пользователях.
