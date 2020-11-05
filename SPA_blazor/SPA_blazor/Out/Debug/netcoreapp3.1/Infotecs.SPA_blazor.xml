@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Infotecs.SPA_blazor</name>
+    </assembly>
+    <members>
+        <member name="T:Infotecs.SPA_blazor.BlazorTimer">
+            <summary>
+            Класс для работы с таймером.
+            </summary>
+        </member>
+        <member name="F:Infotecs.SPA_blazor.BlazorTimer.Timer">
+            <summary>
+            Таймер.
+            </summary>
+        </member>
+        <member name="E:Infotecs.SPA_blazor.BlazorTimer.OnElapsed">
+            <summary>
+            Событие срабатывания таймера.
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.BlazorTimer.SetTimer(System.Double)">
+            <summary>
+            Установка таймера.
+            </summary>
+            <param name="interval">Время задержки.</param>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Data.UserStatistics">
+            <summary>
+            Класс хранения пользовательской статистики.
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Data.UserStatistics.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.SPA_blazor.Data.UserStatistics"/> class.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.UserID">
+            <summary>
+            ID пользователя.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.NameOfNode">
+            <summary>
+            Имя узла.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.DateTimeOfLastStatistics">
+            <summary>
+            Дата последней статистики.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.VersionOfClient">
+            <summary>
+            Версия клиентского приложения.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.TypeOfDevice">
+            <summary>
+            Тип клиентского устройства.
+            </summary>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Data.UserStatisticsDTO">
+            <summary>
+            Класс DTO для передаче данных о статистике пользователей.
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Data.UserStatisticsDTO.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Infotecs.SPA_blazor.Data.UserStatisticsDTO"/> class.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.UserID">
+            <summary>
+            ID узла.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.NameOfNode">
+            <summary>
+            Имя узла.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.DateTimeOfLastStatistics">
+            <summary>
+            Дата последней статистики.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.VersionOfClient">
+            <summary>
+            Версия клиентского приложения.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.TypeOfDevice">
+            <summary>
+            Тип клиентского устройства.
+            </summary>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Data.UserStatisticsService">
+            <summary>
+            Класс для работы с пользовательской статистикой.
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Data.UserStatisticsService.GetUserStatisticsAsync">
+            <summary>
+            Асинхронно запрашивает пользовательскую статистику у сервера.
+            </summary>
+            <returns>Список пользоавтельских статистик.</returns>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Program">
+            <summary>
+            Стандартный класс с точкой входа. 
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Program.Main(System.String[])">
+            <summary>
+            Точка входа приложения.
+            </summary>
+            <param name="args">Аргументы командной строки.</param>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Program.CreateHostBuilder(System.String[])">
+            <summary>
+            Запуск строителя узла.
+            </summary>
+            <param name="args">Аргументы командной строки.</param>
+            <returns>Универсальный узел.</returns>
+        </member>
+        <member name="T:Infotecs.SPA_blazor.Startup">
+            <summary>
+            Входная точка приложения ASP.NET Core.
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Задание параметров конфигурации.
+            </summary>
+            <param name="configuration">Параметры конфигурации.</param>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Startup.Configuration">
+            <summary>
+            Строитель параметров конфигурации.
+            </summary>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Регистрирация сервисов, которые используются приложением.
+            </summary>
+            <param name="services">Коллекция сервисов приложения.</param>
+        </member>
+        <member name="M:Infotecs.SPA_blazor.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            Установка способа обработки запроса.
+            </summary>
+            <param name="app">Компоненты обработки запроса.</param>
+            <param name="env">Информация о среде запуска приложения.</param>
+        </member>
+    </members>
+</doc>

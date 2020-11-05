@@ -1,23 +1,21 @@
-﻿// <copyright file="UserStatistics.cs" company="Infotecs">
+﻿// <copyright file="UserStatisticsDTO.cs" company="Infotecs">
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
 namespace Infotecs.SPA_blazor.Data
 {
-    using System;
-
     /// <summary>
-    /// Класс хранения пользовательской статистики.
+    /// Класс DTO для передаче данных о статистике пользователей.
     /// </summary>
-    public class UserStatistics
+    public class UserStatisticsDTO
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserStatistics"/> class.
+        /// Initializes a new instance of the <see cref="UserStatisticsDTO"/> class.
         /// </summary>
-        public UserStatistics() { }
-        
+        public UserStatisticsDTO() { }
+
         /// <summary>
-        /// ID пользователя.
+        /// ID узла.
         /// </summary>
         public string UserID { get; set; }
 

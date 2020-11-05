@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>Infotecs.SPA_blazor</AssemblyName>
     <RootNamespace>Infotecs.SPA_blazor</RootNamespace>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -15,5 +16,14 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <OutputPath>Out\Debug\</OutputPath>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Mapster" Version="6.5.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 </Project>
