@@ -1,4 +1,6 @@
-﻿namespace Infotecs.WebApi.Models
+﻿using System;
+
+namespace Infotecs.WebApi.Models
 {
     /// <summary>
     /// Класс для хранения информации о пользователях.
@@ -16,17 +18,17 @@
         /// <param name="name">Имя пользователя.</param>
         public Users(string name)
         {
-            this.UserName = name;
+            this.NameOfNode = name;
         }
 
         /// <summary>
         /// Уникальный идентификатор пользователя.
         /// </summary>
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// Имя пользователя.
         /// </summary>
-        public string UserName { get; set; }
+        public string NameOfNode { get; set; }
     }
 }

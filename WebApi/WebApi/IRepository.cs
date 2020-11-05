@@ -17,7 +17,7 @@ namespace Infotecs.WebApi
         /// Метод получает из базы данных список всех пользователей.
         /// </summary>
         /// <returns>Список всех пользователей.</returns>
-        List<UserStatisticsDTO> GetUsersList();
+        List<Users> GetUsersList();
 
         /// <summary>
         /// Метод получает из базы данных данные по одному пользователю,
@@ -25,51 +25,20 @@ namespace Infotecs.WebApi
         /// </summary>
         /// <param name="name">Имя пользователя, статистику которого нужно получить.</param>
         /// <returns>Обьект пользовательской статистики для пользователя с именем "name".</returns>
-        List<UserStatisticsDTO> GetUser(string name);
+        Users GetUser(string name);
 
-        /// <summary>
-        /// Метод создаёт в базе данных новую запись о пользовательской статистике.
-        /// </summary>
-        /// <param name="statistics">
-        /// Данные о пользовательской статистике, 
-        /// которые нужно внести в базу.
-        /// </param>
-        /// <returns>
-        /// Статус создания новой записи:
-        /// 1 - запись успешно создана,
-        /// 0 - создать запись не удалось.
-        /// </returns>
-        int Create(UserStatisticsDTO statistics);
+        List<UserStatistics> GetStatisticsList();
 
-        /// <summary>
-        /// Метод обновляет в базе данных запись о пользовательской статистике.
-        /// </summary>
-        /// <param name="statistics">
-        /// Данные о пользовательской статистике, 
-        /// которые нужно изменить.
-        /// </param>
-        /// <param name="newStatistics">
-        /// Данные о пользовательской статистике, 
-        /// которые нужно внести в базу.
-        /// </param>
-        /// <returns>
-        /// Статус обновления записи:
-        /// 1 - запись успешно обновлена,
-        /// 0 - обновить запись не удалось.
-        /// </returns>
-        int Update(UserStatisticsDTO statistics, UserStatisticsDTO newStatistics);
+        int CreateUser(Users user);
 
-        /// <summary>
-        /// Метод удаляет из базы данных запись о пользовательской статистике.
-        /// </summary>
-        /// <param name="statistics">
-        /// Имя пользователя, данные о котором необходимо удалить.
-        /// </param>
-        /// <returns>
-        /// Статус удаления записи:
-        /// 1 - запись успешно удалена,
-        /// 0 - удалить запись не удалось.
-        /// </returns>
-        int Delete(UserStatisticsDTO statistics);
+        int CreateStatistics(UserStatistics statistics);
+
+        int UpdateUser(Users user);
+
+        int UpdateStatistics(UserStatistics statistics, UserStatistics newStatistics);
+
+        int DeleteUser(Users user);
+
+        int DeleteStatistics(UserStatistics statistics);
     }
 }
