@@ -1,5 +1,5 @@
-// <copyright file="Program.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="Program.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
 namespace Infotecs.WebApi
@@ -12,12 +12,12 @@ namespace Infotecs.WebApi
     using Serilog;
 
     /// <summary>
-    /// Стандартный класс с точкой входа.
+    /// РЎС‚Р°РЅРґР°СЂС‚РЅС‹Р№ РєР»Р°СЃСЃ СЃ С‚РѕС‡РєРѕР№ РІС…РѕРґР°.
     /// </summary>
     public class Program
     {
         /// <summary>
-        /// Строитель параметров конфигурации.
+        /// РЎС‚СЂРѕРёС‚РµР»СЊ РїР°СЂР°РјРµС‚СЂРѕРІ РєРѕРЅС„РёРіСѓСЂР°С†РёРё.
         /// </summary>
         public static IConfiguration Configuration { get; } = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
@@ -27,13 +27,13 @@ namespace Infotecs.WebApi
             .Build();
 
         /// <summary>
-        /// Точка входа приложения.
+        /// РўРѕС‡РєР° РІС…РѕРґР° РїСЂРёР»РѕР¶РµРЅРёСЏ.
         /// </summary>
-        /// <param name="args">Аргументы командной строки.</param>
+        /// <param name="args">РђСЂРіСѓРјРµРЅС‚С‹ РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё.</param>
         /// <returns>
-        /// Статус завершения работы программы:
-        /// 0 - нормальное завершение работы;
-        /// 1 - ошибка при создании узла.
+        /// РЎС‚Р°С‚СѓСЃ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ РїСЂРѕРіСЂР°РјРјС‹:
+        /// 0 - РЅРѕСЂРјР°Р»СЊРЅРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ СЂР°Р±РѕС‚С‹;
+        /// 1 - РѕС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё СѓР·Р»Р°.
         /// </returns>
         public static int Main(string[] args)
         {
@@ -55,10 +55,10 @@ namespace Infotecs.WebApi
         }
 
         /// <summary>
-        /// Запуск строителя узла.
+        /// Р—Р°РїСѓСЃРє СЃС‚СЂРѕРёС‚РµР»СЏ СѓР·Р»Р°.
         /// </summary>
-        /// <param name="args">Аргументы командной строки.</param>
-        /// <returns>Универсальный узел.</returns>
+        /// <param name="args">РђСЂРіСѓРјРµРЅС‚С‹ РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё.</param>
+        /// <returns>РЈРЅРёРІРµСЂСЃР°Р»СЊРЅС‹Р№ СѓР·РµР».</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>

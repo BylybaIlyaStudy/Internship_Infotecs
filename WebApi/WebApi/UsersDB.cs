@@ -12,128 +12,283 @@ using Microsoft.Extensions.Configuration;
 namespace Infotecs.WebApi
 {
     /// <summary>
-    /// Класс для работы с базой данных о пользователях.
+    /// Класс для работы с базой данных.
     /// </summary>
     public class UsersDB : IRepository
     {
-        
         /// <summary>
         /// Подключение к базе данных.
         /// </summary>
         private readonly NpgsqlConnection connection = new NpgsqlConnection(Program.Configuration.GetConnectionString("DefaultConnection"));
 
         /// <summary>
-        /// Метод создаёт в базе данных новую запись о пользовательской статистике.
+        /// Метод пытается создать запись статистики. 
+        /// Проверяет наличие пользователя, которому добавляется статистика и ищет возможные копии. 
+        /// Возвращает код результата выполнения.
         /// </summary>
-        /// <param name="user">
-        /// Данные о пользовательской статистике, 
-        /// которые нужно внести в базу.
-        /// </param>
+        /// <param name="statistics">Статистика.</param>
         /// <returns>
-        /// Статус создания новой записи:
-        /// 1 - запись успешно создана,
-        /// 0 - создать запись не удалось.
+        /// Код результата выполнения:
+        /// 0 - создана новая запись статистики;
+        /// 1 - ошибка создания статистики: пользоавтель с таким ID не существует;
+        /// 2 - ошибка создания статистики: статистика с такими данными уже существует.
         /// </returns>
-        public bool Create(UserStatistics user)
+        public int CreateStatistics(UserStatistics statistics)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
+            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE (ID = @UserID AND NameOfNode = @NameOfNode)", statistics).FirstOrDefault();
 
             if (foundUser == null)
             {
-                string sqlQuery = "INSERT INTO Users (nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice) VALUES(@nameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice);";
-                connection.Execute(sqlQuery, user);
-                return true;
+                return 1;
             }
+            else
+            {
+                string sqlQuery = "SELECT * FROM Statistics WHERE (DateTimeOfLastStatistics = @DateTimeOfLastStatistics AND VersionOfClient = @VersionOfClient AND TypeOfDevice = @TypeOfDevice AND UserID = @UserID)";
+                UserStatistics foundStatistics = connection.Query<UserStatistics>(sqlQuery, statistics).FirstOrDefault();
 
-            return false;
+                if (foundStatistics != null)
+                {
+                    return 2;
+                }
+                else
+                {
+                    sqlQuery = "INSERT INTO Statistics (UserID, nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice) VALUES(@UserID, @NameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice);";
+                    connection.Execute(sqlQuery, statistics);
+
+                    return 0;
+                }
+            }
         }
 
         /// <summary>
-        /// Метод удаляет из базы данных запись о пользовательской статистике.
+        /// Метод пытается создать запись пользователя. 
+        /// Проверяет уникальность ID пользователя. 
+        /// Возвращает код результата выполнения.
         /// </summary>
-        /// <param name="name">
-        /// Имя пользователя, данные о котором необходимо удалить.
-        /// </param>
+        /// <param name="user">Пользователь.</param>
         /// <returns>
-        /// Статус удаления записи:
-        /// 1 - запись успешно удалена,
-        /// 0 - удалить запись не удалось.
+        /// Код результата выполнения:
+        /// 0 - создана новая запись пользователя;
+        /// 1 - ошибка создания пользователя: пользоавтель с таким ID уже существует.
         /// </returns>
-        public bool Delete(string name)
+        public int CreateUser(Users user)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = name }).FirstOrDefault();
-            
+            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE ID = @ID", user).FirstOrDefault();
+
             if (foundUser != null)
             {
-                string sqlQuery = "DELETE FROM Users WHERE nameOfNode = @nameOfNode";
-                connection.Execute(sqlQuery, new { nameOfNode = name });
-                
-                return true;
+                return 1;
             }
+            else
+            {
+                string sqlQuery = "INSERT INTO Users (nameOfNode, ID) VALUES(@nameOfNode, @ID);";
+                connection.Execute(sqlQuery, user);
 
-            return false;
+                return 0;
+            }
         }
 
         /// <summary>
-        /// Удаляет хранилище данных о пользователях.
+        /// Метод пытается удалить запись статистики. 
+        /// Проверяет наличие пользователя, для которого удаляется статистика и 
+        /// проверяет наличие статистики. 
+        /// Возвращает код результата выполнения.
         /// </summary>
-        public virtual void Dispose()
+        /// <param name="statistics">Статистика.</param>
+        /// <returns>
+        /// Код результата выполнения:
+        /// 0 - запись статистики удалена;
+        /// 1 - ошибка удаления статистики: пользоавтель с такими данными не существует;
+        /// 2 - ошибка удаления статистики: статистика с такими данными не существует.
+        /// </returns>
+        public int DeleteStatistics(UserStatistics statistics)
+        {
+            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE (ID = @UserID AND NameOfNode = @NameOfNode)", statistics).FirstOrDefault();
+
+            if (foundUser == null)
+            {
+                return 1;
+            }
+            else
+            {
+                string sqlQuery = "SELECT * FROM Statistics WHERE (DateTimeOfLastStatistics = @DateTimeOfLastStatistics AND VersionOfClient = @VersionOfClient AND TypeOfDevice = @TypeOfDevice AND UserID = @UserID)";
+                UserStatistics foundStatistics = connection.Query<UserStatistics>(sqlQuery, statistics).FirstOrDefault();
+                   
+                if (foundStatistics == null)
+                {
+                    return 2;
+                }
+                else
+                {
+                    sqlQuery = "DELETE FROM Statistics WHERE (UserID = @UserID AND DateTimeOfLastStatistics = @DateTimeOfLastStatistics AND versionOfClient = @versionOfClient AND typeOfDevice = @typeOfDevice)";
+                    connection.Execute(sqlQuery, statistics);
+
+                    return 0;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Метод пытается удалить запись пользователя, а также все его записи статистики. 
+        /// Проверяет наличие пользователя. 
+        /// Возвращает код результата выполнения.
+        /// </summary>
+        /// <param name="user">Пользователь.</param>
+        /// <returns>
+        /// Код результата выполнения:
+        /// 0 - запись пользователя удалена;
+        /// 1 - ошибка удаления пользователя: пользоавтель с такими данными не существует.
+        /// </returns>
+        public int DeleteUser(Users user)
+        {
+            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE (ID = @ID AND NameOfNode = @NameOfNode)", user).FirstOrDefault();
+
+            if (foundUser == null)
+            {
+                return 1;
+            }
+            else
+            {
+                string sqlQuery = "DELETE FROM Users WHERE ID = @ID;";
+                connection.Execute(sqlQuery, user);
+
+                sqlQuery = "DELETE FROM Statistics WHERE UserID = @ID;";
+                connection.Execute(sqlQuery, user);
+
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Удаляет подключение к бд.
+        /// </summary>
+        public void Dispose()
         {
             connection.Close();
         }
 
         /// <summary>
-        /// Метод получает из базы данных данные по одному пользователю,
-        /// имя которого передаётся в параметрах.
+        /// Получает список всех статистик.
         /// </summary>
-        /// <param name="name">Имя пользователя, статистику которого нужно получить.</param>
-        /// <returns>
-        /// Обьект пользовательской статистики для пользователя с именем "name", если такой существует,
-        /// Иначе null.
-        /// </returns>
-        public UserStatistics GetUser(string name)
+        /// <returns>Список всех статистик.</returns>
+        public List<UserStatistics> GetStatisticsList()
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = name }).FirstOrDefault();
+            List<UserStatistics> foundStatistics = connection.Query<UserStatistics>("SELECT * FROM Statistics").ToList();
+
+            return foundStatistics;
+        }
+
+        /// <summary>
+        /// Получает пользователя по ID.
+        /// </summary>
+        /// <param name="ID">ID пользователя.</param>
+        /// <returns>Пользователь.</returns>
+        public Users GetUser(string ID)
+        {
+            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE ID = @UserID", new { UserID = ID }).FirstOrDefault();
 
             return foundUser;
         }
 
         /// <summary>
-        /// Метод получает из базы данных список всех пользователей.
+        /// Получает список всех пользователей.
         /// </summary>
         /// <returns>Список всех пользователей.</returns>
-        public List<UserStatistics> GetUsersList()
+        public List<Users> GetUsersList()
         {
-            List<UserStatistics> users = connection.Query<UserStatistics>("SELECT * FROM Users").ToList();
-            
-            return users;
+            List<Users> foundUsers = connection.Query<Users>("SELECT * FROM Users").ToList();
+
+            return foundUsers;
         }
 
         /// <summary>
-        /// Метод обновляет в базе данных запись о пользовательской статистике.
+        /// Метод пытается обновить запись статистики. 
+        /// Проверяет наличие пользователя, для которого обновляется статистика и 
+        /// проверяет наличие статистики. Проверяет совпадение пользовательских данных
+        /// в обновляемой и новой статистиках.
+        /// Возвращает код результата выполнения.
         /// </summary>
-        /// <param name="user">
-        /// Данные о пользовательской статистике, 
-        /// которые нужно внести в базу.
-        /// </param>
+        /// <param name="statistics">Статистика, которую нужно обновить.</param>
+        /// <param name="newStatistics">Новая статистика.</param>
         /// <returns>
-        /// Статус обновления записи:
-        /// 1 - запись успешно обновлена,
-        /// 0 - обновить запись не удалось.
+        /// Код результата выполнения:
+        /// 0 - запись статистики обновлена;
+        /// 1 - ошибка обновления статистики: пользоавтель с такими данными не существует;
+        /// 2 - ошибка обновления статистики: статистика с такими данными не существует;
+        /// 3 - ошибка обновления статистики: ID пользователя обновляемой статистики не совпадает с ID пользователя новой статистики;
+        /// 4 - ошибка обновления статистики: имя пользователя обновляемой статистики не совпадает с именем пользователя новой статистики.
         /// </returns>
-        public bool Update(UserStatistics user)
+        public int UpdateStatistics(UserStatistics statistics, UserStatistics newStatistics)
         {
-            UserStatistics foundUser = connection.Query<UserStatistics>("SELECT * FROM Users WHERE nameOfNode = @nameOfNode", new { nameOfNode = user.NameOfNode }).FirstOrDefault();
+            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE (ID = @UserID AND NameOfNode = @NameOfNode)", statistics).FirstOrDefault();
 
-            if (foundUser != null)
+            if (foundUser == null)
             {
-                string sqlQuery = "UPDATE Users SET nameOfNode = @NameOfNode, DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE nameOfNode = @nameOfNode";
+                return 1;
+            }
+            else
+            {
+                string sqlQuery = "SELECT * FROM Statistics WHERE (DateTimeOfLastStatistics = @DateTimeOfLastStatistics AND VersionOfClient = @VersionOfClient AND TypeOfDevice = @TypeOfDevice AND UserID = @UserID)";
+                UserStatistics foundStatistics = connection.Query<UserStatistics>(sqlQuery, statistics).FirstOrDefault();
+
+                if (foundStatistics == null)
+                {
+                    return 2;
+                }
+                else
+                {
+                    if (statistics.UserID != newStatistics.UserID)
+                    {
+                        return 3;
+                    }
+                    else
+                    {
+                        if (statistics.NameOfNode != newStatistics.NameOfNode) 
+                        {
+                            return 4;
+                        }
+                        else 
+                        {
+                            sqlQuery = "UPDATE Statistics SET DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE UserID = @UserID";
+                            connection.Execute(sqlQuery, newStatistics);
+
+                            return 0; 
+                        }
+
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Метод пытается обновить запись пользователя, а также все его записи статистики. 
+        /// Проверяет наличие пользователя. 
+        /// Возвращает код результата выполнения.
+        /// </summary>
+        /// <param name="user">Пользователь.</param>
+        /// <returns>
+        /// Код результата выполнения:
+        /// 0 - запись пользователя обновлена;
+        /// 1 - ошибка обновления пользователя: пользоавтель с таким ID не существует.
+        /// </returns>
+        public int UpdateUser(Users user)
+        {
+            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE ID = @ID", user).FirstOrDefault();
+
+            if (foundUser == null)
+            {
+                return 1;
+            }
+            else
+            {
+                string sqlQuery = "UPDATE Users SET nameOfNode = @NameOfNode WHERE ID = @ID";
                 connection.Execute(sqlQuery, user);
 
-                return true;
-            }
+                sqlQuery = "UPDATE Statistics SET nameOfNode = @NameOfNode WHERE UserID = @ID;";
+                connection.Execute(sqlQuery, user);
 
-            return false;
+                return 0;
+            }
         }
     }
 }

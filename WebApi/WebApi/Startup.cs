@@ -1,5 +1,5 @@
-// <copyright file="Startup.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+// <copyright file="Startup.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
 namespace Infotecs.WebApi
@@ -9,26 +9,26 @@ namespace Infotecs.WebApi
     using Serilog.Injection;
 
     /// <summary>
-    /// Входная точка приложения ASP.NET Core.
+    /// Р’С…РѕРґРЅР°СЏ С‚РѕС‡РєР° РїСЂРёР»РѕР¶РµРЅРёСЏ ASP.NET Core.
     /// </summary>
     public class Startup
     {
         /// <summary>
-        /// Регистрирация сервисов, которые используются приложением.
+        /// Р РµРіРёСЃС‚СЂРёСЂР°С†РёСЏ СЃРµСЂРІРёСЃРѕРІ, РєРѕС‚РѕСЂС‹Рµ РёСЃРїРѕР»СЊР·СѓСЋС‚СЃСЏ РїСЂРёР»РѕР¶РµРЅРёРµРј.
         /// </summary>
-        /// <param name="services">Коллекция сервисов приложения.</param>
+        /// <param name="services">РљРѕР»Р»РµРєС†РёСЏ СЃРµСЂРІРёСЃРѕРІ РїСЂРёР»РѕР¶РµРЅРёСЏ.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IRepository, UsersDB>();
             services.AddSerilogServices();
-            services.AddControllers(); // используем контроллеры без представлений
+            services.AddControllers(); // РёСЃРїРѕР»СЊР·СѓРµРј РєРѕРЅС‚СЂРѕР»Р»РµСЂС‹ Р±РµР· РїСЂРµРґСЃС‚Р°РІР»РµРЅРёР№
             services.AddSwaggerGen();
         }
 
         /// <summary>
-        /// Установка способа обработки запроса.
+        /// РЈСЃС‚Р°РЅРѕРІРєР° СЃРїРѕСЃРѕР±Р° РѕР±СЂР°Р±РѕС‚РєРё Р·Р°РїСЂРѕСЃР°.
         /// </summary>
-        /// <param name="app">Компоненты обработки запроса.</param>
+        /// <param name="app">РљРѕРјРїРѕРЅРµРЅС‚С‹ РѕР±СЂР°Р±РѕС‚РєРё Р·Р°РїСЂРѕСЃР°.</param>
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
@@ -43,7 +43,7 @@ namespace Infotecs.WebApi
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // подключаем маршрутизацию на контроллеры
+                endpoints.MapControllers(); // РїРѕРґРєР»СЋС‡Р°РµРј РјР°СЂС€СЂСѓС‚РёР·Р°С†РёСЋ РЅР° РєРѕРЅС‚СЂРѕР»Р»РµСЂС‹
             });
         }
     }
