@@ -1,13 +1,11 @@
 ﻿// <copyright file="UserStatisticsDTO.cs" company="Infotecs">
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
-using System.Runtime.Serialization;
-using System.Text.Json;
 
 namespace Infotecs.SPA_blazor.Data
 {
     /// <summary>
-    /// Класс DTO для передаче данных о пользователях.
+    /// Класс DTO для передаче данных о статистике пользователей.
     /// </summary>
     public class UserStatisticsDTO
     {
@@ -17,19 +15,9 @@ namespace Infotecs.SPA_blazor.Data
         public UserStatisticsDTO() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserStatisticsDTO"/> class.
+        /// ID узла.
         /// </summary>
-        /// <param name="name">Имя узла.</param>
-        /// <param name="date">Дата последней статистики.</param>
-        /// <param name="version">Версия клиентского приложения.</param>
-        /// <param name="type">Тип клиентского устройства.</param>
-        public UserStatisticsDTO(string name, string date, string version, string type)
-        {
-            this.NameOfNode = name;
-            this.DateTimeOfLastStatistics = date;
-            this.VersionOfClient = version;
-            this.TypeOfDevice = type;
-        }
+        public string UserID { get; set; }
 
         /// <summary>
         /// Имя узла.

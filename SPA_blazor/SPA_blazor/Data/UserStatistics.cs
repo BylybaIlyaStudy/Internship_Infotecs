@@ -1,9 +1,10 @@
-﻿namespace Infotecs.SPA_blazor.Data
+﻿// <copyright file="UserStatistics.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
+// </copyright>
+
+namespace Infotecs.SPA_blazor.Data
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Класс хранения пользовательской статистики.
@@ -13,37 +14,15 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStatistics"/> class.
         /// </summary>
-        /// <param name="nameOfNode">Имя узла.</param>
-        /// <param name="dateTime">Дата последней статистики.</param>
-        /// <param name="versionOfClient">Версия приложения клиента.</param>
-        /// <param name="typeOfDevice">Тип устройства клиента.</param>
-        public UserStatistics(
-            string nameOfNode,
-            DateTime dateTime,
-            string versionOfClient,
-            string typeOfDevice)
-        {
-            this.NameOfNode = nameOfNode;
-            this.DateTimeOfLastStatistics = dateTime.ToString();
-            this.VersionOfClient = versionOfClient;
-            this.TypeOfDevice = typeOfDevice;
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserStatistics"/> class.
-        /// </summary>
-        /// <param name="nameOfNode">Имя узла.</param>
-        /// <param name="versionOfClient">Версия приложения клиента.</param>
-        /// <param name="typeOfDevice">Тип устройства клиента.</param>
-        public UserStatistics(string nameOfNode, string versionOfClient, string typeOfDevice)
-            : this(nameOfNode, DateTime.Now, versionOfClient, typeOfDevice) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserStatistics"/> class.
-        /// </summary>
         public UserStatistics() { }
+        
         /// <summary>
-        /// Имя узла. Используется как уникальный идентификатор.
+        /// ID пользователя.
+        /// </summary>
+        public string UserID { get; set; }
+
+        /// <summary>
+        /// Имя узла.
         /// </summary>
         public string NameOfNode { get; set; }
 

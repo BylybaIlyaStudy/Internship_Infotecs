@@ -18,7 +18,7 @@ namespace Infotecs.SPA_blazor.Data
         /// <returns>Список пользоавтельских статистик.</returns>
         public Task<List<UserStatistics>> GetUserStatisticsAsync()
         {
-            WebRequest request = WebRequest.Create("https://localhost:5001/api/userstatistics");
+            WebRequest request = WebRequest.Create("https://localhost:5001/api/statistics/UserStatistics");
             WebResponse response = request.GetResponse();
 
             StreamReader stream = new StreamReader(response.GetResponseStream());
