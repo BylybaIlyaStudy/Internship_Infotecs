@@ -1,8 +1,8 @@
-﻿// <copyright file="UserStatistics.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="UserStatistics.cs" company="Infotecs">
+// Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
-namespace WebApi.Models
+namespace Infotecs.WebApi.Models
 {
     using System;
 
@@ -14,38 +14,15 @@ namespace WebApi.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStatistics"/> class.
         /// </summary>
-        /// <param name="nameOfNode">Имя узла.</param>
-        /// <param name="dateTime">Дата последней статистики.</param>
-        /// <param name="versionOfClient">Версия приложения клиента.</param>
-        /// <param name="typeOfDevice">Тип устройства клиента.</param>
-        public UserStatistics(
-            string nameOfNode,
-            DateTime dateTime,
-            string versionOfClient,
-            string typeOfDevice)
-        {
-            this.NameOfNode = nameOfNode;
-            this.DateTimeOfLastStatistics = dateTime.ToString();
-            this.VersionOfClient = versionOfClient;
-            this.TypeOfDevice = typeOfDevice;
-        }
+        public UserStatistics() { }
+        
+        /// <summary>
+        /// ID пользователя.
+        /// </summary>
+        public string UserID { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="UserStatistics"/> class.
-        /// </summary>
-        /// <param name="nameOfNode">Имя узла.</param>
-        /// <param name="versionOfClient">Версия приложения клиента.</param>
-        /// <param name="typeOfDevice">Тип устройства клиента.</param>
-        public UserStatistics(string nameOfNode, string versionOfClient, string typeOfDevice)
-            : this(nameOfNode, DateTime.Now, versionOfClient, typeOfDevice) { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="UserStatistics"/> class.
-        /// </summary>
-        public UserStatistics()
-            : this(string.Empty, DateTime.MinValue, string.Empty, string.Empty) { }
-        /// <summary>
-        /// Имя узла. Используется как уникальный идентификатор.
+        /// Имя узла.
         /// </summary>
         public string NameOfNode { get; set; }
 
