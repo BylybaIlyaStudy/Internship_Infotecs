@@ -2,6 +2,8 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using System.Collections.Generic;
+
 namespace Infotecs.WebApi.Models
 {
     /// <summary>
@@ -38,5 +40,7 @@ namespace Infotecs.WebApi.Models
         /// Тип клиентского устройства.
         /// </summary>
         public string TypeOfDevice { get; set; }
+
+        public List<Events> Events { get; set; }
     }
 }

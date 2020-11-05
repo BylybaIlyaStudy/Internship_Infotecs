@@ -2,10 +2,11 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
+
 namespace Infotecs.WebApi.Models
 {
-    using System;
-
     /// <summary>
     /// Класс хранения пользовательской статистики.
     /// </summary>
@@ -14,7 +15,10 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStatistics"/> class.
         /// </summary>
-        public UserStatistics() { }
+        public UserStatistics() 
+        {
+            this.statisticsID = Guid.NewGuid().ToString();
+        }
         
         /// <summary>
         /// ID пользователя.
@@ -40,5 +44,9 @@ namespace Infotecs.WebApi.Models
         /// Тип клиентского устройства.
         /// </summary>
         public string TypeOfDevice { get; set; }
+
+        public string statisticsID { get; set; }
+
+        public List<Events> Events { get; set; }
     }
 }

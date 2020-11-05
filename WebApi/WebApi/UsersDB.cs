@@ -8,6 +8,7 @@ using Dapper;
 using System.Linq;
 using Npgsql;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Infotecs.WebApi
 {
@@ -52,8 +53,19 @@ namespace Infotecs.WebApi
                 }
                 else
                 {
-                    sqlQuery = "INSERT INTO Statistics (UserID, nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice) VALUES(@UserID, @NameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice);";
+                    sqlQuery = "INSERT INTO Statistics (UserID, nameOfNode, DateTimeOfLastStatistics, versionOfClient, typeOfDevice, statisticsID) VALUES(@UserID, @NameOfNode, @DateTimeOfLastStatistics, @versionOfClient, @typeOfDevice, @statisticsID)";
                     connection.Execute(sqlQuery, statistics);
+
+                    if (statistics.Events != null)
+                    {
+                        foreach (var _event in statistics.Events)
+                        {
+                            _event.StatisticsID = statistics.statisticsID;
+
+                            sqlQuery = "INSERT INTO Events (statisticsID, name, date) VALUES(@statisticsID, @name, @date)";
+                            connection.Execute(sqlQuery, _event);
+                        }
+                    }
 
                     return 0;
                 }
@@ -123,6 +135,9 @@ namespace Infotecs.WebApi
                     sqlQuery = "DELETE FROM Statistics WHERE (UserID = @UserID AND DateTimeOfLastStatistics = @DateTimeOfLastStatistics AND versionOfClient = @versionOfClient AND typeOfDevice = @typeOfDevice)";
                     connection.Execute(sqlQuery, statistics);
 
+                    sqlQuery = "DELETE FROM Events WHERE (statisticsID = @statisticsID)";
+                    connection.Execute(sqlQuery, statistics);
+
                     return 0;
                 }
             }
@@ -152,6 +167,14 @@ namespace Infotecs.WebApi
                 string sqlQuery = "DELETE FROM Users WHERE ID = @ID;";
                 connection.Execute(sqlQuery, user);
 
+                List<UserStatistics> foundStatistics = connection.Query<UserStatistics>("SELECT * FROM Statistics").ToList();
+
+                foreach (var statistic in foundStatistics)
+                {
+                    sqlQuery = "DELETE FROM Events WHERE (statisticsID = @statisticsID)";
+                    connection.Execute(sqlQuery, statistic);
+                }
+
                 sqlQuery = "DELETE FROM Statistics WHERE UserID = @ID;";
                 connection.Execute(sqlQuery, user);
 
@@ -174,6 +197,14 @@ namespace Infotecs.WebApi
         public List<UserStatistics> GetStatisticsList()
         {
             List<UserStatistics> foundStatistics = connection.Query<UserStatistics>("SELECT * FROM Statistics").ToList();
+
+            if (foundStatistics != null)
+            {
+                foreach (var statistics in foundStatistics)
+                {
+                    statistics.Events = connection.Query<Events>("SELECT * FROM Events WHERE (statisticsID = @statisticsID)", statistics).ToList();
+                }
+            }
 
             return foundStatistics;
         }
@@ -249,8 +280,22 @@ namespace Infotecs.WebApi
                         }
                         else 
                         {
-                            sqlQuery = "UPDATE Statistics SET DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice WHERE UserID = @UserID";
+                            sqlQuery = "UPDATE Statistics SET DateTimeOfLastStatistics = @DateTimeOfLastStatistics, VersionOfClient = @VersionOfClient, TypeOfDevice = @TypeOfDevice statisticsID = @statisticsID WHERE UserID = @UserID";
                             connection.Execute(sqlQuery, newStatistics);
+
+                            sqlQuery = "DELETE FROM Events WHERE (statisticsID = @statisticsID)";
+                            connection.Execute(sqlQuery, statistics);
+
+                            if (statistics.Events != null)
+                            {
+                                foreach (var _event in statistics.Events)
+                                {
+                                    _event.StatisticsID = statistics.statisticsID;
+
+                                    sqlQuery = "INSERT INTO Events (statisticsID, name, date) VALUES(@statisticsID, @name, @date)";
+                                    connection.Execute(sqlQuery, _event);
+                                }
+                            }
 
                             return 0; 
                         }

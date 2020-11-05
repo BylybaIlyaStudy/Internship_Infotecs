@@ -40,10 +40,15 @@ namespace Infotecs.WebApi.Controllers
         public List<UserStatisticsDTO> Get()
         {
             this.logger.Debug("Запрос списка статистик");
-            
-            return repository.GetStatisticsList();
+
+            List<UserStatisticsDTO> statistics = repository.GetStatisticsList().Adapt<List<UserStatisticsDTO>>();
+
+            return statistics;
         }
-        
+
+        /// <summary>
+        /// Отправляет в репозиторий запрос на добавление статистики и возвращает результат.
+        /// </summary>
         /// <param name="DTO">Пользовательская статистика.</param>
         /// <returns>
         /// Результат добавления статистикти:
@@ -81,11 +86,16 @@ namespace Infotecs.WebApi.Controllers
 
                     return StatusCode(412);
                 }
+            }
+
             this.logger.Fatal("ошибка создания статистики {@UserStatisticsDTO}: непредвиденная ошибка", DTO);
 
             return StatusCode(418);
         }
 
+        /// <summary>
+        /// Отправляет в репозиторий запрос на обновление статистики и возвращает результат.
+        /// </summary>
         /// <param name="oldDTO">Статистика, которую нужно обновить ([FromBody]).</param>
         /// <param name="newDTO">Статистика, на которую нужно обновить ([FromQuery]).</param>
         /// <returns>
@@ -136,12 +146,16 @@ namespace Infotecs.WebApi.Controllers
 
                     return StatusCode(412);
                 }
+            }
 
             this.logger.Fatal("ошибка создания обновления {@OldUserStatisticsDTO} => {@NewUserStatisticsDTO}: непредвиденная ошибка", oldDTO, newDTO);
 
             return StatusCode(418);
         }
 
+        /// <summary>
+        /// Отправляет в репозиторий запрос на удаление статистики и возвращает результат.
+        /// </summary>
         /// <param name="DTO">Удаляемая статистика.</param>
         /// <returns>
         /// Результат удаления статистикти:
@@ -177,6 +191,7 @@ namespace Infotecs.WebApi.Controllers
 
                     return NotFound(DTO);
                 }
+            }
 
             this.logger.Fatal("ошибка удаления статистики {@UserStatisticsDTO}: непредвиденная ошибка", DTO);
 
