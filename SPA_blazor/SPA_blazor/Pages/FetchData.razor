@@ -4,35 +4,95 @@
 @using Infotecs.SPA_blazor.Data
 @inject UserStatisticsService StatisticsService
 
-<button @onclick="@Update">Update</button>
-
 @if (userStatistics == null)
 {
     <p><em>Loading...</em></p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Имя узла</th>
-                <th>Дата последней статистики</th>
-                <th>Версия Client</th>
-                <th>Тип устройства</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in userStatistics)
-            {
+    @if (userForEvents != null)
+    {
+        <div class="statistics_style">
+            <h1>Статистика</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Имя узла</th>
+                        <th>Дата последней статистики</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in userStatistics)
+                    {
+                        <tr @onclick='(e => ShowEvents(user))'>
+                            <td>@user.NameOfNode</td>
+                            <td>@user.DateTimeOfLastStatistics</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="events_style">
+            <h1>События</h1>
+            <h2>@userForEvents.NameOfNode</h2>
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Идентификатор</th>
+                        <th>@userForEvents.UserID</th>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr>
+                        <th>Версия ПО ViPNet Client</th>
+                        <th>@userForEvents.VersionOfClient</th>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Дата</th>
+                        <th>Событие</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var _event in userForEvents.Events)
+                    {
+                        <tr>
+                            <td>@_event.Date</td>
+                            <td>@_event.Name</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <h1>Статистика</h1>
+        <table class="table">
+            <thead>
                 <tr>
-                    <td>@user.NameOfNode</td>
-                    <td>@user.DateTimeOfLastStatistics</td>
-                    <td>@user.VersionOfClient</td>
-                    <td>@user.TypeOfDevice</td>
+                    <th>Имя узла</th>
+                    <th>Дата последней статистики</th>
+                    <th>Версия Client</th>
+                    <th>Тип устройства</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var user in userStatistics)
+                {
+                    <tr @onclick='(e => ShowEvents(user))'>
+                        <td>@user.NameOfNode</td>
+                        <td>@user.DateTimeOfLastStatistics</td>
+                        <td>@user.VersionOfClient</td>
+                        <td>@user.TypeOfDevice</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
 }
 
 @code {
@@ -42,9 +102,31 @@ else
 
     private static BlazorTimer Timer = new BlazorTimer();
 
+    private UserStatistics userForEvents = null;
+
+    private void ShowEvents(UserStatistics userStatistics)
+    {
+        if (userForEvents == null)
+        {
+            userForEvents = userStatistics;
+        }
+        else
+        {
+            if (userForEvents.Equals(userStatistics))
+            {
+                userForEvents = null;
+            }
+            else
+            {
+                userForEvents = userStatistics;
+            }
+        }
+
+        this.InvokeAsync(new Action(() => this.StateHasChanged()));
+    }
+
     protected override async Task OnInitializedAsync()
     {
-        //forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
         userStatistics = await Update();
         StartTimer();
     }

@@ -2,6 +2,8 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using System.Collections.Generic;
+
 namespace Infotecs.SPA_blazor.Data
 {
     /// <summary>
@@ -38,5 +40,10 @@ namespace Infotecs.SPA_blazor.Data
         /// Тип клиентского устройства.
         /// </summary>
         public string TypeOfDevice { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Events> Events { get; set; }
     }
 }

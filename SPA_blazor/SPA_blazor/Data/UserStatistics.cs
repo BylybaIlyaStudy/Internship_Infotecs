@@ -5,6 +5,7 @@
 namespace Infotecs.SPA_blazor.Data
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Класс хранения пользовательской статистики.
@@ -40,5 +41,10 @@ namespace Infotecs.SPA_blazor.Data
         /// Тип клиентского устройства.
         /// </summary>
         public string TypeOfDevice { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Events> Events { get; set; }
     }
 }

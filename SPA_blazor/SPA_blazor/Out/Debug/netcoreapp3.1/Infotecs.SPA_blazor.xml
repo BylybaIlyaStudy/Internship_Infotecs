@@ -25,6 +25,21 @@
             </summary>
             <param name="interval">Время задержки.</param>
         </member>
+        <member name="T:Infotecs.SPA_blazor.Data.Events">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.Events.Date">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.Events.Name">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Infotecs.SPA_blazor.Data.UserStatistics">
             <summary>
             Класс хранения пользовательской статистики.
@@ -60,6 +75,11 @@
             Тип клиентского устройства.
             </summary>
         </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.Events">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Infotecs.SPA_blazor.Data.UserStatisticsDTO">
             <summary>
             Класс DTO для передаче данных о статистике пользователей.
@@ -93,6 +113,11 @@
         <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.TypeOfDevice">
             <summary>
             Тип клиентского устройства.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.Events">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Infotecs.SPA_blazor.Data.UserStatisticsService">

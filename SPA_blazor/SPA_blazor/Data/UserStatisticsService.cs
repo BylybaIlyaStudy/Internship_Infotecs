@@ -26,6 +26,8 @@ namespace Infotecs.SPA_blazor.Data
 
             List<UserStatisticsDTO> usersDTO = JsonConvert.DeserializeObject<List<UserStatisticsDTO>>(json);
 
+            //JsonConvert.SerializeObject();
+
             List<UserStatistics> users = usersDTO.Adapt<List<UserStatistics>>();
 
             return Task.FromResult(users);
