@@ -4,9 +4,13 @@
 
 namespace Infotecs.WebApi
 {
+    using FluentMigrator.Runner;
+    using Infotecs.WebApi.Migrations;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Serilog.Injection;
+    using System;
 
     /// <summary>
     /// Входная точка приложения ASP.NET Core.
