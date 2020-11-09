@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Infotecs.WebApi.Models
+﻿namespace Infotecs.WebApi.Models
 {
     /// <summary>
     /// Класс для хранения информации о пользователях.

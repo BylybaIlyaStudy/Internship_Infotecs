@@ -42,7 +42,9 @@ namespace Infotecs.WebApi.Controllers
         {
             this.logger.Debug("Запрос списка пользователей");
 
-            return this.repository.GetUsersList();
+            List<Users> users = this.repository.GetUsersList();
+
+            return users;
         }
 
         /// <summary>
