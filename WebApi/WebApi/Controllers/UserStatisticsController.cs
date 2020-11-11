@@ -7,6 +7,7 @@ using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Infotecs.WebApi.Models;
+using Infotecs.WebApi.Services;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -20,6 +21,8 @@ namespace Infotecs.WebApi.Controllers
     {
         private readonly ILogger logger = null;
         private readonly IRepository repository = null;
+        
+        private readonly StatisticsService statisticsService = null;
 
         /// <summary>
         /// Конструктор для привязки системы логирования и базы данных.
@@ -30,6 +33,9 @@ namespace Infotecs.WebApi.Controllers
         {
             this.logger = logger;
             this.repository = repository;
+
+            
+            statisticsService = new StatisticsService(repository, logger);
         }
 
         /// <summary>
@@ -39,11 +45,33 @@ namespace Infotecs.WebApi.Controllers
         [HttpGet]
         public List<UserStatisticsDTO> Get()
         {
-            this.logger.Debug("Запрос списка статистик");
+            List<UserStatisticsDTO> userStatisticsDTOs = statisticsService.GetStatistics().Adapt<List<UserStatisticsDTO>>();
 
-            List<UserStatisticsDTO> statistics = repository.GetStatisticsList().Adapt<List<UserStatisticsDTO>>();
+            if (userStatisticsDTOs != null)
+            {
+                foreach (var statistics in userStatisticsDTOs)
+                {
+                    statistics.EventsDTO = statisticsService.GetStatistics(statistics.ID).Events.Adapt<List<EventsDTO>>();
+                }
+            }
 
-            return statistics;
+            return userStatisticsDTOs;
+        }
+
+        /// <summary>
+        /// Запрос списка всех статистик.
+        /// </summary>
+        /// <returns>Список всех статиситк.</returns>
+        [HttpGet("{ID}")]
+        public UserStatisticsDTO Get(string ID)
+        {
+            UserStatisticsDTO userStatisticsDTO = statisticsService.GetStatistics(ID).Adapt<UserStatisticsDTO>();
+            if (userStatisticsDTO != null)
+            {
+                userStatisticsDTO.EventsDTO = statisticsService.GetStatistics(ID).Events.Adapt<List<EventsDTO>>();
+            }
+
+            return userStatisticsDTO;
         }
 
         /// <summary>
@@ -60,97 +88,10 @@ namespace Infotecs.WebApi.Controllers
         [HttpPost]
         public IActionResult Post([FromBody]UserStatisticsDTO DTO)
         {
-            this.logger.Debug("Запрос на добавление статистики {@UserStatisticsDTO}", DTO);
-
             UserStatistics statistics = DTO.Adapt<UserStatistics>();
+            statistics.Events = DTO.EventsDTO.Adapt<List<Events>>();
 
-            int status = repository.CreateStatistics(statistics);
-
-            if (status == 0)
-            {
-                this.logger.Debug("создана новая запись статистики {@UserStatisticsDTO}", DTO);
-
-                return Ok(DTO);
-            }
-            else
-            {
-                if (status == 1)
-                {
-                    this.logger.Error("ошибка создания статистики {@UserStatisticsDTO}: пользоавтель с таким ID не существует", DTO);
-
-                    return NotFound(DTO);
-                }
-                if (status == 2)
-                {
-                    this.logger.Error("ошибка создания статистики {@UserStatisticsDTO}: статистика с такими данными уже существует", DTO);
-
-                    return StatusCode(412);
-                }
-            }
-
-            this.logger.Fatal("ошибка создания статистики {@UserStatisticsDTO}: непредвиденная ошибка", DTO);
-
-            return StatusCode(418);
-        }
-
-        /// <summary>
-        /// Отправляет в репозиторий запрос на обновление статистики и возвращает результат.
-        /// </summary>
-        /// <param name="oldDTO">Статистика, которую нужно обновить ([FromBody]).</param>
-        /// <param name="newDTO">Статистика, на которую нужно обновить ([FromQuery]).</param>
-        /// <returns>
-        /// Результат обновления статистикти:
-        /// Ok - запись статистики обновлена;
-        /// NotFound - ошибка обновления статистики: пользоавтель с таким ID или статистика с такими данными не существует;
-        /// 412 - ошибка обновления статистики: пользовательские данные не совпадают;
-        /// 418 - ошибка обновления статистики: непредвиденная ошибка.
-        [HttpPut]
-        public IActionResult Put([FromBody] UserStatisticsDTO oldDTO, [FromQuery] UserStatisticsDTO newDTO)
-        {
-            this.logger.Debug("Запрос на обновление статистики {@OldUserStatisticsDTO} => {@NewUserStatisticsDTO}", oldDTO, newDTO);
-
-            UserStatistics oldStatistics = oldDTO.Adapt<UserStatistics>();
-            UserStatistics newStatistics = newDTO.Adapt<UserStatistics>();
-
-            int status = repository.UpdateStatistics(oldStatistics, newStatistics);
-
-            if (status == 0)
-            {
-                this.logger.Debug("запись статистики обновлена {@OldUserStatisticsDTO} => {@NewUserStatisticsDTO}", oldDTO, newDTO);
-
-                return Ok(newDTO);
-            }
-            else
-            {
-                if (status == 1)
-                {
-                    this.logger.Error("ошибка обновления статистики {@OldUserStatisticsDTO} => {@NewUserStatisticsDTO}: пользоавтель с таким ID не существует", oldDTO, newDTO);
-
-                    return NotFound(oldDTO);
-                }
-                if (status == 2)
-                {
-                    this.logger.Error("ошибка обновления статистики {@OldUserStatisticsDTO} => {@NewUserStatisticsDTO}: статистика с такими данными не существует", oldDTO, newDTO);
-
-                    return NotFound(oldDTO);
-                }
-                if (status == 3)
-                {
-                    this.logger.Error("ошибка обновления статистики {@OldUserStatisticsDTO} => {@NewUserStatisticsDTO}: ID пользователя обновляемой статистики не совпадает с ID пользователя новой статистики", oldDTO, newDTO);
-
-                    return StatusCode(412);
-                }
-                if (status == 4)
-                {
-                    this.logger.Error("ошибка обновления статистики {@OldUserStatisticsDTO} => {@NewUserStatisticsDTO}: имя пользователя обновляемой статистики не совпадает с именем пользователя новой статистики", oldDTO, newDTO);
-
-                    return StatusCode(412);
-                }
-            }
-
-            this.logger.Fatal("ошибка создания обновления {@OldUserStatisticsDTO} => {@NewUserStatisticsDTO}: непредвиденная ошибка", oldDTO, newDTO);
-
-            return StatusCode(418);
+            return StatusCode(statisticsService.CreateStatistics(statistics));
         }
 
         /// <summary>
@@ -163,39 +104,9 @@ namespace Infotecs.WebApi.Controllers
         /// NotFound - ошибка удаления статистики: пользоавтель или статистика с такими данными не существует;
         /// 418 - ошибка удаления статистики: непредвиденная ошибка.
         [HttpDelete]
-        public IActionResult Delete([FromBody] UserStatisticsDTO DTO)
+        public IActionResult Delete(string ID)
         {
-            this.logger.Debug("Запрос на удаление статистики {@UserStatisticsDTO}", DTO);
-
-            UserStatistics statistics = DTO.Adapt<UserStatistics>();
-
-            int status = repository.DeleteStatistics(statistics);
-
-            if (status == 0)
-            {
-                this.logger.Debug("удалена запись статистики {@UserStatisticsDTO}", DTO);
-
-                return Ok(DTO);
-            }
-            else
-            {
-                if (status == 1)
-                {
-                    this.logger.Error("ошибка удаления статистики {@UserStatisticsDTO}: пользоавтель с такими данными не существует", DTO);
-
-                    return NotFound(DTO);
-                }
-                if (status == 2)
-                {
-                    this.logger.Error("ошибка удаления статистики {@UserStatisticsDTO}: статистика с такими данными не существует", DTO);
-
-                    return NotFound(DTO);
-                }
-            }
-
-            this.logger.Fatal("ошибка удаления статистики {@UserStatisticsDTO}: непредвиденная ошибка", DTO);
-
-            return StatusCode(418);
+            return StatusCode(statisticsService.DeleteStatistics(ID));
         }
     }
 }

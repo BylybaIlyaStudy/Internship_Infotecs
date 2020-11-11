@@ -30,7 +30,7 @@ namespace Infotecs.WebApi
             {
                 foreach (var _event in statistics.Events)
                 {
-                    _event.UserID = statistics.UserID;
+                    _event.ID = statistics.ID;
 
                     sqlQuery = "INSERT INTO Events (ID, name, date) VALUES(@ID, @name, @date)";
                     connection.Execute(sqlQuery, _event);

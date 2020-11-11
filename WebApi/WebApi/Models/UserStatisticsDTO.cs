@@ -19,7 +19,7 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// ID узла.
         /// </summary>
-        public string UserID { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// Имя узла.
@@ -41,6 +41,6 @@ namespace Infotecs.WebApi.Models
         /// </summary>
         public string os { get; set; }
 
-        public List<Events> Events { get; set; }
+        public List<EventsDTO> EventsDTO { get; set; }
     }
 }

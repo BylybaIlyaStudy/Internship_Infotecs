@@ -20,7 +20,7 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// ID пользователя.
         /// </summary>
-        public string UserID { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// Имя узла.
