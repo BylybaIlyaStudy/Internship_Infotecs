@@ -14,7 +14,7 @@ namespace Infotecs.WebApi.Models
 
         public UsersDTO(string name)
         {
-            this.NameOfNode = name;
+            this.name = name;
         }
 
         /// <summary>
@@ -25,6 +25,6 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// Имя пользователя.
         /// </summary>
-        public string NameOfNode { get; set; }
+        public string name { get; set; }
     }
 }
