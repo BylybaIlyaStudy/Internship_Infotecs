@@ -25,8 +25,8 @@ else
                     @foreach (var user in userStatistics)
                     {
                         <tr @onclick='(e => ShowEvents(user))'>
-                            <td>@user.NameOfNode</td>
-                            <td>@user.DateTimeOfLastStatistics</td>
+                            <td>@user.Name</td>
+                            <td>@user.Date</td>
                         </tr>
                     }
                 </tbody>
@@ -34,18 +34,18 @@ else
         </div>
         <div class="events_style">
             <h1>События</h1>
-            <h2>@userForEvents.NameOfNode</h2>
+            <h2>@userForEvents.Name</h2>
             <table class="table">
                 <tbody>
                     <tr>
                         <th>Идентификатор</th>
-                        <th>@userForEvents.UserID</th>
+                        <th>@userForEvents.ID</th>
                     </tr>
                 </tbody>
                 <tbody>
                     <tr>
                         <th>Версия ПО ViPNet Client</th>
-                        <th>@userForEvents.VersionOfClient</th>
+                        <th>@userForEvents.Version</th>
                     </tr>
                 </tbody>
             </table>
@@ -84,10 +84,10 @@ else
                 @foreach (var user in userStatistics)
                 {
                     <tr @onclick='(e => ShowEvents(user))'>
-                        <td>@user.NameOfNode</td>
-                        <td>@user.DateTimeOfLastStatistics</td>
-                        <td>@user.VersionOfClient</td>
-                        <td>@user.TypeOfDevice</td>
+                        <td>@user.Name</td>
+                        <td>@user.Date</td>
+                        <td>@user.Version</td>
+                        <td>@user.OS</td>
                     </tr>
                 }
             </tbody>
@@ -148,7 +148,7 @@ else
         {
             foreach (var user in users)
             {
-                Console.WriteLine(user.NameOfNode);
+                Console.WriteLine(user.Name);
             }
         }
 
