@@ -19,28 +19,28 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// ID узла.
         /// </summary>
-        public string UserID { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// Имя узла.
         /// </summary>
-        public string NameOfNode { get; set; }
+        public string name { get; set; }
 
         /// <summary>
         /// Дата последней статистики.
         /// </summary>
-        public string DateTimeOfLastStatistics { get; set; }
+        public string date { get; set; }
 
         /// <summary>
         /// Версия клиентского приложения.
         /// </summary>
-        public string VersionOfClient { get; set; }
+        public string version { get; set; }
 
         /// <summary>
         /// Тип клиентского устройства.
         /// </summary>
-        public string TypeOfDevice { get; set; }
+        public string os { get; set; }
 
-        public List<Events> Events { get; set; }
+        public List<EventsDTO> EventsDTO { get; set; }
     }
 }

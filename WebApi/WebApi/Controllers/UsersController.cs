@@ -2,15 +2,15 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using System.Collections.Generic;
+using Mapster;
+using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using Infotecs.WebApi.Models;
+using Infotecs.WebApi.Services;
+
 namespace Infotecs.WebApi.Controllers
 {
-    using System.Collections.Generic;
-    using System.Text.Json;
-    using Mapster;
-    using Microsoft.AspNetCore.Mvc;
-    using Serilog;
-    using Infotecs.WebApi.Models;
-
     /// <summary>
     /// Класс контроллера для обработки REST запросов и 
     /// взаимодействия с данными пользователей.
@@ -21,6 +21,7 @@ namespace Infotecs.WebApi.Controllers
     {
         private readonly ILogger logger = null;
         private readonly IRepository repository = null;
+        private readonly UserService userService = null;
 
         /// <summary>
         /// Конструктор для привязки системы логирования и базы данных.
@@ -31,6 +32,8 @@ namespace Infotecs.WebApi.Controllers
         {
             this.logger = logger;
             this.repository = repository;
+
+            userService = new UserService(repository, logger);
         }
 
         /// <summary>
@@ -38,13 +41,23 @@ namespace Infotecs.WebApi.Controllers
         /// </summary>
         /// <returns>Список всех пользователей.</returns>
         [HttpGet]
-        public List<Users> Get()
+        public List<UsersDTO> Get()
         {
-            this.logger.Debug("Запрос списка пользователей");
+            List<UsersDTO> usersDTOs = userService.GetUsersList().Adapt<List<UsersDTO>>();
 
-            List<Users> users = this.repository.GetUsersList();
+            return usersDTOs;
+        }
 
-            return users;
+        /// <summary>
+        /// Запрос из репозитория списка всех пользователей.
+        /// </summary>
+        /// <returns>Список всех пользователей.</returns>
+        [HttpGet("{ID}")]
+        public UsersDTO Get(string ID)
+        {
+            UsersDTO usersDTO = userService.GetUser(ID).Adapt<UsersDTO>();
+
+            return usersDTO;
         }
 
         /// <summary>
@@ -58,69 +71,11 @@ namespace Infotecs.WebApi.Controllers
         /// 418 - ошибка создания пользователя: непредвиденная ошибка.
         /// </returns>
         [HttpPost]
-        public IActionResult Post([FromBody] UsersDTO DTO)
+        public IActionResult Post([FromBody] UsersDTO usersDTO)
         {
-            Users user = DTO.Adapt<Users>();
+            Users user = usersDTO.Adapt<Users>();
 
-            int status = this.repository.CreateUser(user);
-
-            if (status == 0)
-            {
-                this.logger.Debug("создана запись о новом пользователе {@Users}", user);
-
-                return Ok(DTO);
-            }
-            else
-            {
-                if (status == 1)
-                {
-                    this.logger.Error("ошибка создания пользователя {@Users}: пользоавтель с таким ID уже существует", user);
-
-                    return StatusCode(412);
-                }
-            }
-
-            this.logger.Fatal("ошибка создания пользователя {@Users}: непредвиденная ошибка", user);
-
-            return StatusCode(418);
-        }
-
-        /// <summary>
-        /// Отправляет в репозиторий запрос на обновление пользователя и возвращает результат.
-        /// </summary>
-        /// <param name="DTO">Пользователь.</param>
-        /// <returns>
-        /// Результат обновления пользователя:
-        /// Ok - запись пользователя обновлена;
-        /// NotFound - ошибка обновления пользователя: пользоавтель с таким ID не существует;
-        /// 418 - ошибка обновления пользователя: непредвиденная ошибка.
-        /// </returns>
-        [HttpPut]
-        public IActionResult Put([FromBody] UsersDTO DTO)
-        {
-            Users user = DTO.Adapt<Users>();
-
-            int status = this.repository.UpdateUser(user);
-
-            if (status == 0)
-            {
-                this.logger.Debug("запись о пользователе {@Users} обновлена", user);
-
-                return Ok(DTO);
-            }
-            else
-            {
-                if (status == 1)
-                {
-                    this.logger.Error("ошибка обновления пользователя {@Users}: пользоавтель с таким ID не существует", user);
-
-                    return NotFound(DTO);
-                }
-            }
-
-            this.logger.Fatal("ошибка создания пользователя {@Users}: непредвиденная ошибка", user);
-
-            return StatusCode(418);
+            return StatusCode(userService.CreateUser(user));
         }
 
         /// <summary>
@@ -134,31 +89,9 @@ namespace Infotecs.WebApi.Controllers
         /// 418 - ошибка удаления пользователя: непредвиденная ошибка.
         /// </returns>
         [HttpDelete]
-        public IActionResult Delete([FromBody] UsersDTO DTO)
+        public IActionResult Delete(string ID)
         {
-            Users user = DTO.Adapt<Users>();
-
-            int status = this.repository.DeleteUser(user);
-
-            if (status == 0)
-            {
-                this.logger.Debug("запись о пользователе {@Users} удалена", user);
-
-                return Ok(DTO);
-            }
-            else
-            {
-                if (status == 1)
-                {
-                    this.logger.Error("ошибка удаления пользователя {@Users}: пользоавтель с таким ID не существует", user);
-
-                    return NotFound(DTO);
-                }
-            }
-
-            this.logger.Fatal("ошибка создания пользователя {@Users}: непредвиденная ошибка", user);
-
-            return StatusCode(418);
+            return StatusCode(userService.DeleteUser(ID));
         }
     }
 }

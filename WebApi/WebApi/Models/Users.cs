@@ -16,7 +16,7 @@
         /// <param name="name">Имя пользователя.</param>
         public Users(string name)
         {
-            this.NameOfNode = name;
+            this.name = name;
         }
 
         /// <summary>
@@ -27,6 +27,6 @@
         /// <summary>
         /// Имя пользователя.
         /// </summary>
-        public string NameOfNode { get; set; }
+        public string name { get; set; }
     }
 }
