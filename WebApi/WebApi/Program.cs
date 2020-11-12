@@ -6,8 +6,11 @@ namespace Infotecs.WebApi
 {
     using System;
     using System.IO;
+    using FluentMigrator.Runner;
+    using Infotecs.WebApi.Migrations;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Serilog;
 
@@ -37,6 +40,15 @@ namespace Infotecs.WebApi
         /// </returns>
         public static int Main(string[] args)
         {
+            var serviceProvider = CreateServices();
+
+            // Put the database update into a scope to ensure
+            // that all resources will be disposed.
+            using (var scope = serviceProvider.CreateScope())
+            {
+                UpdateDatabase(scope.ServiceProvider);
+            }
+
             try
             {
                 Log.Information("Starting web host");
@@ -52,6 +64,30 @@ namespace Infotecs.WebApi
             {
                 Log.CloseAndFlush();
             }
+        }
+
+        private static IServiceProvider CreateServices()
+        {
+            return new ServiceCollection()
+                .AddFluentMigratorCore().ConfigureRunner(rb => rb
+                    // Add SQLite support to FluentMigrator
+                    .AddPostgres()
+                    // Set the connection string
+                    .WithGlobalConnectionString(Configuration.GetConnectionString("DefaultConnection"))
+                    // Define the assembly containing the migrations
+                    .ScanIn(typeof(Baseline).Assembly).For.Migrations())
+                .AddLogging(lb => lb.AddFluentMigratorConsole())
+                // Build the service provider
+                .BuildServiceProvider(false);
+        }
+
+        private static void UpdateDatabase(IServiceProvider serviceProvider)
+        {
+            // Instantiate the runner
+            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+
+            // Execute the migrations
+            runner.MigrateUp();
         }
 
         /// <summary>

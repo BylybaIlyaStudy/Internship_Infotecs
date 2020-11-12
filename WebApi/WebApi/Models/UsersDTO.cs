@@ -12,6 +12,11 @@ namespace Infotecs.WebApi.Models
         /// </summary>
         public UsersDTO() { }
 
+        public UsersDTO(string name)
+        {
+            this.name = name;
+        }
+
         /// <summary>
         /// Уникальный идентификатор пользователя.
         /// </summary>
@@ -20,6 +25,6 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// Имя пользователя.
         /// </summary>
-        public string NameOfNode { get; set; }
+        public string name { get; set; }
     }
 }

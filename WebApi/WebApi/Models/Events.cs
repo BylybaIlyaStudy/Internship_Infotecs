@@ -2,7 +2,7 @@
 {
     public class Events
     {
-        public string StatisticsID = null;
+        public string ID { get; set; }
         public string Date { get; set; }
         public string Name { get; set; }
     }
