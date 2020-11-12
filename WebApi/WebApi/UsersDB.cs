@@ -115,7 +115,7 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Получает пользователя по ID.
         /// </summary>
-        /// <param name="ID">ID пользователя.</param>
+        /// <param Name="ID">ID пользователя.</param>
         /// <returns>Пользователь.</returns>
         public Users GetUser(string ID)
         {
