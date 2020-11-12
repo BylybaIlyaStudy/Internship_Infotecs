@@ -15,20 +15,22 @@ namespace Infotecs.WebApi.Migrations
         {
             Create.Table("users".ToLower())
                 .WithColumn("ID".ToLower()).AsString()
-                .WithColumn("nameOfNode".ToLower()).AsString();
+                .WithColumn("Name".ToLower()).AsString();
+            Create.PrimaryKey("ID".ToLower()).OnTable("users".ToLower()).Column("ID".ToLower());
 
             Create.Table("statistics".ToLower())
-                .WithColumn("UserID".ToLower()).AsString()
-                .WithColumn("nameOfNode".ToLower()).AsString()
-                .WithColumn("DateTimeOfLastStatistics".ToLower()).AsString()
-                .WithColumn("versionOfClient".ToLower()).AsString()
-                .WithColumn("typeOfDevice".ToLower()).AsString()
-                .WithColumn("statisticsID".ToLower()).AsString();
+                .WithColumn("ID".ToLower()).AsString()
+                .WithColumn("Name".ToLower()).AsString()
+                .WithColumn("Date".ToLower()).AsString()
+                .WithColumn("Version".ToLower()).AsString()
+                .WithColumn("OS".ToLower()).AsString();
+            Create.ForeignKey("ID".ToLower()).FromTable("statistics".ToLower()).ForeignColumn("ID".ToLower()).ToTable("users".ToLower()).PrimaryColumn("ID".ToLower());
 
             Create.Table("events".ToLower())
-                .WithColumn("statisticsID".ToLower()).AsString()
-                .WithColumn("name".ToLower()).AsString()
-                .WithColumn("date".ToLower()).AsString();
+                .WithColumn("ID".ToLower()).AsString()
+                .WithColumn("Name".ToLower()).AsString(50)
+                .WithColumn("Date".ToLower()).AsDateTime();
+            Create.ForeignKey("ID".ToLower()).FromTable("events".ToLower()).ForeignColumn("ID".ToLower()).ToTable("users".ToLower()).PrimaryColumn("ID".ToLower());
         }
 
         /// <summary>
@@ -36,6 +38,9 @@ namespace Infotecs.WebApi.Migrations
         /// </summary>
         public override void Down()
         {
+            Delete.ForeignKey("ID".ToLower()).OnTable("events".ToLower());
+            Delete.ForeignKey("ID".ToLower()).OnTable("statistics".ToLower());
+
             Delete.Table("users".ToLower());
             Delete.Table("statistics".ToLower());
             Delete.Table("events".ToLower());
