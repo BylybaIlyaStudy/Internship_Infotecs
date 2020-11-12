@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Infotecs.WebApi.Models;
 using Infotecs.WebApi.Services;
 using Serilog;
+using WebApi.Repositories;
+using Infotecs.WebApi.Repositories;
 
 namespace Infotecs.WebApi.Tests
 {
@@ -15,8 +17,8 @@ namespace Infotecs.WebApi.Tests
             // Arrange
             var expexted = new List<UserStatistics>();
 
-            var rep = new Mock<IRepository>();
-            rep.Setup(a => a.GetStatisticsList()).Returns(expexted);
+            var rep = new Mock<IUnitOfWork>();
+            rep.Setup(a => a.Statistics.GetList()).Returns(expexted);
 
             var log = new Mock<ILogger>();
 
@@ -33,11 +35,11 @@ namespace Infotecs.WebApi.Tests
         public void GetStatisticsByIdIsEqualExpected()
         {
             // Arrange
-            var user = new Users() { ID = "001", name = "default" };
+            var user = new Users() { ID = "001", Name = "default" };
             var expexted = new UserStatistics() { ID = user.ID };
 
-            var rep = new Mock<IRepository>();
-            rep.Setup(a => a.GetStatistics(user.ID)).Returns(expexted);
+            var rep = new Mock<IUnitOfWork>();
+            rep.Setup(a => a.Statistics.Get(user.ID)).Returns(expexted);
 
             var log = new Mock<ILogger>();
 
@@ -55,11 +57,14 @@ namespace Infotecs.WebApi.Tests
         {
             // Arrange
             int expected = 200;
-            Users user = new Users() { ID = "001", name = "default" };
+            Users user = new Users() { ID = "001", Name = "default" };
             UserStatistics statistics = new UserStatistics() { ID = user.ID };
 
-            var rep = new Mock<IRepository>();
-            rep.Setup(a => a.GetUser(user.ID)).Returns(user);
+            var mow = new Mock<IRepository<UserStatistics>>();
+            var rep = new Mock<IUnitOfWork>();
+            rep.Setup(a => a.Statistics).Returns(mow.Object);
+
+            rep.Setup(a => a.Users.Get(user.ID)).Returns(user);
 
             var log = new Mock<ILogger>();
 
@@ -77,10 +82,13 @@ namespace Infotecs.WebApi.Tests
         {
             // Arrange
             int expected = 404;
-            Users user = new Users() { ID = "001", name = "default" };
+            Users user = new Users() { ID = "001", Name = "default" };
             UserStatistics statistics = new UserStatistics() { ID = user.ID };
 
-            var rep = new Mock<IRepository>();
+            var mow = new Mock<IRepository<Users>>();
+            var rep = new Mock<IUnitOfWork>();
+            rep.Setup(a => a.Users).Returns(mow.Object);
+
             var log = new Mock<ILogger>();
 
             StatisticsService statisticsService = new StatisticsService(rep.Object, log.Object);
@@ -97,12 +105,12 @@ namespace Infotecs.WebApi.Tests
         {
             // Arrange
             int expected = 200;
-            Users user = new Users() { ID = "001", name = "default" };
+            Users user = new Users() { ID = "001", Name = "default" };
             UserStatistics statistics = new UserStatistics() { ID = user.ID };
 
-            var rep = new Mock<IRepository>();
-            rep.Setup(a => a.GetUser(user.ID)).Returns(user);
-            rep.Setup(a => a.GetStatistics(user.ID)).Returns(statistics);
+            var rep = new Mock<IUnitOfWork>();
+            rep.Setup(a => a.Users.Get(user.ID)).Returns(user);
+            rep.Setup(a => a.Statistics.Get(user.ID)).Returns(statistics);
 
             var log = new Mock<ILogger>();
 
@@ -120,9 +128,12 @@ namespace Infotecs.WebApi.Tests
         {
             // Arrange
             int expected = 404;
-            Users user = new Users() { ID = "001", name = "default" };
+            Users user = new Users() { ID = "001", Name = "default" };
 
-            var rep = new Mock<IRepository>();
+            var mow = new Mock<IRepository<Users>>();
+            var rep = new Mock<IUnitOfWork>();
+            rep.Setup(a => a.Users).Returns(mow.Object);
+
             var log = new Mock<ILogger>();
 
             StatisticsService statisticsService = new StatisticsService(rep.Object, log.Object);
@@ -139,10 +150,13 @@ namespace Infotecs.WebApi.Tests
         {
             // Arrange
             int expected = 404;
-            Users user = new Users() { ID = "001", name = "default" };
+            Users user = new Users() { ID = "001", Name = "default" };
 
-            var rep = new Mock<IRepository>();
-            rep.Setup(a => a.GetUser(user.ID)).Returns(user);
+            var mow = new Mock<IRepository<UserStatistics>>();
+            var rep = new Mock<IUnitOfWork>();
+            rep.Setup(a => a.Statistics).Returns(mow.Object);
+            rep.Setup(a => a.Users.Get(user.ID)).Returns(user);
+
             var log = new Mock<ILogger>();
 
             StatisticsService statisticsService = new StatisticsService(rep.Object, log.Object);
