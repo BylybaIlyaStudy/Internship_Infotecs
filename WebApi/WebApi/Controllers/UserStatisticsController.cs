@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Infotecs.WebApi.Models;
 using Infotecs.WebApi.Services;
+using WebApi.Repositories;
+using System.Text.Json;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -20,16 +22,16 @@ namespace Infotecs.WebApi.Controllers
     public class UserStatisticsController : Controller
     {
         private readonly ILogger logger = null;
-        private readonly IRepository repository = null;
+        private readonly IUnitOfWork repository = null;
         
         private readonly StatisticsService statisticsService = null;
 
         /// <summary>
         /// Конструктор для привязки системы логирования и базы данных.
         /// </summary>
-        /// <param name="logger">Интерфейс системы логирования.</param>
-        /// <param name="repository">Интерфейс базы данных.</param>
-        public UserStatisticsController(ILogger logger, IRepository repository)
+        /// <param Name="logger">Интерфейс системы логирования.</param>
+        /// <param Name="repository">Интерфейс базы данных.</param>
+        public UserStatisticsController(ILogger logger, IUnitOfWork repository)
         {
             this.logger = logger;
             this.repository = repository;
@@ -45,17 +47,18 @@ namespace Infotecs.WebApi.Controllers
         [HttpGet]
         public List<UserStatisticsDTO> Get()
         {
-            List<UserStatisticsDTO> userStatisticsDTOs = statisticsService.GetStatistics().Adapt<List<UserStatisticsDTO>>();
+            List<UserStatisticsDTO> userStatisticsDTOS = statisticsService.GetStatistics().Adapt<List<UserStatisticsDTO>>();
 
-            if (userStatisticsDTOs != null)
+            if (userStatisticsDTOS != null)
             {
-                foreach (var statistics in userStatisticsDTOs)
+                foreach (var statistics in userStatisticsDTOS)
                 {
                     statistics.EventsDTO = statisticsService.GetStatistics(statistics.ID).Events.Adapt<List<EventsDTO>>();
                 }
+
             }
 
-            return userStatisticsDTOs;
+            return userStatisticsDTOS;
         }
 
         /// <summary>
@@ -77,7 +80,7 @@ namespace Infotecs.WebApi.Controllers
         /// <summary>
         /// Отправляет в репозиторий запрос на добавление статистики и возвращает результат.
         /// </summary>
-        /// <param name="DTO">Пользовательская статистика.</param>
+        /// <param Name="DTO">Пользовательская статистика.</param>
         /// <returns>
         /// Результат добавления статистикти:
         /// Ok - создана новая запись статистики;
@@ -91,13 +94,18 @@ namespace Infotecs.WebApi.Controllers
             UserStatistics statistics = DTO.Adapt<UserStatistics>();
             statistics.Events = DTO.EventsDTO.Adapt<List<Events>>();
 
+            foreach (var e in statistics.Events)
+            {
+                e.ID = statistics.ID;
+            }
+
             return StatusCode(statisticsService.CreateStatistics(statistics));
         }
 
         /// <summary>
         /// Отправляет в репозиторий запрос на удаление статистики и возвращает результат.
         /// </summary>
-        /// <param name="DTO">Удаляемая статистика.</param>
+        /// <param Name="DTO">Удаляемая статистика.</param>
         /// <returns>
         /// Результат удаления статистикти:
         /// Ok - запись статистики удалена;

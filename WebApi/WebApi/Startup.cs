@@ -2,16 +2,16 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Serilog.Injection;
+using WebApi.Repositories;
+using Microsoft.AspNetCore.Mvc.Formatters.Json;
+using System.Text.Json;
+using Newtonsoft.Json.Serialization;
+
 namespace Infotecs.WebApi
 {
-    using FluentMigrator.Runner;
-    using Infotecs.WebApi.Migrations;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Serilog.Injection;
-    using System;
-
     /// <summary>
     /// Входная точка приложения ASP.NET Core.
     /// </summary>
@@ -20,19 +20,27 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Регистрирация сервисов, которые используются приложением.
         /// </summary>
-        /// <param name="services">Коллекция сервисов приложения.</param>
+        /// <param Name="services">Коллекция сервисов приложения.</param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IRepository, UsersDB>();
+            services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddSerilogServices();
-            services.AddControllers(); // используем контроллеры без представлений
+            //services.AddControllers(); // используем контроллеры без представлений
             services.AddSwaggerGen();
+
+            services
+                .AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+                    options.JsonSerializerOptions.DictionaryKeyPolicy = JsonNamingPolicy.CamelCase;
+                });
         }
 
         /// <summary>
         /// Установка способа обработки запроса.
         /// </summary>
-        /// <param name="app">Компоненты обработки запроса.</param>
+        /// <param Name="app">Компоненты обработки запроса.</param>
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();

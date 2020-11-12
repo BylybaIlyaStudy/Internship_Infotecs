@@ -1,8 +1,11 @@
-﻿namespace Infotecs.WebApi.Models
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+
+namespace Infotecs.WebApi.Models
 {
     public class EventsDTO
     {
-        public string Date { get; set; }
-        public string Name { get; set; }
+        [DataType(DataType.DateTime)] public DateTime Date { get; set; }
+        [MaxLength(50)] public string Name { get; set; }
     }
 }

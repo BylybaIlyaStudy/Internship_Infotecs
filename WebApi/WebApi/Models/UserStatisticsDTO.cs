@@ -3,6 +3,7 @@
 // </copyright>
 
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Infotecs.WebApi.Models
 {
@@ -24,23 +25,24 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// Имя узла.
         /// </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Дата последней статистики.
         /// </summary>
-        public string date { get; set; }
+        public string Date { get; set; }
 
         /// <summary>
         /// Версия клиентского приложения.
         /// </summary>
-        public string version { get; set; }
+        public string Version { get; set; }
 
         /// <summary>
         /// Тип клиентского устройства.
         /// </summary>
-        public string os { get; set; }
+        public string OS { get; set; }
 
+        [JsonPropertyName("events")]
         public List<EventsDTO> EventsDTO { get; set; }
     }
 }

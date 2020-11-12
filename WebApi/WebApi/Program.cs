@@ -2,18 +2,18 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using System;
+using System.IO;
+using FluentMigrator.Runner;
+using Infotecs.WebApi.Migrations;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+
 namespace Infotecs.WebApi
 {
-    using System;
-    using System.IO;
-    using FluentMigrator.Runner;
-    using Infotecs.WebApi.Migrations;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
-    using Serilog;
-
     /// <summary>
     /// Стандартный класс с точкой входа.
     /// </summary>
@@ -32,7 +32,7 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Точка входа приложения.
         /// </summary>
-        /// <param name="args">Аргументы командной строки.</param>
+        /// <param Name="args">Аргументы командной строки.</param>
         /// <returns>
         /// Статус завершения работы программы:
         /// 0 - нормальное завершение работы;
@@ -42,16 +42,16 @@ namespace Infotecs.WebApi
         {
             var serviceProvider = CreateServices();
 
-            // Put the database update into a scope to ensure
-            // that all resources will be disposed.
+            // Put the database upDate into a scope to ensure
+            // that all resources will be dispOSed.
             using (var scope = serviceProvider.CreateScope())
             {
-                UpdateDatabase(scope.ServiceProvider);
+                UpDateDatabase(scope.ServiceProvider);
             }
 
             try
             {
-                Log.Information("Starting web host");
+                Log.Information("Starting web Host");
                 CreateHostBuilder(args).Build().Run();
                 return 0;
             }
@@ -65,6 +65,19 @@ namespace Infotecs.WebApi
                 Log.CloseAndFlush();
             }
         }
+
+        /// <summary>
+        /// Запуск строителя узла.
+        /// </summary>
+        /// <param Name="args">Аргументы командной строки.</param>
+        /// <returns>Универсальный узел.</returns>
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                })
+                .UseSerilog();
 
         private static IServiceProvider CreateServices()
         {
@@ -81,7 +94,7 @@ namespace Infotecs.WebApi
                 .BuildServiceProvider(false);
         }
 
-        private static void UpdateDatabase(IServiceProvider serviceProvider)
+        private static void UpDateDatabase(IServiceProvider serviceProvider)
         {
             // Instantiate the runner
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
@@ -89,18 +102,5 @@ namespace Infotecs.WebApi
             // Execute the migrations
             runner.MigrateUp();
         }
-
-        /// <summary>
-        /// Запуск строителя узла.
-        /// </summary>
-        /// <param name="args">Аргументы командной строки.</param>
-        /// <returns>Универсальный узел.</returns>
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                })
-                .UseSerilog();
     }
 }

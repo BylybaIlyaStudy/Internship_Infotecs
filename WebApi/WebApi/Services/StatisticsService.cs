@@ -1,15 +1,16 @@
 ﻿using Infotecs.WebApi.Models;
 using Serilog;
 using System.Collections.Generic;
+using WebApi.Repositories;
 
 namespace Infotecs.WebApi.Services
 {
     public class StatisticsService
     {
         private readonly ILogger logger = null;
-        private readonly IRepository repository = null;
+        private readonly IUnitOfWork repository = null;
 
-        public StatisticsService(IRepository repository, ILogger logger)
+        public StatisticsService(IUnitOfWork repository, ILogger logger)
         {
             this.logger = logger;
             this.repository = repository;
@@ -17,13 +18,15 @@ namespace Infotecs.WebApi.Services
 
         public int CreateStatistics(UserStatistics statistics)
         {
-            Users foundUser = repository.GetUser(statistics.ID);
+            Users foundUser = repository.Users.Get(statistics.ID);
 
             if (foundUser != null)
             {
-                _ = repository.DeleteStatistics(statistics.ID);
+                _ = repository.Statistics.Delete(statistics.ID);
+                _ = repository.Events.Delete(statistics.ID);
 
-                repository.CreateStatistics(statistics);
+                repository.Statistics.Create(statistics);
+                repository.Events.Create(statistics.Events);
 
                 return 200;
             }
@@ -37,7 +40,15 @@ namespace Infotecs.WebApi.Services
         {
             this.logger.Debug("Запрос списка статистик");
 
-            List<UserStatistics> statistics = repository.GetStatisticsList();
+            List<UserStatistics> statistics = repository.Statistics.GetList();
+
+            if (statistics != null)
+            {
+                foreach (var stat in statistics)
+                {
+                    stat.Events = repository.Events.Get(stat.ID);
+                }
+            }
 
             return statistics;
         }
@@ -46,22 +57,28 @@ namespace Infotecs.WebApi.Services
         {
             this.logger.Debug("Запрос списка статистик {@Users}", ID);
 
-            UserStatistics statistics = repository.GetStatistics(ID);
+            UserStatistics statistics = repository.Statistics.Get(ID);
+
+            if (statistics != null)
+            {
+                statistics.Events = repository.Events.Get(statistics.ID);
+            }
 
             return statistics;
         }
 
         public int DeleteStatistics(string ID)
         {
-            Users foundUser = repository.GetUser(ID);
+            Users foundUser = repository.Users.Get(ID);
 
             if (foundUser != null)
             {
-                UserStatistics foundStatistics = repository.GetStatistics(ID);
+                UserStatistics foundStatistics = repository.Statistics.Get(ID);
 
                 if (foundStatistics != null)
                 {
-                    repository.DeleteStatistics(ID);
+                    repository.Statistics.Delete(ID);
+                    repository.Events.Delete(ID);
 
                     return 200;
                 }

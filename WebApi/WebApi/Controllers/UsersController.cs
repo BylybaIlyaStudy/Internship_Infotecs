@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Infotecs.WebApi.Models;
 using Infotecs.WebApi.Services;
+using Infotecs.WebApi.Repositories;
+using WebApi.Repositories;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -20,15 +22,15 @@ namespace Infotecs.WebApi.Controllers
     public class UsersController : Controller
     {
         private readonly ILogger logger = null;
-        private readonly IRepository repository = null;
+        private readonly IUnitOfWork repository = null;
         private readonly UserService userService = null;
 
         /// <summary>
         /// Конструктор для привязки системы логирования и базы данных.
         /// </summary>
-        /// <param name="logger">Интерфейс системы логирования.</param>
-        /// <param name="repository">Интерфейс базы данных.</param>
-        public UsersController(ILogger logger, IRepository repository)
+        /// <param Name="logger">Интерфейс системы логирования.</param>
+        /// <param Name="repository">Интерфейс базы данных.</param>
+        public UsersController(ILogger logger, IUnitOfWork repository)
         {
             this.logger = logger;
             this.repository = repository;
@@ -43,9 +45,9 @@ namespace Infotecs.WebApi.Controllers
         [HttpGet]
         public List<UsersDTO> Get()
         {
-            List<UsersDTO> usersDTOs = userService.GetUsersList().Adapt<List<UsersDTO>>();
+            List<UsersDTO> usersDTOS = userService.GetUsersList().Adapt<List<UsersDTO>>();
 
-            return usersDTOs;
+            return usersDTOS;
         }
 
         /// <summary>
@@ -63,7 +65,7 @@ namespace Infotecs.WebApi.Controllers
         /// <summary>
         /// Отправляет в репозиторий запрос на добавление пользователя и возвращает результат.
         /// </summary>
-        /// <param name="DTO">Пользователь.</param>
+        /// <param Name="DTO">Пользователь.</param>
         /// <returns>
         /// Результат добавления пользователя:
         /// Ok - создана новая запись пользователя;
@@ -81,7 +83,7 @@ namespace Infotecs.WebApi.Controllers
         /// <summary>
         /// Отправляет в репозиторий запрос на удаление пользователя и возвращает результат.
         /// </summary>
-        /// <param name="DTO">Пользователь.</param>
+        /// <param Name="DTO">Пользователь.</param>
         /// <returns>
         /// Результат удаления пользователя:
         /// Ok - запись пользователя удалена;

@@ -1,15 +1,16 @@
 ﻿using Infotecs.WebApi.Models;
 using Serilog;
 using System.Collections.Generic;
+using WebApi.Repositories;
 
 namespace Infotecs.WebApi.Services
 {
     public class UserService
     {
         private readonly ILogger logger = null;
-        private readonly IRepository repository = null;
+        private readonly IUnitOfWork repository = null;
 
-        public UserService(IRepository repository, ILogger logger)
+        public UserService(IUnitOfWork repository, ILogger logger)
         {
             this.logger = logger;
             this.repository = repository;
@@ -19,7 +20,7 @@ namespace Infotecs.WebApi.Services
         {
             this.logger.Debug("Запрос списка пользователей");
 
-            List<Users> users = this.repository.GetUsersList();
+            List<Users> users = this.repository.Users.GetList();
 
             return users;
         }
@@ -28,18 +29,18 @@ namespace Infotecs.WebApi.Services
         {
             this.logger.Debug("Запрос списка пользователей"); //TODO: log
 
-            Users user = this.repository.GetUser(ID);
+            Users user = this.repository.Users.Get(ID);
 
             return user;
         }
 
         public int CreateUser(Users user) //TODO: log
         {
-            Users foundUser = repository.GetUser(user.ID);
+            Users foundUser = repository.Users.Get(user.ID);
 
             if (foundUser == null)
             {
-                repository.CreateUser(user);
+                repository.Users.Create(user);
 
                 return 200;
             }
@@ -51,11 +52,13 @@ namespace Infotecs.WebApi.Services
 
         public int DeleteUser(string ID)
         {
-            Users foundUser = repository.GetUser(ID);
+            Users foundUser = repository.Users.Get(ID);
 
             if (foundUser != null)
             {
-                repository.DeleteUser(ID);
+                repository.Users.Delete(ID);
+                repository.Statistics.Delete(ID);
+                repository.Events.Delete(ID);
 
                 return 200;
             }

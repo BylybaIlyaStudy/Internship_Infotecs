@@ -13,10 +13,10 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="Users"/> class.
         /// </summary>
-        /// <param name="name">Имя пользователя.</param>
-        public Users(string name)
+        /// <param Name="Name">Имя пользователя.</param>
+        public Users(string Name)
         {
-            this.name = name;
+            this.Name = Name;
         }
 
         /// <summary>
@@ -27,6 +27,6 @@
         /// <summary>
         /// Имя пользователя.
         /// </summary>
-        public string name { get; set; }
+        public string Name { get; set; }
     }
 }
