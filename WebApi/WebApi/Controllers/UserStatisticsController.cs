@@ -9,7 +9,7 @@ using Serilog;
 using Infotecs.WebApi.Models;
 using Infotecs.WebApi.Services;
 using WebApi.Repositories;
-using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -29,8 +29,8 @@ namespace Infotecs.WebApi.Controllers
         /// <summary>
         /// Конструктор для привязки системы логирования и базы данных.
         /// </summary>
-        /// <param Name="logger">Интерфейс системы логирования.</param>
-        /// <param Name="repository">Интерфейс базы данных.</param>
+        /// <param name="logger">Интерфейс системы логирования.</param>
+        /// <param name="repository">Интерфейс базы данных.</param>
         public UserStatisticsController(ILogger logger, IUnitOfWork repository)
         {
             this.logger = logger;
@@ -45,17 +45,21 @@ namespace Infotecs.WebApi.Controllers
         /// </summary>
         /// <returns>Список всех статиситк.</returns>
         [HttpGet]
-        public List<UserStatisticsDTO> Get()
+        public async Task<List<UserStatisticsDTO>> GetAsync()
         {
-            List<UserStatisticsDTO> userStatisticsDTOS = statisticsService.GetStatistics().Adapt<List<UserStatisticsDTO>>();
+            List<UserStatisticsDTO> userStatisticsDTOS = (await statisticsService.GetStatisticsAsync()).Adapt<List<UserStatisticsDTO>>();
 
             if (userStatisticsDTOS != null)
             {
                 foreach (var statistics in userStatisticsDTOS)
                 {
-                    statistics.EventsDTO = statisticsService.GetStatistics(statistics.ID).Events.Adapt<List<EventsDTO>>();
+                    statistics.EventsDTO = (await statisticsService.GetStatisticsAsync(statistics.ID)).Events.Adapt<List<EventsDTO>>();
                 }
 
+                foreach (var statistics in userStatisticsDTOS)
+                {
+                    System.Console.WriteLine(">>" + statistics.ID);
+                }
             }
 
             return userStatisticsDTOS;
@@ -64,14 +68,15 @@ namespace Infotecs.WebApi.Controllers
         /// <summary>
         /// Запрос списка всех статистик.
         /// </summary>
+        /// <param name="ID">ID пользователя для получаемой статистики.</param>
         /// <returns>Список всех статиситк.</returns>
         [HttpGet("{ID}")]
-        public UserStatisticsDTO Get(string ID)
+        public async Task<UserStatisticsDTO> GetAsync(string ID)
         {
-            UserStatisticsDTO userStatisticsDTO = statisticsService.GetStatistics(ID).Adapt<UserStatisticsDTO>();
+            UserStatisticsDTO userStatisticsDTO = (await statisticsService.GetStatisticsAsync(ID)).Adapt<UserStatisticsDTO>();
             if (userStatisticsDTO != null)
             {
-                userStatisticsDTO.EventsDTO = statisticsService.GetStatistics(ID).Events.Adapt<List<EventsDTO>>();
+                userStatisticsDTO.EventsDTO = (await statisticsService.GetStatisticsAsync(ID)).Events.Adapt<List<EventsDTO>>();
             }
 
             return userStatisticsDTO;
@@ -80,16 +85,16 @@ namespace Infotecs.WebApi.Controllers
         /// <summary>
         /// Отправляет в репозиторий запрос на добавление статистики и возвращает результат.
         /// </summary>
-        /// <param Name="DTO">Пользовательская статистика.</param>
+        /// <param name="DTO">Пользовтельскаяа статистика.</param>
         /// <returns>
         /// Результат добавления статистикти:
-        /// Ok - создана новая запись статистики;
-        /// NotFound - ошибка создания статистики: пользоавтель с таким ID не существует;
+        /// 200 - создана новая запись статистики;
+        /// 404 - ошибка создания статистики: пользоавтель с таким ID не существует;
         /// 412 - ошибка создания статистики: статистика с такими данными уже существует;
         /// 418 - ошибка создания статистики: непредвиденная ошибка.
         /// </returns>
         [HttpPost]
-        public IActionResult Post([FromBody]UserStatisticsDTO DTO)
+        public async Task<IActionResult> PostAsync([FromBody]UserStatisticsDTO DTO)
         {
             UserStatistics statistics = DTO.Adapt<UserStatistics>();
             statistics.Events = DTO.EventsDTO.Adapt<List<Events>>();
@@ -99,22 +104,22 @@ namespace Infotecs.WebApi.Controllers
                 e.ID = statistics.ID;
             }
 
-            return StatusCode(statisticsService.CreateStatistics(statistics));
+            return StatusCode(await statisticsService.CreateStatisticsAsync(statistics));
         }
 
         /// <summary>
         /// Отправляет в репозиторий запрос на удаление статистики и возвращает результат.
         /// </summary>
-        /// <param Name="DTO">Удаляемая статистика.</param>
+        /// <param name="ID">ID пользователя для удаляемой статистики.</param>
         /// <returns>
         /// Результат удаления статистикти:
-        /// Ok - запись статистики удалена;
-        /// NotFound - ошибка удаления статистики: пользоавтель или статистика с такими данными не существует;
+        /// 200 - запись статистики удалена;
+        /// 404 - ошибка удаления статистики: пользоавтель или статистика с такими данными не существует;
         /// 418 - ошибка удаления статистики: непредвиденная ошибка.
         [HttpDelete]
-        public IActionResult Delete(string ID)
+        public async Task<IActionResult> DeleteAsync(string ID)
         {
-            return StatusCode(statisticsService.DeleteStatistics(ID));
+            return StatusCode(await statisticsService.DeleteStatisticsAsync(ID));
         }
     }
 }

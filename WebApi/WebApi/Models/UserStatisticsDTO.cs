@@ -42,6 +42,9 @@ namespace Infotecs.WebApi.Models
         /// </summary>
         public string OS { get; set; }
 
+        /// <summary>
+        /// Список событий для данной статистики.
+        /// </summary>
         [JsonPropertyName("events")]
         public List<EventsDTO> EventsDTO { get; set; }
     }

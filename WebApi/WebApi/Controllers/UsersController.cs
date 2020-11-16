@@ -8,8 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Infotecs.WebApi.Models;
 using Infotecs.WebApi.Services;
-using Infotecs.WebApi.Repositories;
 using WebApi.Repositories;
+using System.Threading.Tasks;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -28,8 +28,8 @@ namespace Infotecs.WebApi.Controllers
         /// <summary>
         /// Конструктор для привязки системы логирования и базы данных.
         /// </summary>
-        /// <param Name="logger">Интерфейс системы логирования.</param>
-        /// <param Name="repository">Интерфейс базы данных.</param>
+        /// <param name="logger">Интерфейс системы логирования.</param>
+        /// <param name="repository">Интерфейс базы данных.</param>
         public UsersController(ILogger logger, IUnitOfWork repository)
         {
             this.logger = logger;
@@ -43,21 +43,22 @@ namespace Infotecs.WebApi.Controllers
         /// </summary>
         /// <returns>Список всех пользователей.</returns>
         [HttpGet]
-        public List<UsersDTO> Get()
+        public async Task<List<UsersDTO>> GetAsync()
         {
-            List<UsersDTO> usersDTOS = userService.GetUsersList().Adapt<List<UsersDTO>>();
+            List<UsersDTO> usersDTOS = (await userService.GetUsersListAsync()).Adapt<List<UsersDTO>>();
 
             return usersDTOS;
         }
 
         /// <summary>
-        /// Запрос из репозитория списка всех пользователей.
+        /// Запрос из репозитория пользователя по ID.
         /// </summary>
+        /// <param name="ID">ID пользователя.</param>
         /// <returns>Список всех пользователей.</returns>
         [HttpGet("{ID}")]
-        public UsersDTO Get(string ID)
+        public async Task<UsersDTO> GetAsync(string ID)
         {
-            UsersDTO usersDTO = userService.GetUser(ID).Adapt<UsersDTO>();
+            UsersDTO usersDTO = (await userService.GetUserAsync(ID)).Adapt<UsersDTO>();
 
             return usersDTO;
         }
@@ -65,7 +66,7 @@ namespace Infotecs.WebApi.Controllers
         /// <summary>
         /// Отправляет в репозиторий запрос на добавление пользователя и возвращает результат.
         /// </summary>
-        /// <param Name="DTO">Пользователь.</param>
+        /// <param name="usersDTO">Пользователь.</param>
         /// <returns>
         /// Результат добавления пользователя:
         /// Ok - создана новая запись пользователя;
@@ -73,17 +74,17 @@ namespace Infotecs.WebApi.Controllers
         /// 418 - ошибка создания пользователя: непредвиденная ошибка.
         /// </returns>
         [HttpPost]
-        public IActionResult Post([FromBody] UsersDTO usersDTO)
+        public async Task<IActionResult> PostAsync([FromBody] UsersDTO usersDTO)
         {
             Users user = usersDTO.Adapt<Users>();
 
-            return StatusCode(userService.CreateUser(user));
+            return StatusCode(await userService.CreateUserAsync(user));
         }
 
         /// <summary>
         /// Отправляет в репозиторий запрос на удаление пользователя и возвращает результат.
         /// </summary>
-        /// <param Name="DTO">Пользователь.</param>
+        /// <param name="ID">ID пользователя, которого необходимо удалить.</param>
         /// <returns>
         /// Результат удаления пользователя:
         /// Ok - запись пользователя удалена;
@@ -91,9 +92,9 @@ namespace Infotecs.WebApi.Controllers
         /// 418 - ошибка удаления пользователя: непредвиденная ошибка.
         /// </returns>
         [HttpDelete]
-        public IActionResult Delete(string ID)
+        public async Task<IActionResult> DeleteAsync(string ID)
         {
-            return StatusCode(userService.DeleteUser(ID));
+            return StatusCode(await userService.DeleteUserAsync(ID));
         }
     }
 }

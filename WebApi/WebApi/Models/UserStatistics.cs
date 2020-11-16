@@ -42,6 +42,9 @@ namespace Infotecs.WebApi.Models
         /// </summary>
         public string OS { get; set; }
 
+        /// <summary>
+        /// Список событий.
+        /// </summary>
         public List<Events> Events { get; set; }
     }
 }

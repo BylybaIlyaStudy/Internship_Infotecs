@@ -3,13 +3,13 @@
 namespace Infotecs.WebApi.Migrations
 {
     /// <summary>
-    /// 
+    /// Нулевая миграция.
     /// </summary>
     [Migration(0)]
     public class Baseline : Migration
     {
         /// <summary>
-        /// 
+        /// Создание базы данных.
         /// </summary>
         public override void Up()
         {
@@ -34,7 +34,7 @@ namespace Infotecs.WebApi.Migrations
         }
 
         /// <summary>
-        /// 
+        /// Удаление базы данных.
         /// </summary>
         public override void Down()
         {
