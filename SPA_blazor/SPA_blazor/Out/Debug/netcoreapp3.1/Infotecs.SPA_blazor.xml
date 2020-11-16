@@ -25,6 +25,21 @@
             </summary>
             <param name="interval">Время задержки.</param>
         </member>
+        <member name="T:Infotecs.SPA_blazor.Data.Events">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.Events.Date">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.Events.Name">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="T:Infotecs.SPA_blazor.Data.UserStatistics">
             <summary>
             Класс хранения пользовательской статистики.
@@ -35,29 +50,34 @@
             Initializes a new instance of the <see cref="T:Infotecs.SPA_blazor.Data.UserStatistics"/> class.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.UserID">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.ID">
             <summary>
             ID пользователя.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.NameOfNode">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.Name">
             <summary>
             Имя узла.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.DateTimeOfLastStatistics">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.Date">
             <summary>
             Дата последней статистики.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.VersionOfClient">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.Version">
             <summary>
             Версия клиентского приложения.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.TypeOfDevice">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.OS">
             <summary>
             Тип клиентского устройства.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatistics.Events">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Infotecs.SPA_blazor.Data.UserStatisticsDTO">
@@ -70,29 +90,34 @@
             Initializes a new instance of the <see cref="T:Infotecs.SPA_blazor.Data.UserStatisticsDTO"/> class.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.UserID">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.ID">
             <summary>
             ID узла.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.NameOfNode">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.Name">
             <summary>
             Имя узла.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.DateTimeOfLastStatistics">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.Date">
             <summary>
             Дата последней статистики.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.VersionOfClient">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.Version">
             <summary>
             Версия клиентского приложения.
             </summary>
         </member>
-        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.TypeOfDevice">
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.OS">
             <summary>
             Тип клиентского устройства.
+            </summary>
+        </member>
+        <member name="P:Infotecs.SPA_blazor.Data.UserStatisticsDTO.Events">
+            <summary>
+            
             </summary>
         </member>
         <member name="T:Infotecs.SPA_blazor.Data.UserStatisticsService">

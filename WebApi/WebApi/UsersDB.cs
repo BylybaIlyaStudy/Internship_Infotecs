@@ -23,7 +23,7 @@ namespace Infotecs.WebApi
 
         public int CreateStatistics(UserStatistics statistics)
         {
-            string sqlQuery = "INSERT INTO Statistics (ID, Name, Date, Version, OS) VALUES(@ID, @Name, @Date, @Version, @OS)";
+            string sqlQuery = "INSERT INTO Statistics (ID, name, date, version, os) VALUES(@ID, @name, @date, @version, @os)";
             connection.Execute(sqlQuery, statistics);
 
             if (statistics.Events != null)
@@ -32,7 +32,7 @@ namespace Infotecs.WebApi
                 {
                     _event.ID = statistics.ID;
 
-                    sqlQuery = "INSERT INTO Events (ID, Name, Date) VALUES(@ID, @Name, @Date)";
+                    sqlQuery = "INSERT INTO Events (ID, name, date) VALUES(@ID, @name, @date)";
                     connection.Execute(sqlQuery, _event);
                 }
             }
@@ -42,7 +42,7 @@ namespace Infotecs.WebApi
 
         public int CreateUser(Users user)
         {
-            string sqlQuery = "INSERT INTO Users (Name, ID) VALUES(@Name, @ID);";
+            string sqlQuery = "INSERT INTO Users (name, ID) VALUES(@name, @ID);";
             connection.Execute(sqlQuery, user);
 
             return 0;

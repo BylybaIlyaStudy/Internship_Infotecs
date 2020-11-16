@@ -2,10 +2,11 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using System;
+using System.Collections.Generic;
+
 namespace Infotecs.WebApi.Models
 {
-    using System;
-
     /// <summary>
     /// Класс хранения пользовательской статистики.
     /// </summary>
@@ -14,31 +15,33 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="UserStatistics"/> class.
         /// </summary>
-        public UserStatistics() { }
+        public UserStatistics() {}
         
         /// <summary>
         /// ID пользователя.
         /// </summary>
-        public string UserID { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// Имя узла.
         /// </summary>
-        public string NameOfNode { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Дата последней статистики.
         /// </summary>
-        public string DateTimeOfLastStatistics { get; set; }
+        public string Date { get; set; }
 
         /// <summary>
         /// Версия клиентского приложения.
         /// </summary>
-        public string VersionOfClient { get; set; }
+        public string Version { get; set; }
 
         /// <summary>
         /// Тип клиентского устройства.
         /// </summary>
-        public string TypeOfDevice { get; set; }
+        public string OS { get; set; }
+
+        public List<Events> Events { get; set; }
     }
 }

@@ -2,15 +2,18 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using System;
+using System.IO;
+using FluentMigrator.Runner;
+using Infotecs.WebApi.Migrations;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Serilog;
+
 namespace Infotecs.WebApi
 {
-    using System;
-    using System.IO;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.Hosting;
-    using Serilog;
-
     /// <summary>
     /// Стандартный класс с точкой входа.
     /// </summary>
@@ -29,7 +32,7 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Точка входа приложения.
         /// </summary>
-        /// <param name="args">Аргументы командной строки.</param>
+        /// <param Name="args">Аргументы командной строки.</param>
         /// <returns>
         /// Статус завершения работы программы:
         /// 0 - нормальное завершение работы;
@@ -37,9 +40,18 @@ namespace Infotecs.WebApi
         /// </returns>
         public static int Main(string[] args)
         {
+            var serviceProvider = CreateServices();
+
+            // Put the database upDate into a scope to ensure
+            // that all resources will be dispOSed.
+            using (var scope = serviceProvider.CreateScope())
+            {
+                UpDateDatabase(scope.ServiceProvider);
+            }
+
             try
             {
-                Log.Information("Starting web host");
+                Log.Information("Starting web Host");
                 CreateHostBuilder(args).Build().Run();
                 return 0;
             }
@@ -57,7 +69,7 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Запуск строителя узла.
         /// </summary>
-        /// <param name="args">Аргументы командной строки.</param>
+        /// <param Name="args">Аргументы командной строки.</param>
         /// <returns>Универсальный узел.</returns>
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
@@ -66,5 +78,29 @@ namespace Infotecs.WebApi
                     webBuilder.UseStartup<Startup>();
                 })
                 .UseSerilog();
+
+        private static IServiceProvider CreateServices()
+        {
+            return new ServiceCollection()
+                .AddFluentMigratorCore().ConfigureRunner(rb => rb
+                    // Add SQLite support to FluentMigrator
+                    .AddPostgres()
+                    // Set the connection string
+                    .WithGlobalConnectionString(Configuration.GetConnectionString("DefaultConnection"))
+                    // Define the assembly containing the migrations
+                    .ScanIn(typeof(Baseline).Assembly).For.Migrations())
+                .AddLogging(lb => lb.AddFluentMigratorConsole())
+                // Build the service provider
+                .BuildServiceProvider(false);
+        }
+
+        private static void UpDateDatabase(IServiceProvider serviceProvider)
+        {
+            // Instantiate the runner
+            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+
+            // Execute the migrations
+            runner.MigrateUp();
+        }
     }
 }

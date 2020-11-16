@@ -28,8 +28,8 @@ namespace Infotecs.WebApi.Migrations
 
             Create.Table("events".ToLower())
                 .WithColumn("ID".ToLower()).AsString()
-                .WithColumn("Name".ToLower()).AsString()
-                .WithColumn("Date".ToLower()).AsString();
+                .WithColumn("Name".ToLower()).AsString(50)
+                .WithColumn("Date".ToLower()).AsDateTime();
             Create.ForeignKey("ID".ToLower()).FromTable("events".ToLower()).ForeignColumn("ID".ToLower()).ToTable("users".ToLower()).PrimaryColumn("ID".ToLower());
         }
 

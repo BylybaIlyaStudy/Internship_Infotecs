@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Infotecs.WebApi.Models
+﻿namespace Infotecs.WebApi.Models
 {
     /// <summary>
     /// Класс для хранения информации о пользователях.
@@ -15,10 +13,10 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Users"/> class.
         /// </summary>
-        /// <param name="name">Имя пользователя.</param>
-        public Users(string name)
+        /// <param Name="Name">Имя пользователя.</param>
+        public Users(string Name)
         {
-            this.NameOfNode = name;
+            this.Name = Name;
         }
 
         /// <summary>
@@ -29,6 +27,6 @@ namespace Infotecs.WebApi.Models
         /// <summary>
         /// Имя пользователя.
         /// </summary>
-        public string NameOfNode { get; set; }
+        public string Name { get; set; }
     }
 }

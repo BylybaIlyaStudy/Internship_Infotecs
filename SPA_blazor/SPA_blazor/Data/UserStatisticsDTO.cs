@@ -2,6 +2,8 @@
 // Copyright (c) Infotecs. All rights reserved.
 // </copyright>
 
+using System.Collections.Generic;
+
 namespace Infotecs.SPA_blazor.Data
 {
     /// <summary>
@@ -17,26 +19,31 @@ namespace Infotecs.SPA_blazor.Data
         /// <summary>
         /// ID узла.
         /// </summary>
-        public string UserID { get; set; }
+        public string ID { get; set; }
 
         /// <summary>
         /// Имя узла.
         /// </summary>
-        public string NameOfNode { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Дата последней статистики.
         /// </summary>
-        public string DateTimeOfLastStatistics { get; set; }
+        public string Date { get; set; }
 
         /// <summary>
         /// Версия клиентского приложения.
         /// </summary>
-        public string VersionOfClient { get; set; }
+        public string Version { get; set; }
 
         /// <summary>
         /// Тип клиентского устройства.
         /// </summary>
-        public string TypeOfDevice { get; set; }
+        public string OS { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<Events> Events { get; set; }
     }
 }
