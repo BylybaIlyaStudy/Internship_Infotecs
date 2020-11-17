@@ -1,18 +1,33 @@
-﻿using FluentMigrator;
+﻿using Dapper;
+using FluentMigrator;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+using System.Linq;
 
 namespace Infotecs.WebApi.Migrations
 {
     /// <summary>
-    /// 
+    /// Нулевая миграция.
     /// </summary>
     [Migration(0)]
     public class Baseline : Migration
     {
         /// <summary>
-        /// 
+        /// Создание базы данных.
         /// </summary>
         public override void Up()
         {
+            string name = "webapidb";
+            var parameters = new DynamicParameters();
+            parameters.Add("name", name);
+            NpgsqlConnection connection = new NpgsqlConnection(Program.Configuration.GetConnectionString("TestConnection"));
+            var records = connection.Query("SELECT DATNAME FROM pg_catalog.pg_database WHERE DATNAME = @name",
+                 parameters);
+            if (!records.Any())
+            {
+                connection.Execute($"CREATE DATABASE {name}");
+            }
+
             Create.Table("users".ToLower())
                 .WithColumn("ID".ToLower()).AsString()
                 .WithColumn("Name".ToLower()).AsString();
@@ -34,7 +49,7 @@ namespace Infotecs.WebApi.Migrations
         }
 
         /// <summary>
-        /// 
+        /// Удаление базы данных.
         /// </summary>
         public override void Down()
         {
