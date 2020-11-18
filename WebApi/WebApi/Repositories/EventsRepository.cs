@@ -93,6 +93,20 @@ namespace Infotecs.WebApi.Repositories
         }
 
         /// <summary>
+        /// Асинхронное удаление событий из бд по ID.
+        /// </summary>
+        /// <param name="ID">ID событий, которые необходимо удалить.</param>
+        /// <returns>Статус удаления событий: 0.</returns>
+        public async Task<int> DeleteAsync(string ID)
+        {
+            string sqlQuery = "DELETE FROM Events WHERE (ID = @ID)";
+            await connection.ExecuteAsync(sqlQuery, new { ID = ID });
+
+            return 0;
+        }
+
+        /// <summary>
+        
         /// Получение списка событий по ID.
         /// </summary>
         /// <param name="ID">ID пользователя, которому пренадлежат события.</param>

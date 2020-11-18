@@ -80,6 +80,19 @@ namespace Infotecs.WebApi.Repositories
         }
 
         /// <summary>
+        /// Асинхронное удаление пользователя из бд по ID.
+        /// </summary>
+        /// <param name="ID">ID пользователя, которого необходимо удалить.</param>
+        /// <returns>Статус удаления пользователя: 0.</returns>
+        public async Task<int> DeleteAsync(string ID)
+        {
+            string sqlQuery = "DELETE FROM Users WHERE (ID = @ID);";
+            await connection.ExecuteAsync(sqlQuery, new { ID = ID });
+
+            return 0;
+        }
+
+        /// <summary>
         /// Получение пользователя по ID.
         /// </summary>
         /// <param name="ID">ID пользователя.</param>

@@ -81,6 +81,19 @@ namespace Infotecs.WebApi.Repositories
         }
 
         /// <summary>
+        /// Асинхронное удаление статистики из бд по ID.
+        /// </summary>
+        /// <param name="ID">ID статистики, которую необходимо удалить.</param>
+        /// <returns>Статус удаления статистики: 0.</returns>
+        public async Task<int> DeleteAsync(string ID)
+        {
+            string sqlQuery = "DELETE FROM Statistics WHERE (ID = @ID)";
+            await connection.ExecuteAsync(sqlQuery, new { ID = ID });
+
+            return 0;
+        }
+
+        /// <summary>
         /// Получение статистики по ID.
         /// </summary>
         /// <param name="ID">ID пользователя, которому пренадлежит статистика.</param>
