@@ -36,10 +36,12 @@ namespace Infotecs.WebApi.Tests
         {
             // Arrange
             var user = new Users() { ID = "001", Name = "default" };
-            var expexted = new UserStatistics() { ID = user.ID };
+            UserStatistics expexted = new UserStatistics() { ID = user.ID };
 
             var rep = new Mock<IUnitOfWork>();
+            
             rep.Setup(a => a.Statistics.Get(user.ID)).Returns(expexted);
+            rep.Setup(a => a.Events.Get(user.ID)).Returns(new List<Events>());
 
             var log = new Mock<ILogger>();
 
@@ -65,6 +67,7 @@ namespace Infotecs.WebApi.Tests
             rep.Setup(a => a.Statistics).Returns(mow.Object);
 
             rep.Setup(a => a.Users.Get(user.ID)).Returns(user);
+            rep.Setup(a => a.Events.Get(user.ID)).Returns(new List<Events>());
 
             var log = new Mock<ILogger>();
 
@@ -111,6 +114,7 @@ namespace Infotecs.WebApi.Tests
             var rep = new Mock<IUnitOfWork>();
             rep.Setup(a => a.Users.Get(user.ID)).Returns(user);
             rep.Setup(a => a.Statistics.Get(user.ID)).Returns(statistics);
+            rep.Setup(a => a.Events.Get(user.ID)).Returns(new List<Events>());
 
             var log = new Mock<ILogger>();
 
