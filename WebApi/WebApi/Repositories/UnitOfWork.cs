@@ -19,7 +19,7 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Подключение к базе данных.
         /// </summary>
-        private readonly NpgsqlConnection connection = new NpgsqlConnection(Program.Configuration.GetConnectionString("DefaultConnection"));
+        public static readonly NpgsqlConnection connection = new NpgsqlConnection(Program.Configuration.GetConnectionString("DefaultConnection"));
 
         private IRepository<Users> users = null;
         private IRepository<UserStatistics> statistics = null;

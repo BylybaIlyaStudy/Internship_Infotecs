@@ -62,7 +62,20 @@ namespace Infotecs.WebApi.Repositories
         public int Delete(string ID)
         {
             string sqlQuery = "DELETE FROM Statistics WHERE (ID = @ID)";
-            connection.Execute(sqlQuery, new { ID = ID });
+            connection.Execute(sqlQuery, new { ID });
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Асинхронное удаление статистики из бд по ID.
+        /// </summary>
+        /// <param name="ID">ID статистики, которую необходимо удалить.</param>
+        /// <returns>Статус удаления статистики: 0.</returns>
+        public async Task<int> DeleteAsync(string ID)
+        {
+            string sqlQuery = "DELETE FROM Statistics WHERE (ID = @ID)";
+            await connection.ExecuteAsync(sqlQuery, new { ID });
 
             return 0;
         }
@@ -89,7 +102,7 @@ namespace Infotecs.WebApi.Repositories
         /// </returns>
         public UserStatistics Get(string ID)
         {
-            UserStatistics foundStatistics = connection.Query<UserStatistics>("SELECT * FROM Statistics WHERE (ID = @ID)", new { ID = ID }).FirstOrDefault();
+            UserStatistics foundStatistics = connection.Query<UserStatistics>("SELECT * FROM Statistics WHERE (ID = @ID)", new { ID }).FirstOrDefault();
 
             return foundStatistics;
         }
@@ -103,7 +116,7 @@ namespace Infotecs.WebApi.Repositories
         /// </returns>
         public async Task<UserStatistics> GetAsync(string ID)
         {
-            IEnumerable<UserStatistics> foundStatistics = await connection.QueryAsync<UserStatistics>("SELECT * FROM Statistics WHERE (ID = @ID)", new { ID = ID });
+            IEnumerable<UserStatistics> foundStatistics = await connection.QueryAsync<UserStatistics>("SELECT * FROM Statistics WHERE (ID = @ID)", new { ID });
 
             return foundStatistics.FirstOrDefault();
         }

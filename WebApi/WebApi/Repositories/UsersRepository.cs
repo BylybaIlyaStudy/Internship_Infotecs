@@ -61,7 +61,20 @@ namespace Infotecs.WebApi.Repositories
         public int Delete(string ID)
         {
             string sqlQuery = "DELETE FROM Users WHERE (ID = @ID);";
-            connection.Execute(sqlQuery, new { ID = ID });
+            connection.Execute(sqlQuery, new { ID });
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Асинхронное удаление пользователя из бд по ID.
+        /// </summary>
+        /// <param name="ID">ID пользователя, которого необходимо удалить.</param>
+        /// <returns>Статус удаления пользователя: 0.</returns>
+        public async Task<int> DeleteAsync(string ID)
+        {
+            string sqlQuery = "DELETE FROM Users WHERE (ID = @ID);";
+            await connection.ExecuteAsync(sqlQuery, new { ID });
 
             return 0;
         }
@@ -88,7 +101,7 @@ namespace Infotecs.WebApi.Repositories
         /// </returns>
         public Users Get(string ID)
         {
-            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE ID = @ID", new { ID = ID }).FirstOrDefault();
+            Users foundUser = connection.Query<Users>("SELECT * FROM Users WHERE ID = @ID", new { ID }).FirstOrDefault();
 
             return foundUser;
         }
@@ -102,7 +115,7 @@ namespace Infotecs.WebApi.Repositories
         /// </returns>
         public async Task<Users> GetAsync(string ID)
         {
-            IEnumerable<Users> foundUser = await connection.QueryAsync<Users>("SELECT * FROM Users WHERE ID = @ID", new { ID = ID });
+            IEnumerable<Users> foundUser = await connection.QueryAsync<Users>("SELECT * FROM Users WHERE ID = @ID", new { ID });
 
             return foundUser.FirstOrDefault();
         }

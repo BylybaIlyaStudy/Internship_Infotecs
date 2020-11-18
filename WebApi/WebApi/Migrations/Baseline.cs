@@ -1,4 +1,8 @@
-﻿using FluentMigrator;
+using Dapper;
+using FluentMigrator;
+using Microsoft.Extensions.Configuration;
+using Npgsql;
+using System.Linq;
 
 namespace Infotecs.WebApi.Migrations
 {
@@ -13,6 +17,17 @@ namespace Infotecs.WebApi.Migrations
         /// </summary>
         public override void Up()
         {
+            string name = "webapidb";
+            var parameters = new DynamicParameters();
+            parameters.Add("name", name);
+            NpgsqlConnection connection = new NpgsqlConnection(Program.Configuration.GetConnectionString("TestConnection"));
+            var records = connection.Query("SELECT DATNAME FROM pg_catalog.pg_database WHERE DATNAME = @name",
+                 parameters);
+            if (!records.Any())
+            {
+                connection.Execute($"CREATE DATABASE {name}");
+            }
+
             Create.Table("users".ToLower())
                 .WithColumn("ID".ToLower()).AsString()
                 .WithColumn("Name".ToLower()).AsString();

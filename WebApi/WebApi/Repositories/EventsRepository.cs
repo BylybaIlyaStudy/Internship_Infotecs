@@ -74,7 +74,20 @@ namespace Infotecs.WebApi.Repositories
         public int Delete(string ID)
         {
             string sqlQuery = "DELETE FROM Events WHERE (ID = @ID)";
-            connection.Execute(sqlQuery, new { ID = ID });
+            connection.Execute(sqlQuery, new { ID });
+
+            return 0;
+        }
+
+        /// <summary>
+        /// Асинхронное удаление событий из бд по ID.
+        /// </summary>
+        /// <param name="ID">ID событий, которые необходимо удалить.</param>
+        /// <returns>Статус удаления событий: 0.</returns>
+        public async Task<int> DeleteAsync(string ID)
+        {
+            string sqlQuery = "DELETE FROM Events WHERE (ID = @ID)";
+            await connection.ExecuteAsync(sqlQuery, new { ID });
 
             return 0;
         }
@@ -93,6 +106,7 @@ namespace Infotecs.WebApi.Repositories
         }
 
         /// <summary>
+        
         /// Получение списка событий по ID.
         /// </summary>
         /// <param name="ID">ID пользователя, которому пренадлежат события.</param>
@@ -101,7 +115,7 @@ namespace Infotecs.WebApi.Repositories
         /// </returns>
         public List<Events> Get(string ID)
         {
-            return connection.Query<Events>("SELECT * FROM Events WHERE (ID = @ID)", new { ID = ID }).ToList();
+            return connection.Query<Events>("SELECT * FROM Events WHERE (ID = @ID)", new { ID }).ToList();
         }
 
         /// <summary>
@@ -113,13 +127,13 @@ namespace Infotecs.WebApi.Repositories
         /// </returns>
         public async Task<List<Events>> GetAsync(string ID)
         {
-            IEnumerable<Events> foundEvents = await connection.QueryAsync<Events>("SELECT * FROM Events WHERE (ID = @ID)", new { ID = ID });
+            IEnumerable<Events> foundEvents = await connection.QueryAsync<Events>("SELECT * FROM Events WHERE (ID = @ID)", new { ID });
 
             return foundEvents.ToList();
         }
 
         /// <summary>
-        /// Получение списка списков событий по ID. Не реализовано.
+        /// Получение списка списков всех событий. Не реализовано.
         /// </summary>
         /// <returns>
         /// Список списков всех событий сортированный по ID.
@@ -129,6 +143,12 @@ namespace Infotecs.WebApi.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Асинхронное получение списка списков всех событий. Не реализовано.
+        /// </summary>
+        /// <returns>
+        /// Список списков всех событий сортированный по ID.
+        /// </returns>
         public Task<List<List<Events>>> GetListAsync()
         {
             throw new NotImplementedException();
