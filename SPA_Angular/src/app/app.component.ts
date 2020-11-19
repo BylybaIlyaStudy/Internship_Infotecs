@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { UserStatistics } from './UserStatistics';
 
+const TIME = 30;
+
 @Component({
     selector: 'my-app',
     template:   `
@@ -91,13 +93,12 @@ export class AppComponent {
     constructor(private http: HttpClient){}
     
     timeLeft: number = 0;
-    time: number = 30;
     timer;
 
     ngOnInit(){
         this.getData();
         this.timer = setInterval(() => {
-            if(this.timeLeft < this.time) {
+            if(this.timeLeft < TIME) {
                 this.timeLeft++;
                 console.log(this.timeLeft);
             } else {
