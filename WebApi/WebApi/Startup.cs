@@ -20,13 +20,14 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Регистрирация сервисов, которые используются приложением.
         /// </summary>
-        /// <param Name="services">Коллекция сервисов приложения.</param>
+        /// <param name="services">Коллекция сервисов приложения.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddSerilogServices();
-            //services.AddControllers(); // используем контроллеры без представлений
             services.AddSwaggerGen();
+
+            services.AddCors();
 
             services
                 .AddControllers()
@@ -40,12 +41,14 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Установка способа обработки запроса.
         /// </summary>
-        /// <param Name="app">Компоненты обработки запроса.</param>
+        /// <param name="app">Компоненты обработки запроса.</param>
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
 
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
