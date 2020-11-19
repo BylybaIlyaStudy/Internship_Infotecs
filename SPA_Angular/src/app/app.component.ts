@@ -1,10 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { UserStatistics } from './UserStatistics';
-import { OnInit } from '@angular/core';
-import { MatTableModule } from '@angular/material/table';
-import {MatButtonModule} from '@angular/material/button';
-import { Events } from './Events';
 
 @Component({
     selector: 'my-app',
@@ -34,10 +30,11 @@ import { Events } from './Events';
                                 'float':'right',
                                 'margin-top':'20px',
                                 'margin-left':'20px'
-                            }">
+                            }" (click) = "setEvents(userWhoseEventsAreSelected)">
                             <p>Идентификатор: {{userWhoseEventsAreSelected.id}}</p>
                             <p>Версия ПО ViPNet Client: {{userWhoseEventsAreSelected.version}}</p>
-                            
+                            <b>События ViPNet Client</b>
+
                             <table mat-table [dataSource]="userWhoseEventsAreSelected.events"  width ="100%">
                                 <ng-container matColumnDef="name">
                                     <th mat-header-cell *matHeaderCellDef> Событие </th>
@@ -95,11 +92,12 @@ export class AppComponent {
     
     timeLeft: number = 0;
     time: number = 30;
+    timer;
 
     ngOnInit(){
         this.getData();
-        setInterval(() => {
-            if(this.timeLeft <= this.time) {
+        this.timer = setInterval(() => {
+            if(this.timeLeft < this.time) {
                 this.timeLeft++;
                 console.log(this.timeLeft);
             } else {
@@ -109,17 +107,18 @@ export class AppComponent {
         }, 1000);
     }
 
+    ngOnDestroy(){
+        clearInterval(this.timer);
+    }
+
     setEvents(user: UserStatistics) {
-        this.userWhoseEventsAreSelected = user;
-        this.showEvents();
-    }
-
-    showEvents(){
-        this.displayedEvents = true;
-    }
-
-    hideEvents(){
-        this.displayedEvents = false;
+        if (user == this.userWhoseEventsAreSelected){
+            this.displayedEvents = !this.displayedEvents;
+        }
+        else {
+            this.userWhoseEventsAreSelected = user;
+            this.displayedEvents = true;
+        }
     }
 
     getData(){
