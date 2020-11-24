@@ -1,4 +1,4 @@
-using Dapper;
+﻿using Dapper;
 using FluentMigrator;
 using Microsoft.Extensions.Configuration;
 using Npgsql;

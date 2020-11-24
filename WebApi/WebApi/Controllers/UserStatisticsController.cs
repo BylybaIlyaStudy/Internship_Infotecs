@@ -10,6 +10,7 @@ using Infotecs.WebApi.Models;
 using Infotecs.WebApi.Services;
 using WebApi.Repositories;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -21,23 +22,19 @@ namespace Infotecs.WebApi.Controllers
     [ApiController]
     public class UserStatisticsController : Controller
     {
-        private readonly ILogger logger = null;
-        private readonly IUnitOfWork repository = null;
-        
         private readonly StatisticsService statisticsService = null;
+        IHubContext<WebApiHub> hubContext;
 
         /// <summary>
         /// Конструктор для привязки системы логирования и базы данных.
         /// </summary>
         /// <param name="logger">Интерфейс системы логирования.</param>
         /// <param name="repository">Интерфейс базы данных.</param>
-        public UserStatisticsController(ILogger logger, IUnitOfWork repository)
+        public UserStatisticsController(ILogger logger, IUnitOfWork repository, IHubContext<WebApiHub> hubContext)
         {
-            this.logger = logger;
-            this.repository = repository;
-
-            
             statisticsService = new StatisticsService(repository, logger);
+
+            this.hubContext = hubContext;
         }
 
         /// <summary>
@@ -104,7 +101,11 @@ namespace Infotecs.WebApi.Controllers
                 e.ID = statistics.ID;
             }
 
-            return StatusCode(await statisticsService.CreateStatisticsAsync(statistics));
+            var status = await statisticsService.CreateStatisticsAsync(statistics);
+
+            await hubContext.Clients.All.SendAsync("update");
+
+            return StatusCode(status);
         }
 
         /// <summary>
@@ -119,7 +120,11 @@ namespace Infotecs.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(string ID)
         {
-            return StatusCode(await statisticsService.DeleteStatisticsAsync(ID));
+            var status = await statisticsService.DeleteStatisticsAsync(ID);
+
+            await hubContext.Clients.All.SendAsync("update");
+
+            return StatusCode(status);
         }
     }
 }
