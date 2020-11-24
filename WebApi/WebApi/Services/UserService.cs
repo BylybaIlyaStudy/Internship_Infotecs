@@ -6,6 +6,9 @@ using WebApi.Repositories;
 
 namespace Infotecs.WebApi.Services
 {
+    /// <summary>
+    /// Класс для работы с данными о пользователях.
+    /// </summary>
     public class UserService
     {
         private readonly ILogger logger = null;

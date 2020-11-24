@@ -7,7 +7,7 @@ using WebApi.Repositories;
 namespace Infotecs.WebApi.Services
 {
     /// <summary>
-    /// Класс для работы с данными пользовательской статистики.
+    /// Класс для работы с репозиторием пользовательской статистики.
     /// </summary>
     public class StatisticsService
     {
@@ -26,6 +26,11 @@ namespace Infotecs.WebApi.Services
             this.repository = repository;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="statistics">Обьект статистики, который нужно добавить в репозиторий.</param>
+        /// <returns></returns>
         public int CreateStatistics(UserStatistics statistics)
         {
             Users foundUser = repository.Users.Get(statistics.ID);
@@ -70,13 +75,13 @@ namespace Infotecs.WebApi.Services
         {
             this.logger.Debug("Запрос списка статистик");
 
-            List<UserStatistics> statistics = repository.Statistics.GetList();
+            List<UserStatistics> statistics = this.repository.Statistics.GetList();
 
             if (statistics != null)
             {
                 foreach (var stat in statistics)
                 {
-                    stat.Events = repository.Events.Get(stat.ID);
+                    stat.Events = this.repository.Events.Get(stat.ID);
                 }
             }
 
@@ -104,11 +109,11 @@ namespace Infotecs.WebApi.Services
         {
             this.logger.Debug("Запрос списка статистик {@Users}", ID);
 
-            UserStatistics statistics = repository.Statistics.Get(ID);
+            UserStatistics statistics = this.repository.Statistics.Get(ID);
 
             if (statistics != null)
             {
-                statistics.Events = repository.Events.Get(statistics.ID);
+                statistics.Events = this.repository.Events.Get(statistics.ID);
             }
 
             return statistics;
