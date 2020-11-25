@@ -9,26 +9,15 @@ import { map } from 'rxjs/operators'
 export class HTTPService{
   
     private data: UserStatistics[] = [];
-    private link: string = 'https://localhost:5001/api/statistics/UserStatistics';
+    private link: string = 'https://localhost:5001/api';
 
     constructor(private http: HttpClient){}
     
-    getData(): UserStatistics[] {
-    //getData(): Observable<any> {
-        //return from(
-        //    fetch(
-        //      this.link, // the url you are trying to access
-        //      {
-        //        headers: {
-        //          'Content-Type': 'application/json',
-        //        },
-        //        method: 'GET', // GET, POST, PUT, DELETE
-        //        mode: 'no-cors' // the most important option
-        //      }
-        //    ));
+    getUsersList() {
+        return this.http.get(this.link + '/statistics/UserStatistics');
+    }
 
-        this.http.get(this.link).subscribe((data:UserStatistics[]) => this.data = data);
-
-        return this.data;
+    getEventsForUser(ID: string) {
+        return this.http.get(this.link + '/events/Events/' + ID);
     }
 }

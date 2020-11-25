@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { UserStatistics } from './UserStatistics';
+import { Events } from './Events';
 import { HTTPService } from './HTTPService'
 
 import * as signalR from '@aspnet/signalr';
+import { UsersWithEventsComponent } from './UsersWithEvents.component';
 
 const TIME = 10;
 
@@ -15,7 +17,7 @@ const TIME = 10;
 
 export class AppComponent implements OnInit { 
     users: UserStatistics[] = [];
-    userWhoseEventsAreSelected: UserStatistics;
+    userWhoseEventsAreSelected: UserStatistics = null;
 
     displayedColumnsWithoutEvents: string[] = ['name', 'date', 'version', 'os'];
     displayedColumnsWithEvents: string[] = ['name', 'date'];
@@ -25,48 +27,46 @@ export class AppComponent implements OnInit {
 
     constructor(private http: HTTPService){}
     
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl('https://localhost:5001/api')
+        .build();
+
     timeLeft: number = 0;
     timer;
 
-    ngOnInit(): void {
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl('https://localhost:5001/api')
-            .build();
+    ngOnInit(): void {  
+        this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
 
-        connection.on('send', data => {
-            console.log("update");
-            this.users = this.http.getData();
-            this.timer = setInterval(() => { this.users = this.http.getData(); }, 1000);
+        this.connection.on('update statistics', data => {
+            console.log('update statistics');
+            this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
         });
         
-        connection.start()
-            .then(() => connection.invoke('send', 'hi'))
-            .catch(err => console.log('Error while starting connection: ' + err));
+        this.connection.on('update users', data => {
+            console.log('update users');
+            this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
+        });
 
-        //this.users = this.http.getData();
-        //console.log(this.users);
-        //this.timer = setInterval(() => {
-        //    if(this.timeLeft < TIME) {
-        //        this.timeLeft++;
-        //        //console.log(this.timeLeft);
-        //    } else {
-        //        this.users = this.http.getData();
-        //        this.timeLeft = 0;
-        //        console.log("time");
-        //    }
-        //}, 1000);
+        this.connection.start();
     }
-
-    //ngOnDestroy(){
-    //    clearInterval(this.timer);
-    //}
 
     onChanged(user: UserStatistics){
         if (user == this.userWhoseEventsAreSelected){
             this.displayedEvents = !this.displayedEvents;
         }
         else {
+            if (this.userWhoseEventsAreSelected != null){
+                this.connection.off('update events ' + this.userWhoseEventsAreSelected.id);
+            }
+
             this.userWhoseEventsAreSelected = user;
+            this.http.getEventsForUser(this.userWhoseEventsAreSelected.id).subscribe((data:Events[]) => this.userWhoseEventsAreSelected.events=data);
+
+            this.connection.on('update events ' + this.userWhoseEventsAreSelected.id, data => {
+                console.log('update events ' + this.userWhoseEventsAreSelected.id);
+                this.http.getEventsForUser(this.userWhoseEventsAreSelected.id).subscribe((data:Events[]) => this.userWhoseEventsAreSelected.events=data);
+            });
+
             this.displayedEvents = true;
         }
     }
