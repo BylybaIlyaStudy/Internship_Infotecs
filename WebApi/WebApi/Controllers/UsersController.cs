@@ -78,6 +78,7 @@ namespace Infotecs.WebApi.Controllers
 
             var status = await userService.CreateUserAsync(user);
 
+            System.Console.WriteLine("send update");
             await hubContext.Clients.All.SendAsync("update");
 
             return StatusCode(status);
@@ -98,6 +99,7 @@ namespace Infotecs.WebApi.Controllers
         {
             var status = await userService.DeleteUserAsync(ID);
 
+            System.Console.WriteLine("send update");
             await hubContext.Clients.All.SendAsync("update");
 
             return StatusCode(status);
