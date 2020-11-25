@@ -98,7 +98,7 @@ namespace Infotecs.WebApi.Services
             {
                 foreach (var stat in statistics)
                 {
-                    stat.Events = await repository.Events.GetAsync(stat.ID);
+                    stat.Events = await this.repository.Events.GetAsync(stat.ID);
                 }
             }
 
@@ -110,11 +110,7 @@ namespace Infotecs.WebApi.Services
             this.logger.Debug("Запрос списка статистик {@Users}", ID);
 
             UserStatistics statistics = this.repository.Statistics.Get(ID);
-
-            if (statistics != null)
-            {
-                statistics.Events = this.repository.Events.Get(statistics.ID);
-            }
+            statistics.Events = this.repository.Events.Get(ID);
 
             return statistics;
         }
@@ -124,11 +120,7 @@ namespace Infotecs.WebApi.Services
             this.logger.Debug("Запрос списка статистик {@Users}", ID);
 
             UserStatistics statistics = await repository.Statistics.GetAsync(ID);
-
-            if (statistics != null)
-            {
-                statistics.Events = await repository.Events.GetAsync(statistics.ID);
-            }
+            statistics.Events = await this.repository.Events.GetAsync(ID);
 
             return statistics;
         }

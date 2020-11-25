@@ -1,16 +1,15 @@
-﻿// <copyright file="UserStatisticsController.cs" company="Infotecs">
-// Copyright (c) Infotecs. All rights reserved.
-// </copyright>
-
-using System.Collections.Generic;
-using Mapster;
-using Microsoft.AspNetCore.Mvc;
-using Serilog;
-using Infotecs.WebApi.Models;
+﻿using Infotecs.WebApi.Models;
 using Infotecs.WebApi.Services;
-using WebApi.Repositories;
-using System.Threading.Tasks;
+using Mapster;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Serilog;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using WebApi.Repositories;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -18,11 +17,13 @@ namespace Infotecs.WebApi.Controllers
     /// Класс контроллера для обработки REST запросов и 
     /// взаимодействия с пользовательской статистикой.
     /// </summary>
-    [Route("api/statistics/[controller]")]
+    [Route("api/events/[controller]")]
     [ApiController]
-    public class UserStatisticsController : Controller
+    public class EventsController : Controller
     {
         private readonly StatisticsService statisticsService = null;
+        private readonly EventsService eventsService = null;
+
         IHubContext<WebApiHub> hubContext;
 
         /// <summary>
@@ -30,36 +31,12 @@ namespace Infotecs.WebApi.Controllers
         /// </summary>
         /// <param name="logger">Интерфейс системы логирования.</param>
         /// <param name="repository">Интерфейс базы данных.</param>
-        public UserStatisticsController(ILogger logger, IUnitOfWork repository, IHubContext<WebApiHub> hubContext)
+        public EventsController(ILogger logger, IUnitOfWork repository, IHubContext<WebApiHub> hubContext)
         {
             statisticsService = new StatisticsService(repository, logger);
+            eventsService = new EventsService(repository, logger);
 
             this.hubContext = hubContext;
-        }
-
-        /// <summary>
-        /// Запрос списка всех статистик.
-        /// </summary>
-        /// <returns>Список всех статиситк.</returns>
-        [HttpGet]
-        public async Task<List<UserStatisticsDTO>> GetAsync()
-        {
-            List<UserStatisticsDTO> userStatisticsDTOS = (await statisticsService.GetStatisticsAsync()).Adapt<List<UserStatisticsDTO>>();
-
-            if (userStatisticsDTOS != null)
-            {
-                foreach (var statistics in userStatisticsDTOS)
-                {
-                    statistics.EventsDTO = (await statisticsService.GetStatisticsAsync(statistics.ID)).Events.Adapt<List<EventsDTO>>();
-                }
-
-                foreach (var statistics in userStatisticsDTOS)
-                {
-                    System.Console.WriteLine(">>" + statistics.ID);
-                }
-            }
-
-            return userStatisticsDTOS;
         }
 
         /// <summary>
@@ -68,13 +45,9 @@ namespace Infotecs.WebApi.Controllers
         /// <param name="ID">ID пользователя для получаемой статистики.</param>
         /// <returns>Список всех статиситк.</returns>
         [HttpGet("{ID}")]
-        public async Task<UserStatisticsDTO> GetAsync(string ID)
+        public async Task<List<EventsDTO>> GetAsync(string ID)
         {
-            UserStatisticsDTO userStatisticsDTO = (await statisticsService.GetStatisticsAsync(ID)).Adapt<UserStatisticsDTO>();
-            if (userStatisticsDTO != null)
-            {
-                userStatisticsDTO.EventsDTO = (await statisticsService.GetStatisticsAsync(ID)).Events.Adapt<List<EventsDTO>>();
-            }
+            List<EventsDTO> userStatisticsDTO = (await eventsService.GetEventsAsync(ID)).Adapt<List<EventsDTO>>();
 
             return userStatisticsDTO;
         }
@@ -91,20 +64,22 @@ namespace Infotecs.WebApi.Controllers
         /// 418 - ошибка создания статистики: непредвиденная ошибка.
         /// </returns>
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody]UserStatisticsDTO DTO)
+        public async Task<IActionResult> PostAsync(string ID, [FromBody] List<EventsDTO> eventsDTOs)
         {
-            UserStatistics statistics = DTO.Adapt<UserStatistics>();
-            statistics.Events = DTO.EventsDTO.Adapt<List<Events>>();
+            List<Events> events = eventsDTOs.Adapt<List<Events>>();
 
-            foreach (var e in statistics.Events)
+            if (events != null)
             {
-                e.ID = statistics.ID;
+                foreach (var e in events)
+                {
+                    e.ID = ID;
+                }
             }
 
-            var status = await statisticsService.CreateStatisticsAsync(statistics);
+            var status = await eventsService.CreateEventsAsync(events);
 
-            System.Console.WriteLine("send update statistics");
-            await hubContext.Clients.All.SendAsync("update statistics");
+            System.Console.WriteLine("send update events " + ID);
+            await hubContext.Clients.All.SendAsync("update events " + ID);
 
             return StatusCode(status);
         }
@@ -121,10 +96,10 @@ namespace Infotecs.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(string ID)
         {
-            var status = await statisticsService.DeleteStatisticsAsync(ID);
+            var status = await eventsService.DeleteEventsAsync(ID);
 
-            System.Console.WriteLine("send update statistics");
-            await hubContext.Clients.All.SendAsync("update statistics");
+            System.Console.WriteLine("send update events " + ID);
+            await hubContext.Clients.All.SendAsync("update events " + ID);
 
             return StatusCode(status);
         }
