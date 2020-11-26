@@ -37,7 +37,6 @@ namespace Infotecs.WebApi
                        .AllowCredentials();
             }));
 
-
             services
                 .AddControllers()
                 .AddJsonOptions(options =>
