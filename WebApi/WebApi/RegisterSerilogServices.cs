@@ -16,8 +16,8 @@ namespace Serilog.Injection
         /// <summary>
         /// Register the Serilog service with a custom configuration.
         /// </summary>
-        /// <param name="services">Коллекция сервисов приложения.</param>
-        /// <param name="configuration">Конфигурация логгера.</param>
+        /// <param Name="services">Коллекция сервисов приложения.</param>
+        /// <param Name="configuration">Конфигурация логгера.</param>
         /// <returns>Коллекция сервисов приложения с добавленным serilog.</returns>
         public static IServiceCollection AddSerilogServices(this IServiceCollection services, LoggerConfiguration configuration)
         {
@@ -29,14 +29,14 @@ namespace Serilog.Injection
         /// <summary>
         /// Register the Serilog service for console logging only.
         /// </summary>
-        /// <param name="services">Коллекция сервисов приложения.</param>
+        /// <param Name="services">Коллекция сервисов приложения.</param>
         /// <returns>Коллекция сервисов приложения.</returns>
         public static IServiceCollection AddSerilogServices(this IServiceCollection services)
         {
             return services.AddSerilogServices(
                 new LoggerConfiguration()
 
-                    // .MinimumLevel.Verbose()
+                    // .MinimumLevel.VerbOSe()
                     // .WriteTo.Console()
                     .WriteTo.Seq("http://localhost:5341")
                     .MinimumLevel.Debug()

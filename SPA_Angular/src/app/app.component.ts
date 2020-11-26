@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserStatistics } from './UserStatistics';
+import { Events } from './Events';
 import { HTTPService } from './HTTPService'
+
+import * as signalR from '@aspnet/signalr';
+import { UsersWithEventsComponent } from './UsersWithEvents.component';
 
 const TIME = 10;
 
@@ -11,9 +15,9 @@ const TIME = 10;
     styleUrls: ['./app.component.css']
 })
 
-export class AppComponent { 
+export class AppComponent implements OnInit { 
     users: UserStatistics[] = [];
-    userWhoseEventsAreSelected: UserStatistics;
+    userWhoseEventsAreSelected: UserStatistics = null;
 
     displayedColumnsWithoutEvents: string[] = ['name', 'date', 'version', 'os'];
     displayedColumnsWithEvents: string[] = ['name', 'date'];
@@ -23,25 +27,27 @@ export class AppComponent {
 
     constructor(private http: HTTPService){}
     
+    connection = new signalR.HubConnectionBuilder()
+        .withUrl('https://localhost:5001/api')
+        .build();
+
     timeLeft: number = 0;
     timer;
 
-    ngOnInit(){
-        this.users = this.http.getData();
-        console.log(this.users);
-        this.timer = setInterval(() => {
-            if(this.timeLeft < TIME) {
-                this.timeLeft++;
-                console.log(this.timeLeft);
-            } else {
-                this.users = this.http.getData();
-                this.timeLeft = 0;
-            }
-        }, 1000);
-    }
+    ngOnInit(): void {  
+        this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
 
-    ngOnDestroy(){
-        clearInterval(this.timer);
+        this.connection.on('update statistics', data => {
+            console.log('update statistics');
+            this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
+        });
+        
+        this.connection.on('update users', data => {
+            console.log('update users');
+            this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
+        });
+
+        this.connection.start();
     }
 
     onChanged(user: UserStatistics){
@@ -49,7 +55,18 @@ export class AppComponent {
             this.displayedEvents = !this.displayedEvents;
         }
         else {
+            if (this.userWhoseEventsAreSelected != null){
+                this.connection.off('update events ' + this.userWhoseEventsAreSelected.id);
+            }
+
             this.userWhoseEventsAreSelected = user;
+            this.http.getEventsForUser(this.userWhoseEventsAreSelected.id).subscribe((data:Events[]) => this.userWhoseEventsAreSelected.events=data);
+
+            this.connection.on('update events ' + this.userWhoseEventsAreSelected.id, data => {
+                console.log('update events ' + this.userWhoseEventsAreSelected.id);
+                this.http.getEventsForUser(this.userWhoseEventsAreSelected.id).subscribe((data:Events[]) => this.userWhoseEventsAreSelected.events=data);
+            });
+
             this.displayedEvents = true;
         }
     }

@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Injection;
 using WebApi.Repositories;
-using Microsoft.AspNetCore.Mvc.Formatters.Json;
 using System.Text.Json;
-using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Infotecs.WebApi
 {
@@ -20,13 +19,24 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Регистрирация сервисов, которые используются приложением.
         /// </summary>
-        /// <param Name="services">Коллекция сервисов приложения.</param>
+        /// <param name="services">Коллекция сервисов приложения.</param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddSerilogServices();
-            //services.AddControllers(); // используем контроллеры без представлений
             services.AddSwaggerGen();
+
+            services.AddSignalR();
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+            builder =>
+            {
+                builder.AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .SetIsOriginAllowed((host) => true)
+                       .AllowCredentials();
+            }));
+
 
             services
                 .AddControllers()
@@ -40,12 +50,22 @@ namespace Infotecs.WebApi
         /// <summary>
         /// Установка способа обработки запроса.
         /// </summary>
-        /// <param Name="app">Компоненты обработки запроса.</param>
+        /// <param name="app">Компоненты обработки запроса.</param>
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
 
             app.UseRouting();
+
+            app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<WebApiHub>("/api");
+                endpoints.MapDefaultControllerRoute();
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>

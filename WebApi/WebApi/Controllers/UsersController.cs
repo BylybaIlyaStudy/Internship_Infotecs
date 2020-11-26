@@ -10,6 +10,7 @@ using Infotecs.WebApi.Models;
 using Infotecs.WebApi.Services;
 using WebApi.Repositories;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.SignalR;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -21,21 +22,18 @@ namespace Infotecs.WebApi.Controllers
     [ApiController]
     public class UsersController : Controller
     {
-        private readonly ILogger logger = null;
-        private readonly IUnitOfWork repository = null;
         private readonly UserService userService = null;
-
+        IHubContext<WebApiHub> hubContext;
         /// <summary>
         /// Конструктор для привязки системы логирования и базы данных.
         /// </summary>
         /// <param name="logger">Интерфейс системы логирования.</param>
         /// <param name="repository">Интерфейс базы данных.</param>
-        public UsersController(ILogger logger, IUnitOfWork repository)
+        public UsersController(ILogger logger, IUnitOfWork repository, IHubContext<WebApiHub> hubContext)
         {
-            this.logger = logger;
-            this.repository = repository;
-
             userService = new UserService(repository, logger);
+            
+            this.hubContext = hubContext;
         }
 
         /// <summary>
@@ -78,7 +76,12 @@ namespace Infotecs.WebApi.Controllers
         {
             Users user = usersDTO.Adapt<Users>();
 
-            return StatusCode(await userService.CreateUserAsync(user));
+            var status = await userService.CreateUserAsync(user);
+
+            System.Console.WriteLine("send update users");
+            await hubContext.Clients.All.SendAsync("update users");
+
+            return StatusCode(status);
         }
 
         /// <summary>
@@ -94,7 +97,12 @@ namespace Infotecs.WebApi.Controllers
         [HttpDelete]
         public async Task<IActionResult> DeleteAsync(string ID)
         {
-            return StatusCode(await userService.DeleteUserAsync(ID));
+            var status = await userService.DeleteUserAsync(ID);
+
+            System.Console.WriteLine("send update users");
+            await hubContext.Clients.All.SendAsync("update users");
+
+            return StatusCode(status);
         }
     }
 }
