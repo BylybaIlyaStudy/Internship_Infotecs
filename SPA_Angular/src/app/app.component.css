@@ -1,0 +1,12 @@
+UsersWithEvents-component {
+    width : 40%;
+    display : inline-block;
+    margin-left : 10px
+}
+
+Events-component {
+    width : 50%;
+    float : right;
+    margin-top : 20px;
+    margin-left : 20px
+}

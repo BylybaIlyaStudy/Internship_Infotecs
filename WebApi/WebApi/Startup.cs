@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Serilog.Injection;
 using WebApi.Repositories;
-using Microsoft.AspNetCore.Mvc.Formatters.Json;
 using System.Text.Json;
-using Newtonsoft.Json.Serialization;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Infotecs.WebApi
 {
@@ -27,7 +26,16 @@ namespace Infotecs.WebApi
             services.AddSerilogServices();
             services.AddSwaggerGen();
 
-            services.AddCors();
+            services.AddSignalR();
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+            builder =>
+            {
+                builder.AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .SetIsOriginAllowed((host) => true)
+                       .AllowCredentials();
+            }));
 
             services
                 .AddControllers()
@@ -48,7 +56,15 @@ namespace Infotecs.WebApi
 
             app.UseRouting();
 
-            app.UseCors(builder => builder.AllowAnyOrigin());
+            app.UseHttpsRedirection();
+
+            app.UseCors("CorsPolicy");
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<WebApiHub>("/api");
+                endpoints.MapDefaultControllerRoute();
+            });
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
