@@ -4,7 +4,6 @@ import { Events } from './Events';
 import { HTTPService } from './HTTPService'
 
 import * as signalR from '@aspnet/signalr';
-import { UsersWithEventsComponent } from './UsersWithEvents.component';
 
 const TIME = 10;
 
@@ -21,9 +20,11 @@ export class AppComponent implements OnInit {
 
     displayedColumnsWithoutEvents: string[] = ['name', 'date', 'version', 'os'];
     displayedColumnsWithEvents: string[] = ['name', 'date'];
-    displayedColumnsEvents: string[] = ['name', 'date'];
+    displayedColumnsEvents: string[] = ['name', 'date', 'description'];
 
     displayedEvents: boolean = false;
+
+    selectedRowID: string;
 
     constructor(private http: HTTPService){}
     
@@ -38,36 +39,57 @@ export class AppComponent implements OnInit {
         this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
 
         this.connection.on('update statistics', data => {
-            console.log('update statistics');
             this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
         });
         
         this.connection.on('update users', data => {
-            console.log('update users');
             this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
         });
 
         this.connection.start();
     }
 
-    onChanged(user: UserStatistics){
+    onSetUser(user: UserStatistics){
         if (user == this.userWhoseEventsAreSelected){
-            this.displayedEvents = !this.displayedEvents;
+            
+            if (this.displayedEvents) {
+                this.displayedEvents = false;
+                this.selectedRowID = '';
+            }
+            else { 
+                this.displayedEvents = true;
+                this.selectedRowID = user.id;
+            }
         }
         else {
             if (this.userWhoseEventsAreSelected != null){
+                this.selectedRowID = '';
                 this.connection.off('update events ' + this.userWhoseEventsAreSelected.id);
             }
+
+            this.selectedRowID = user.id;
 
             this.userWhoseEventsAreSelected = user;
             this.http.getEventsForUser(this.userWhoseEventsAreSelected.id).subscribe((data:Events[]) => this.userWhoseEventsAreSelected.events=data);
 
             this.connection.on('update events ' + this.userWhoseEventsAreSelected.id, data => {
-                console.log('update events ' + this.userWhoseEventsAreSelected.id);
                 this.http.getEventsForUser(this.userWhoseEventsAreSelected.id).subscribe((data:Events[]) => this.userWhoseEventsAreSelected.events=data);
             });
 
             this.displayedEvents = true;
         }
+    }
+
+    onCreateDescription(user: UserStatistics) {
+        this.http.createEventsDescription(user);
+    }
+
+    onselectedRowIDChange(id) {
+        this.selectedRowID = id;
+    }
+
+    onDeleteEvents(user: UserStatistics){
+        this.http.deleteEvents(user.id);
+        //this.http.getEventsForUser(this.userWhoseEventsAreSelected.id).subscribe((data:Events[]) => this.userWhoseEventsAreSelected.events=data);
     }
 }

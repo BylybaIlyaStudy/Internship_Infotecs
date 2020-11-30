@@ -10,9 +10,11 @@ import { UsersWithEventsComponent }   from './UsersWithEvents.component';
 import { HttpClientModule }   from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
-    imports:      [ BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatTableModule ],
+    imports:      [ BrowserModule, FormsModule, HttpClientModule, BrowserAnimationsModule, MatTableModule, MatButtonModule, MatInputModule ],
     declarations: [ AppComponent, UsersComponent, EventsComponent, UsersWithEventsComponent ],
     bootstrap:    [ AppComponent ],
     exports:[ MatTableModule ]
