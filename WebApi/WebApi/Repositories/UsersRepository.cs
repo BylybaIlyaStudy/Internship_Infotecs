@@ -132,5 +132,10 @@ namespace Infotecs.WebApi.Repositories
 
             return foundUsers.ToList();
         }
+
+        public Task<int> UpdateAsync(Users item)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

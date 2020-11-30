@@ -64,6 +64,24 @@ namespace Infotecs.WebApi.Repositories
             return 0;
         }
 
+        public async Task<int> UpdateAsync(List<Events> item)
+        {
+            string sqlQuery = "UPDATE Events SET Description = @Description WHERE Name = @Name AND ID = @ID";
+
+            foreach (var i in item)
+            {
+                Console.WriteLine(i.ID);
+                Console.WriteLine(i.Description);
+            }
+
+            foreach (var i in item)
+            {
+                await connection.ExecuteAsync(sqlQuery, i);
+            }
+
+            return 0;
+        }
+
         /// <summary>
         /// Удаление событий из бд по ID.
         /// </summary>

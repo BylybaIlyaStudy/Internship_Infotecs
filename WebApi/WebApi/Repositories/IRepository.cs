@@ -39,6 +39,8 @@ namespace Infotecs.WebApi.Repositories
 
         Task<int> CreateAsync(T item);
 
+        Task<int> UpdateAsync(T item);
+
         /// <summary>
         /// Метод удаляет объект из базы данных.
         /// </summary>

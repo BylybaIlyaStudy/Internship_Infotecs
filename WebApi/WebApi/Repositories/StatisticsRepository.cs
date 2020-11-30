@@ -133,5 +133,10 @@ namespace Infotecs.WebApi.Repositories
 
             return foundStatistics.ToList();
         }
+
+        public Task<int> UpdateAsync(UserStatistics item)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

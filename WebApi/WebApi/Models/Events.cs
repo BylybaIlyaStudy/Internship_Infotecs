@@ -21,5 +21,7 @@ namespace Infotecs.WebApi.Models
         /// Название события.
         /// </summary>
         public string Name { get; set; }
+
+        public string Description { get; set; }
     }
 }

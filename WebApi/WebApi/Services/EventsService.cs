@@ -41,6 +41,13 @@ namespace Infotecs.WebApi.Services
             }
         }
 
+        public async Task<int> UpdateEvent(List<Events> events)
+        {
+            _ = await repository.Events.UpdateAsync(events);
+
+            return 200;
+        }
+
         public async Task<List<Events>> GetEventsAsync(string ID)
         {
             this.logger.Debug("Запрос списка событий {@Events}", ID);

@@ -88,7 +88,8 @@ namespace Infotecs.WebApi
                     // Set the connection string
                     .WithGlobalConnectionString(Configuration.GetConnectionString("DefaultConnection"))
                     // Define the assembly containing the migrations
-                    .ScanIn(typeof(Baseline).Assembly).For.Migrations())
+                    .ScanIn(typeof(Baseline).Assembly, typeof(Migration_1).Assembly).For.Migrations())
+                    //.ScanIn(typeof(Migration_1).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 // Build the service provider
                 .BuildServiceProvider(false);
