@@ -1,10 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { UserStatistics } from './UserStatistics';
-import { Events } from './Events';
+import { UserStatistics } from './Models/UserStatistics';
+import { Events } from './Models/Events';
 import { Injectable } from '@angular/core';
-
-import { Observable, from } from 'rxjs';
-import { map } from 'rxjs/operators'
 
 @Injectable({providedIn: 'root'})
 export class HTTPService{
@@ -26,22 +23,7 @@ export class HTTPService{
         this.http.delete(this.link + '/events/Events?ID=' + ID).subscribe();
     }
 
-    createEventsDescription(user: UserStatistics) {
-        let events: Events[] = [];
-
-        for (var i = 0; i < user.events.length; i++){
-            let event: Events = new Events();
-
-            event.id = user.id;
-            event.description = user.events[i].description;
-            event.name = user.events[i].name;
-            event.date = user.events[i].date;
-
-            console.log(event.description);
-
-            events.push(event);
-        }
-
+    createEventsDescription(events: Events[]) {
         this.http.put(this.link + '/events/Events', events).subscribe();
     }
 }
