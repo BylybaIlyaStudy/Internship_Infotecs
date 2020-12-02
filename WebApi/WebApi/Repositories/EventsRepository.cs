@@ -66,17 +66,19 @@ namespace Infotecs.WebApi.Repositories
 
         public async Task<int> UpdateAsync(List<Events> item)
         {
-            string sqlQuery = "UPDATE Events SET Description = @Description WHERE Name = @Name AND ID = @ID";
+            List<Events> events = await this.GetAsync(item[0].ID);
 
-            foreach (var i in item)
+            await this.DeleteAsync(item[0].ID);
+
+            foreach (var e in events)
             {
-                Console.WriteLine(i.ID);
-                Console.WriteLine(i.Description);
+                e.Description = item.Find(x => x.Name == e.Name).Description;
             }
 
-            foreach (var i in item)
+            foreach (var e in events)
             {
-                await connection.ExecuteAsync(sqlQuery, i);
+                string sqlQuery = "INSERT INTO Events (ID, Name, Date, Description) VALUES(@ID, @Name, @Date, @Description)";
+                await connection.ExecuteAsync(sqlQuery, e);
             }
 
             return 0;
