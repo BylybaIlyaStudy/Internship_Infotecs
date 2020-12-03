@@ -1,13 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import * as _ from 'lodash'; 
 import * as signalR from '@aspnet/signalr';
 
-import { UserStatistics } from '../Models/UserStatistics';
+import { UserStatistics } from '../Models/UserStatistics';  
 import { HTTPService } from '../HTTPService';
 import { Events } from '../Models/Events';
+import { ChangeNameDialogComponent } from './ChangeNameDialog/ChangeNameDialog.component';
 
 @Component({
     selector: 'UsersWithEvents-component',
@@ -17,7 +19,9 @@ import { Events } from '../Models/Events';
 
 export class UsersWithEventsComponent implements OnInit, OnDestroy { 
     displayedColumnsUsers: string[] = ['name', 'date'];
-    displayedColumnsEvents: string[] = ['name', 'date', 'description'];
+    displayedColumnsEvents: string[] = ['name', 'date', 'description', 'level'];
+
+    levels: string[] = ["low", "middle", "high"];
 
     users: UserStatistics[] = [];
     user: UserStatistics = new UserStatistics;
@@ -27,12 +31,12 @@ export class UsersWithEventsComponent implements OnInit, OnDestroy {
         .build();
 
     private subscription: Subscription;
-    constructor(private http: HTTPService, private router: Router, private activateRoute: ActivatedRoute){
+    constructor(private http: HTTPService, private router: Router, private activateRoute: ActivatedRoute, public dialog: MatDialog){
         this.subscription = activateRoute.params.subscribe(params=>this.selectedUserID=params['id']);
     }
 
     ngOnInit(): void{    
-        this.http.getUsersList().subscribe((data:UserStatistics[]) => {
+        this.http.getStatisticsList().subscribe((data:UserStatistics[]) => {
             this.users = data;
 
             this.user = this.users.find(x => x.id == this.selectedUserID);
@@ -44,11 +48,18 @@ export class UsersWithEventsComponent implements OnInit, OnDestroy {
         });
 
         this.connection.on('update statistics', data => {
-            this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
+            this.http.getStatisticsList().subscribe((data:UserStatistics[]) => this.users=data);
         });
         
         this.connection.on('update users', data => {
-            this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
+            this.http.getStatisticsList().subscribe((data:UserStatistics[]) => {
+                this.users = data;
+                this.http.getUsersList().subscribe((data:UserStatistics[]) => {
+                    this.users.forEach(user => {
+                        user.description = data.find(x => x.id == user.id).description;
+                    });
+                })
+            });
         });
 
         this.connection.on('update events ' + this.selectedUserID, data => {
@@ -96,6 +107,7 @@ export class UsersWithEventsComponent implements OnInit, OnDestroy {
     displayedEvents: Events[] = [];
     
     createDescription() {
+        console.log(this.displayedEvents);
         this.http.createEventsDescription(this.displayedEvents);
 
         this.changeEnteringDescription();
@@ -105,11 +117,11 @@ export class UsersWithEventsComponent implements OnInit, OnDestroy {
         this.enteringDescription = !this.enteringDescription;
 
         if (this.enteringDescription) {
-            this.displayedColumnsEvents = ['name', 'description'];
+            this.displayedColumnsEvents = ['name', 'description', 'level'];
             this.displayedEvents = _.uniqBy(this.user.events, 'name');
         }
         else {
-            this.displayedColumnsEvents = ['name', 'date', 'description'];
+            this.displayedColumnsEvents = ['name', 'date', 'description', 'level'];
             this.displayedEvents = this.user.events;
         }
     }
@@ -117,4 +129,15 @@ export class UsersWithEventsComponent implements OnInit, OnDestroy {
     deleteEvents() {
         this.http.deleteEvents(this.selectedUserID);
     }
+
+    openDialog() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.data = { user: this.user };
+        let dialogRef = this.dialog.open(ChangeNameDialogComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(value => {
+            console.log(value); 
+        });
+    }
 }
+

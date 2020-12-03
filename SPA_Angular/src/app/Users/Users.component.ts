@@ -13,7 +13,7 @@ import { HTTPService } from '../HTTPService'
 })
 
 export class UsersComponent implements OnInit, OnDestroy { 
-    displayedColumns: string[] = ['name', 'date', 'version', 'os'];
+    displayedColumns: string[] = ['name', 'date', 'version', 'os', 'description'];
 
     users: UserStatistics[];
     selectedUserID: string;
@@ -25,14 +25,28 @@ export class UsersComponent implements OnInit, OnDestroy {
     constructor(private http: HTTPService, private router: Router){}
 
     ngOnInit(): void{
-        this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
+        this.http.getStatisticsList().subscribe((data:UserStatistics[]) => {
+            this.users = data;
+            this.http.getUsersList().subscribe((data:UserStatistics[]) => {
+                this.users.forEach(user => {
+                    user.description = data.find(x => x.id == user.id).description;
+                });
+            })
+        });
 
         this.connection.on('update statistics', data => {
-            this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
+            this.http.getStatisticsList().subscribe((data:UserStatistics[]) => this.users=data);
         });
         
         this.connection.on('update users', data => {
-            this.http.getUsersList().subscribe((data:UserStatistics[]) => this.users=data);
+            this.http.getStatisticsList().subscribe((data:UserStatistics[]) => {
+                this.users = data;
+                this.http.getUsersList().subscribe((data:UserStatistics[]) => {
+                    this.users.forEach(user => {
+                        user.description = data.find(x => x.id == user.id).description;
+                    });
+                })
+            });
         });
 
         this.connection.start();

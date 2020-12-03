@@ -11,8 +11,12 @@ export class HTTPService{
 
     constructor(private http: HttpClient){}
     
-    getUsersList() {
+    getStatisticsList() {
         return this.http.get(this.link + '/statistics/UserStatistics');
+    }
+
+    getUsersList() {
+        return this.http.get(this.link + '/users/Users');
     }
 
     getEventsForUser(ID: string) {
@@ -25,5 +29,9 @@ export class HTTPService{
 
     createEventsDescription(events: Events[]) {
         this.http.put(this.link + '/events/Events', events).subscribe();
+    }
+
+    changeUserName(user: UserStatistics) {
+        this.http.put(this.link + '/users/Users', user).subscribe();
     }
 }

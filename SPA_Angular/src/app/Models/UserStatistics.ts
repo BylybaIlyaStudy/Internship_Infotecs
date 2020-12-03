@@ -6,7 +6,8 @@ export class UserStatistics{
     date: string;
     version: string;
     os: string;
-    index: number;
+    description: string;
+
 
     events: Events[];
 }

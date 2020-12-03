@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Устройство</h1>
+<mat-divider></mat-divider>
+
+<div mat-dialog-content>
+    <mat-form-field>
+        <p>Название устройства:</p>
+        <input matInput type="text" [(ngModel)]="data.user.name">
+    </mat-form-field>
+    <mat-form-field>
+        <p>Описание:</p>
+        <textarea matInput type="text" [(ngModel)]="data.user.description"></textarea>
+    </mat-form-field>
+</div>
+                
+<div mat-dialog-actions>
+    <button mat-button (click)="save()" color="primary">
+        Сохранить
+    </button>
+    <button mat-button (click)="close()">
+        Отмена
+    </button>
+</div>

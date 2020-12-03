@@ -3,4 +3,5 @@ export class Events{
     date: string;
     name: string;
     description: string;
+    level: string;
 }
