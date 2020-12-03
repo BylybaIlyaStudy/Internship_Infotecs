@@ -1,4 +1,5 @@
 ﻿using Infotecs.WebApi.Models;
+using Mapster;
 using Serilog;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -72,11 +73,12 @@ namespace Infotecs.WebApi.Services
             }
         }
 
-        public async Task<int> CreateUserAsync(Users user) //TODO: log
+        public async Task<int> CreateUserAsync(Users user)
         {
-            Users foundUser = await repository.Users.GetAsync(user.ID);
+            Users foundUserByID = await repository.Users.GetAsync(user.ID);
+            Users foundUserByName = (await repository.Users.GetListAsync()).Find(x => x.Name == user.Name);
 
-            if (foundUser == null)
+            if (foundUserByID == null && foundUserByName == null)
             {
                 await repository.Users.CreateAsync(user);
 
@@ -85,6 +87,32 @@ namespace Infotecs.WebApi.Services
             else
             {
                 return 412;
+            }
+        }
+
+        public async Task<int> UpdateUserAsync(Users user)
+        {
+            Users foundUser = await repository.Users.GetAsync(user.ID);
+            UserStatistics userStatistics = user.Adapt<UserStatistics>();
+            Users foundUserByName = (await repository.Users.GetListAsync()).Find(x => x.Name == user.Name);
+
+            if (foundUser != null)
+            {
+                if (foundUserByName == null)
+                {
+                    await repository.Users.UpdateAsync(user);
+                    await repository.Statistics.UpdateAsync(userStatistics);
+                }
+                else
+                {
+                    return 412;
+                }
+
+                return 200;
+            }
+            else
+            {
+                return 404;
             }
         }
 

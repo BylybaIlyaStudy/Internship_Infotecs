@@ -1,13 +1,1 @@
-<div *ngIf="this.users.length > 0">
-    <div *ngIf="displayedEvents">
-        <UsersWithEvents-component (onChanged)="onChanged($event)" [users]="users" [displayedEvents]="displayedEvents"></UsersWithEvents-component>
-        <Events-component (onChanged)="onChanged($event)" [user]="userWhoseEventsAreSelected"></Events-component>
-        
-    </div>
-    <div *ngIf="!displayedEvents">
-        <Users-component (onChanged)="onChanged($event)" [users]="users" [displayedEvents]="displayedEvents"></Users-component>
-    </div>
-</div>
-<p *ngIf="this.users.length == 0">
-    Загрузка...
-</p>
+<router-outlet></router-outlet>

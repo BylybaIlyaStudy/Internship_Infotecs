@@ -133,5 +133,13 @@ namespace Infotecs.WebApi.Repositories
 
             return foundStatistics.ToList();
         }
+
+        public async Task<int> UpdateAsync(UserStatistics item)
+        {
+            string sqlQuery = "UPDATE Statistics SET name = @name WHERE id = @id";
+            await connection.ExecuteAsync(sqlQuery, item);
+
+            return 0;
+        }
     }
 }

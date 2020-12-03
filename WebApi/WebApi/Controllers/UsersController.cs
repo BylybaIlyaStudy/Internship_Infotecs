@@ -83,6 +83,18 @@ namespace Infotecs.WebApi.Controllers
 
             return StatusCode(status);
         }
+        [HttpPut]
+        public async Task<IActionResult> PutAsync([FromBody] UsersDTO usersDTO)
+        {
+            Users user = usersDTO.Adapt<Users>();
+
+            var status = await userService.UpdateUserAsync(user);
+
+            System.Console.WriteLine("send update users");
+            await hubContext.Clients.All.SendAsync("update users");
+
+            return StatusCode(status);
+        }
 
         /// <summary>
         /// Отправляет в репозиторий запрос на удаление пользователя и возвращает результат.

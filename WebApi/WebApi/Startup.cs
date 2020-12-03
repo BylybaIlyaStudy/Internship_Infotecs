@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog.Injection;
 using WebApi.Repositories;
 using System.Text.Json;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 
 namespace Infotecs.WebApi
 {
@@ -36,6 +35,7 @@ namespace Infotecs.WebApi
                        .SetIsOriginAllowed((host) => true)
                        .AllowCredentials();
             }));
+
 
             services
                 .AddControllers()

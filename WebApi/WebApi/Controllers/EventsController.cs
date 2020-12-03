@@ -52,6 +52,14 @@ namespace Infotecs.WebApi.Controllers
             return userStatisticsDTO;
         }
 
+        [HttpGet("descriptions/{ID}")]
+        public async Task<List<DescriptionDTO>> GetAsyncWithDescriptions(string ID)
+        {
+            List<DescriptionDTO> descriptionsDTOs = (await eventsService.GetEventsAsync(ID)).Adapt<List<DescriptionDTO>>();
+
+            return descriptionsDTOs;
+        }
+
         /// <summary>
         /// Отправляет в репозиторий запрос на добавление статистики и возвращает результат.
         /// </summary>
@@ -68,18 +76,30 @@ namespace Infotecs.WebApi.Controllers
         {
             List<Events> events = eventsDTOs.Adapt<List<Events>>();
 
-            if (events != null)
+            foreach (var e in events)
             {
-                foreach (var e in events)
-                {
-                    e.ID = ID;
-                }
+                e.ID = ID;
             }
 
             var status = await eventsService.CreateEventsAsync(events);
 
-            System.Console.WriteLine("send update events " + ID);
-            await hubContext.Clients.All.SendAsync("update events " + ID);
+            System.Console.WriteLine("send update events " + events[0].ID);
+            await hubContext.Clients.All.SendAsync("update events " + events[0].ID);
+
+            return StatusCode(status);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> PutAsync([FromBody] List<DescriptionDTO> descriptionDTOs)
+        {
+            List<Events> events = descriptionDTOs.Adapt<List<Events>>();
+
+            Console.WriteLine(events[0].Level);
+
+            var status = await eventsService.UpdateEvent(events);
+
+            System.Console.WriteLine("send update events " + events[0].ID);
+            await hubContext.Clients.All.SendAsync("update events " + events[0].ID);
 
             return StatusCode(status);
         }
