@@ -37,7 +37,7 @@ namespace Infotecs.WebApi.Repositories
             {
                 foreach (var e in item)
                 {
-                    string sqlQuery = "INSERT INTO Events (ID, Name, Date) VALUES(@ID, @Name, @Date)";
+                    string sqlQuery = "INSERT INTO Events (ID, Name, Date, Level) VALUES(@ID, @Name, @Date, @Level)";
                     connection.Execute(sqlQuery, e);
                 }
             }
@@ -56,7 +56,7 @@ namespace Infotecs.WebApi.Repositories
             {
                 foreach (var e in item)
                 {
-                    string sqlQuery = "INSERT INTO Events (ID, Name, Date) VALUES(@ID, @Name, @Date)";
+                    string sqlQuery = "INSERT INTO Events (ID, Name, Date, Level) VALUES(@ID, @Name, @Date, @Level)";
                     await connection.ExecuteAsync(sqlQuery, e);
                 }
             }
@@ -66,18 +66,20 @@ namespace Infotecs.WebApi.Repositories
 
         public async Task<int> UpdateAsync(List<Events> item)
         {
-            List<Events> events = await this.GetAsync(item[0].ID);
+            IEnumerable<Events> foundEvents = await connection.QueryAsync<Events>("SELECT * FROM Events");
+            List<Events> events = foundEvents.ToList();
 
             await this.DeleteAsync(item[0].ID);
 
             foreach (var e in events)
             {
                 e.Description = item.Find(x => x.Name == e.Name).Description;
+                e.Level = item.Find(x => x.Name == e.Name).Level;
             }
 
             foreach (var e in events)
             {
-                string sqlQuery = "INSERT INTO Events (ID, Name, Date, Description) VALUES(@ID, @Name, @Date, @Description)";
+                string sqlQuery = "INSERT INTO Events (ID, Name, Date, Description, Level) VALUES(@ID, @Name, @Date, @Description, @Level)";
                 await connection.ExecuteAsync(sqlQuery, e);
             }
 

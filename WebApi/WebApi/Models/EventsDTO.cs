@@ -17,5 +17,6 @@ namespace Infotecs.WebApi.Models
         /// Название события. Не более 50 символов.
         /// </summary>
         [MaxLength(50)] public string Name { get; set; }
+        public string Level { get; set; }
     }
 }

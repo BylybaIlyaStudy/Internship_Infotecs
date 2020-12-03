@@ -51,6 +51,14 @@ namespace Infotecs.WebApi.Repositories
             return 0;
         }
 
+        public async Task<int> UpdateAsync(Users user)
+        {
+            string sqlQuery = "UPDATE Users SET description = @description, name = @name WHERE id = @id";
+            await connection.ExecuteAsync(sqlQuery, user);
+
+            return 0;
+        }
+
         /// <summary>
         /// Удаление пользователя из бд по ID.
         /// </summary>
@@ -131,11 +139,6 @@ namespace Infotecs.WebApi.Repositories
             IEnumerable<Users> foundUsers = await connection.QueryAsync<Users>("SELECT * FROM Users");
 
             return foundUsers.ToList();
-        }
-
-        public Task<int> UpdateAsync(Users item)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

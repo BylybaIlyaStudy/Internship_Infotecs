@@ -94,6 +94,8 @@ namespace Infotecs.WebApi.Controllers
         {
             List<Events> events = descriptionDTOs.Adapt<List<Events>>();
 
+            Console.WriteLine(events[0].Level);
+
             var status = await eventsService.UpdateEvent(events);
 
             System.Console.WriteLine("send update events " + events[0].ID);
