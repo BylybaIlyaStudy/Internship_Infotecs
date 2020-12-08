@@ -4,6 +4,8 @@ using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Newtonsoft.Json;
+using RabbitMQ.Client;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -83,9 +85,15 @@ namespace Infotecs.WebApi.Controllers
 
             var status = await eventsService.CreateEventsAsync(events);
 
-            System.Console.WriteLine("send update events " + events[0].ID);
-            await hubContext.Clients.All.SendAsync("update events " + events[0].ID);
+            if (status == 200)
+            {
+                System.Console.WriteLine("send update events " + events[0].ID);
+                await hubContext.Clients.All.SendAsync("update events " + events[0].ID);
 
+                CustomerUpdateSender obj = new CustomerUpdateSender();
+                IConnection con = obj.GetConnection();
+                _ = obj.send(con, JsonConvert.SerializeObject(events));
+            }
             return StatusCode(status);
         }
 

@@ -7,6 +7,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Serilog.Injection;
 using WebApi.Repositories;
 using System.Text.Json;
+using RabbitMQ.Client;
+using System.Configuration;
+using Infotecs.WebApi.Services;
 
 namespace Infotecs.WebApi
 {
@@ -22,6 +25,7 @@ namespace Infotecs.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
+            //services.AddSingleton<RabbitListener>();
             services.AddSerilogServices();
             services.AddSwaggerGen();
 

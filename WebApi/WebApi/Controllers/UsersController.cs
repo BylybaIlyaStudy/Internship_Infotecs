@@ -11,6 +11,8 @@ using Infotecs.WebApi.Services;
 using WebApi.Repositories;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
+using RabbitMQ.Client;
+using Newtonsoft.Json;
 
 namespace Infotecs.WebApi.Controllers
 {
@@ -78,8 +80,11 @@ namespace Infotecs.WebApi.Controllers
 
             var status = await userService.CreateUserAsync(user);
 
-            System.Console.WriteLine("send update users");
-            await hubContext.Clients.All.SendAsync("update users");
+            if (status == 200)
+            {
+                System.Console.WriteLine("send update users");
+                await hubContext.Clients.All.SendAsync("update users");
+            }
 
             return StatusCode(status);
         }
