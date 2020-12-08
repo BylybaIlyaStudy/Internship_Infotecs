@@ -10,6 +10,7 @@ namespace Infotecs.WebApi.Services
 {
     public class CustomerUpdateSender
     {
+        private readonly string queue = Program.Configuration.GetSection("RabbitMQSettings").GetSection("QueueName").Value;
         public IConnection GetConnection()
         {
             ConnectionFactory factory = new ConnectionFactory();
@@ -27,10 +28,10 @@ namespace Infotecs.WebApi.Services
             {
                 IModel channel = con.CreateModel();
                 //channel.ExchangeDeclare("", ExchangeType.Direct);
-                channel.QueueDeclare("events", false, false, false, null);
-                channel.QueueBind("events", "testex", "events", null);
+                channel.QueueDeclare(queue, false, false, false, null);
+                channel.QueueBind(queue, "testex", queue, null);
                 var msg = Encoding.UTF8.GetBytes(message);
-                channel.BasicPublish("testex", "events", null, msg);
+                channel.BasicPublish("testex", queue, null, msg);
 
             }
             catch (Exception ex)
