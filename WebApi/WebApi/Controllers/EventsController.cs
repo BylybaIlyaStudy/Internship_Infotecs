@@ -4,6 +4,7 @@ using Mapster;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using RabbitMQ.Client;
 using Serilog;
@@ -25,6 +26,9 @@ namespace Infotecs.WebApi.Controllers
     {
         private readonly StatisticsService statisticsService = null;
         private readonly EventsService eventsService = null;
+        private readonly ICustomerUpdateSender customerUpdateSender = null;
+        //private readonly IConfiguration conf = null;
+        //private readonly IConnection con = null;
 
         IHubContext<WebApiHub> hubContext;
 
@@ -33,12 +37,15 @@ namespace Infotecs.WebApi.Controllers
         /// </summary>
         /// <param name="logger">Интерфейс системы логирования.</param>
         /// <param name="repository">Интерфейс базы данных.</param>
-        public EventsController(ILogger logger, IUnitOfWork repository, IHubContext<WebApiHub> hubContext)
+        public EventsController(ILogger logger, IUnitOfWork repository, IHubContext<WebApiHub> hubContext, ICustomerUpdateSender customerUpdateSender/*, IConfiguration conf*/)
         {
             statisticsService = new StatisticsService(repository, logger);
             eventsService = new EventsService(repository, logger);
 
             this.hubContext = hubContext;
+            this.customerUpdateSender = customerUpdateSender;
+            //this.conf = conf;
+            //this.con = this.customerUpdateSender.GetConnection();
         }
 
         /// <summary>
@@ -90,9 +97,7 @@ namespace Infotecs.WebApi.Controllers
                 System.Console.WriteLine("send update events " + events[0].ID);
                 await hubContext.Clients.All.SendAsync("update events " + events[0].ID);
 
-                CustomerUpdateSender obj = new CustomerUpdateSender();
-                IConnection con = obj.GetConnection();
-                _ = obj.send(con, JsonConvert.SerializeObject(events));
+                _ = this.customerUpdateSender.send(JsonConvert.SerializeObject(events));
             }
             return StatusCode(status);
         }

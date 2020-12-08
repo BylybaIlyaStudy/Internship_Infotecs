@@ -25,7 +25,7 @@ namespace Infotecs.WebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
-            //services.AddSingleton<RabbitListener>();
+            services.AddSingleton<ICustomerUpdateSender, CustomerUpdateSender>();
             services.AddSerilogServices();
             services.AddSwaggerGen();
 

@@ -1,28 +1,40 @@
-﻿using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+﻿using Microsoft.Extensions.Configuration;
+using RabbitMQ.Client;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Infotecs.WebApi.Services
 {
-    public class CustomerUpdateSender
+    public class CustomerUpdateSender : ICustomerUpdateSender
     {
-        private readonly string queue = Program.Configuration.GetSection("RabbitMQSettings").GetSection("QueueName").Value;
-        public IConnection GetConnection()
+        private readonly string queue = "";
+        private readonly string login = "";
+        private readonly string password = "";
+        private readonly string host = "";
+        private readonly string port = "";
+
+        private readonly IConnection con = null;
+
+        public CustomerUpdateSender(IConfiguration conf)
         {
+            this.queue = conf.GetSection("RabbitMQSettings").GetSection("QueueName").Value;
+            this.login = conf.GetSection("RabbitMQSettings").GetSection("Login").Value;
+            this.password = conf.GetSection("RabbitMQSettings").GetSection("Password").Value;
+            this.host = conf.GetSection("RabbitMQSettings").GetSection("HostName").Value;
+            this.port = conf.GetSection("RabbitMQSettings").GetSection("Port").Value;
+
             ConnectionFactory factory = new ConnectionFactory();
-            factory.UserName = "test";
-            factory.Password = "test";
-            factory.Port = 8081;
-            factory.HostName = "localhost";
+            factory.UserName = this.login;
+            factory.Password = this.password;
+            Console.WriteLine("port: " + this.port);
+            factory.Port = Convert.ToInt32(this.port);
+            factory.HostName = this.host;
             factory.VirtualHost = "/";
 
-            return factory.CreateConnection();
+            this.con = factory.CreateConnection();
         }
-        public bool send(IConnection con, string message)
+
+        public bool send(string message)
         {
             try
             {
@@ -36,7 +48,7 @@ namespace Infotecs.WebApi.Services
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Console.WriteLine("ex => " + ex.Message);
             }
             return true;
         }
